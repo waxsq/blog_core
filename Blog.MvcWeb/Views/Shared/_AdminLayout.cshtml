@@ -1,0 +1,55 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/layuiadmin/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="~/lib/layuiadmin/style/admin.css" media="all" />
+    <title>@ViewBag.Title - BlogAdmin</title>
+    @RenderSection("Head", required: false)
+</head>
+<body class="layui-layout-body">
+
+    <div id="LAY_app">
+        <div class="layui-layout layui-layout-admin">
+            <div class="layui-header">
+                @await Component.InvokeAsync("Topbar")
+            </div>
+
+            <!-- 侧边菜单 -->
+            <div class="layui-side layui-side-menu">
+                @await Component.InvokeAsync("Sidebar")
+            </div>
+
+            <!-- 页面标签 -->
+            <div class="layadmin-pagetabs" id="LAY_app_tabs">
+                @await Component.InvokeAsync("PageTab")
+            </div>
+
+
+            <!-- 主体内容 -->
+            <div class="layui-body" id="LAY_app_body">
+                <div class="layadmin-tabsbody-item layui-show">
+                    <div class="border-0 layadmin-iframe">
+                       @RenderBody()
+                    </div>
+                </div>
+            </div>
+
+            <!-- 辅助元素，一般用于移动设备下遮罩 -->
+            <div class="layadmin-body-shade" layadmin-event="shade"></div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/layuiadmin/layui/layui.js"></script>
+    
+
+    <!-- 添加LayuiAdmin初始化脚本（关键！） -->
+    <script src="~/js/admin/layout.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

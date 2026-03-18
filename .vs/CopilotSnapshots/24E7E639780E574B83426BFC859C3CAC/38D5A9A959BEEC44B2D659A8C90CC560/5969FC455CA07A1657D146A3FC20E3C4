@@ -1,0 +1,10 @@
+﻿using Blog.Core.Entities;
+using Blog.Core.Interfaces;
+
+namespace Blog.Service.Common
+{
+ public class BlogCommentService : Service<BlogComment, string>, IService<BlogComment, string>
+ {
+ public BlogCommentService(IRepository<BlogComment, string> repository) : base(repository) { }
+ }
+}
