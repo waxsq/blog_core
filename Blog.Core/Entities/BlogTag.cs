@@ -32,8 +32,6 @@ namespace Blog.Core.Entities
         [SugarColumn(ColumnName = "slug")]
         public string Slug { get; set; }
 
-        [SugarColumn(ColumnName = "tag_code")]
-        public string TagCode { get; set; }
 
         /// <summary>
         /// 记录创建时间

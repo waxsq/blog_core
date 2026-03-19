@@ -1,10 +1,7 @@
-using System.Reflection;
 using Blog.Core.Exceptions;
-using Blog.Core.Interfaces;
+using Blog.Core.Profiles;
 using Blog.Repository;
 using Blog.Service;
-using Blog.Service.Commons;
-using Blog.Service.Intefaces;
 using SqlSugar;
 
 namespace Blog.MvcWeb.Datas
@@ -130,6 +127,8 @@ namespace Blog.MvcWeb.Datas
                 .AddClasses(classes => classes.Where(c => c.Name.EndsWith("Service") && !c.Name.StartsWith("I") && !c.IsAbstract))
                 .AsImplementedInterfaces() // 【关键修改】注册所有接口，不再强制要求 I+类名
                 .WithScopedLifetime());
+
+            services.AddAutoMapper(typeof(MappingProfile).Assembly); // 注册 AutoMapper 配置    
         }
     }
 }

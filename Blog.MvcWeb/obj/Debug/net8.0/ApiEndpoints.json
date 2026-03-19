@@ -1,12 +1,1 @@
-[
-  {
-    "ContainingType": "Blog.MvcWeb.Controllers.TagController",
-    "Method": "GetAll",
-    "RelativePath": "Tag/GetAll",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  }
-]
+[]

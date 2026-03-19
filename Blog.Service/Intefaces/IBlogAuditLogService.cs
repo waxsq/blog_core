@@ -8,7 +8,7 @@ using Blog.Core.Interfaces;
 
 namespace Blog.Service.Intefaces
 {
-    public interface IBlogAuditLogService:IService<BlogAuditLog,long>
+    public interface IBlogAuditLogService : IService<BlogAuditLog, long>
     {
     }
 }

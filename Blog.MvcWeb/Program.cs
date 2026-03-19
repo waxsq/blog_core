@@ -1,6 +1,7 @@
 using System.Text.Json;
 using Azure.Core.Serialization;
 using Blog.MvcWeb.Datas;
+using SqlSugar;
 
 namespace Blog.MvcWeb
 {
@@ -9,6 +10,8 @@ namespace Blog.MvcWeb
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            SnowFlakeSingle.WorkId = 100;
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
