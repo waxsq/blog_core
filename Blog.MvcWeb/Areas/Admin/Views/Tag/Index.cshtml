@@ -1,59 +1,86 @@
 ﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+  For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    Layout = null;
-    
+  Layout = "~/Views/Shared/_AdminTableLayout.cshtml";
+
 }
 @section Head {
-    <style>
-        .layui-table-tool {
-            background-color: white !important; /* 改成你想要的背景色 */
-            padding: 10px 15px;
-            border-bottom: 1px solid #e6e6e6;
-        }
-    </style>
+  <style>
+    .layui-table-tool {
+      background-color: white !important; /* 改成你想要的背景色 */
+      padding: 10px 15px;
+      border-bottom: 1px solid #e6e6e6;
+    }
+  </style>
 }
 <div class="layui-fluid">
-    <div class="layui-card">
-        <div class="layui-form layui-card-header layuiadmin-card-header-auto">
-            <div class="layui-form-item">
-                <div class="layui-inline">
-                    <label class="layui-form-label">标签编码</label>
-                    <div class="layui-input-inline">
-                        <input type="text" name="tagCode" placeholder="请输入" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label class="layui-form-label">标签名称</label>
-                    <div class="layui-input-inline">
-                        <input type="text" name="tagName" placeholder="请输入" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label class="layui-form-label">是否启用</label>
-                    <div class="layui-input-inline">
-                        <select name="isValid">
-                            <option value="1" selected>是</option>
-                            <option value="0">否</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <button class="layui-btn layuiadmin-btn-list" lay-submit lay-filter="LAY-app-contlist-search">
-                        <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
-                    </button>
-                </div>
-            </div>
+  <div class="layui-card">
+    <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+      <div class="layui-form-item">
+        <div class="layui-inline">
+          <label class="layui-form-label">标签编码</label>
+          <div class="layui-input-inline">
+            <input type="text" name="tagCode" placeholder="请输入" autocomplete="off" class="layui-input">
+          </div>
         </div>
-        <table class="layui-row" id="ID-table-demo-data" lay-filter="ID-table-demo-data"></table>
+        <div class="layui-inline">
+          <label class="layui-form-label">标签名称</label>
+          <div class="layui-input-inline">
+            <input type="text" name="tagName" placeholder="请输入" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+        <div class="layui-inline">
+          <label class="layui-form-label">是否启用</label>
+          <div class="layui-input-inline">
+            <select name="isValid">
+              <option value="1" selected>是</option>
+              <option value="0">否</option>
+            </select>
+          </div>
+        </div>
+        <div class="layui-inline">
+          <button class="layui-btn layuiadmin-btn-list" lay-submit lay-filter="LAY-app-contlist-search">
+            <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+          </button>
+        </div>
+      </div>
     </div>
+    <table class="layui-row" id="ID-table-demo-data" lay-filter="ID-table-demo-data"></table>
+  </div>
 </div>
 
 <script type="text/html" id="codeTpl">
-    <a href="#" lay-event="rowDetail" data-id="{{ d.blogTagId }}">{{ d.tagCode }}</a>
+  <a href="#" lay-event="rowDetail" data-id="{{ d.blogTagId }}">{{ d.tagCode }}</a>
+</script>
+
+<script type="text/html" id="rowToolbarTpl">
+  <div class="layui-btn-group">
+    <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" lay-event="edit">
+      <i class="layui-icon">&#xe642;</i>
+    </button>
+    <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" lay-event="del">
+      <i class="layui-icon">&#xe640;</i>
+    </button>
+  </div>
+</script>
+
+<script type="text/html" id="toolbarTpl">
+  <div class="layui-btn-group">
+    <button type="button" class="layui-btn" lay-event="add">
+      新增
+    </button>
+  </div>
+</script>
+
+<script type="text/html" id="isValidTpl">
+  {{# if(d.isValid == 0){ }}
+  <p>未启用</p>
+  {{#  } else{  }}
+  <p>启用</p>
+  {{# }  }}
 </script>
 
 @section Scripts {
-
+  <script src="~/js/admin/tag/index.js"></script>
 }

@@ -64,7 +64,7 @@ namespace Blog.MvcWeb.Middlewares
             {
                 statusCode = 500;
                 // 生产环境不要将 ex.Message 直接返回，防止泄露敏感信息
-                result = Result.Error<object>("系统内部错误，请联系管理员");
+                result = Result.Error<object>($"系统内部错误，请联系管理员。{ex.Message}");
 
                 // 记录完整的堆栈跟踪，供开发人员排查
                 _logger.LogError(ex, "发生未捕获的系统异常 | Path: {Path} | Method: {Method}",

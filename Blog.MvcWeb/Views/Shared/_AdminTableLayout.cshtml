@@ -1,0 +1,23 @@
+﻿@{
+  Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="~/lib/layuiadmin/layui/css/layui.css" media="all" />
+  <link rel="stylesheet" href="~/lib/layuiadmin/style/admin.css" media="all" />
+  @RenderSection("Head", required: false)
+</head>
+<body class="layui-layout-body">
+  @RenderBody()
+  <script src="~/lib/jquery/dist/jquery.js"></script>
+  <script src="~/lib/layuiadmin/layui/layui.js"></script>
+
+
+  <!-- 添加LayuiAdmin初始化脚本（关键！） -->
+  <script src="~/js/admin/layout.js"></script>
+  @RenderSection("Scripts", required: false)
+</body>
+</html>

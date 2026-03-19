@@ -18,8 +18,8 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\Tag\" />
     <Folder Include="Views\Home\" />
-    <Folder Include="wwwroot\js\admin\tag\" />
   </ItemGroup>
 
 </Project>

@@ -63,5 +63,11 @@ namespace Blog.Core.Entities
         [SugarColumn(ColumnName = "update_by")]
         public long? UpdateBy { get; set; }
 
+        /// <summary>
+        /// 数据状态
+        /// </summary>
+        [SugarColumn(ColumnName = "is_valid")]
+        public int? IsValid { get; set; }
+
     }
 }

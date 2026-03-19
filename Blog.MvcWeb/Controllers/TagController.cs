@@ -16,11 +16,6 @@ namespace Blog.MvcWeb.Controllers
             _blogTagService = blogTagService;
         }
 
-        [HttpGet("GetAll")]
-        public async Task<IActionResult> GetAll()
-        {
-            var tags = await _blogTagService.GetAllAsync();
-            return Json(tags);
-        }
+        
     }
 }

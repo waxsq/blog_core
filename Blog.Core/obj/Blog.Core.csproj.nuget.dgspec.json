@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Code\\Blog\\Blog.Core\\Blog.Core.csproj": {}
+    "C:\\Users\\16483\\Source\\Repos\\blog\\Blog.Core\\Blog.Core.csproj": {}
   },
   "projects": {
-    "D:\\Code\\Blog\\Blog.Core\\Blog.Core.csproj": {
+    "C:\\Users\\16483\\Source\\Repos\\blog\\Blog.Core\\Blog.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Code\\Blog\\Blog.Core\\Blog.Core.csproj",
+        "projectUniqueName": "C:\\Users\\16483\\Source\\Repos\\blog\\Blog.Core\\Blog.Core.csproj",
         "projectName": "Blog.Core",
-        "projectPath": "D:\\Code\\Blog\\Blog.Core\\Blog.Core.csproj",
-        "packagesPath": "C:\\Users\\16224\\.nuget\\packages\\",
-        "outputPath": "D:\\Code\\Blog\\Blog.Core\\obj\\",
+        "projectPath": "C:\\Users\\16483\\Source\\Repos\\blog\\Blog.Core\\Blog.Core.csproj",
+        "packagesPath": "C:\\Users\\16483\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\16483\\Source\\Repos\\blog\\Blog.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "D:\\Data\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\16224\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\16483\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -75,7 +75,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.311/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

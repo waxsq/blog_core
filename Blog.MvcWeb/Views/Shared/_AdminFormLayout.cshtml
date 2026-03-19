@@ -1,0 +1,70 @@
+﻿@{
+  Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="~/lib/layuiadmin/layui/css/layui.css" media="all" />
+  <link rel="stylesheet" href="~/lib/layuiadmin/style/admin.css" media="all" />
+  <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css"/>
+  <style>
+    /* 【关键修改 1】确保页面背景和 Body 都是纯白，且无默认边距 */
+    html, body {
+      background-color: #fff !important;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow-x: hidden; /* 防止出现横向滚动条 */
+    }
+
+    /* 【关键修改 2】表单容器：去掉上下 margin，紧贴顶部，背景强制白 */
+    .layui-form {
+      /* 如果你想让它铺满宽度，去掉 max-width 并设置 width: 100% */
+      /* 这里保留了你原本的居中精致风格，但去掉了多余的上下留白 */
+      max-width: 500px;
+      margin: 15px auto; /* 上下只留 15px，左右居中 */
+      padding: 10px;
+      background-color: #fff;
+    }
+
+    /* 标签对齐 */
+    .layui-form-label {
+      width: 90px;
+      padding: 9px 5px;
+      font-weight: 600;
+      color: #555;
+      text-align: right;
+    }
+
+    .layui-btn {
+      padding: 0 25px;
+      font-size: 14px;
+    }
+  </style>
+  @RenderSection("Head", required: false)
+</head>
+<body class="layui-layout-body">
+  @RenderBody()
+  <script src="~/lib/jquery/dist/jquery.js"></script>
+  <script src="~/js/jquery-serializeObject.js"></script>
+  <script src="~/lib/layuiadmin/layui/layui.js"></script>
+
+
+  <!-- 添加LayuiAdmin初始化脚本（关键！） -->
+  <script src="~/js/admin/layout.js"></script>
+  <script>
+    // 【关键修改 3】自动调整弹窗高度，消除底部空白
+    // 等待 DOM 加载完成和 Layui 表单渲染完成后执行
+    setTimeout(function () {
+      var height = document.body.scrollHeight || document.documentElement.scrollHeight;
+      // 调用父页面的 layer 方法来调整高度 (假设父页面引入了 layer)
+      if (parent.layer && parent.layer.getFrameIndex(window.name)) {
+        parent.layer.iframeAuto(parent.layer.getFrameIndex(window.name));
+      }
+    }, 100); // 延迟 100ms 确保样式已应用
+  </script>
+  @RenderSection("Scripts", required: false)
+</body>
+</html>
