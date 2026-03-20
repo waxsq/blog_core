@@ -12,5 +12,6 @@ namespace Blog.Core.Entities.Vo.Tag
     {
         public string? TagName { get; set; }
         public int IsValid { get; set; } = 1; // 默认查询有效数据
+        public SortModel Sort { get; set; }
     }
 }

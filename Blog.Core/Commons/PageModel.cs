@@ -32,5 +32,7 @@ namespace Blog.Core.Commons
         /// 当前页的数据列表
         /// </summary>
         public List<T> Items { get; set; } = new List<T>();
+
+
     }
 }

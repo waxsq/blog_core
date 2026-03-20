@@ -41,14 +41,10 @@
     form.on('submit(search-form)', function (data) {
         var fieldData = data.field; // 获取表单所有字段 { id: "1", name: "jack" ... }
 
-        // 调用你之前的转换方法，变成 [{FieldName, ConditionalType, FieldValue}]
-        // 注意：这里假设 convertToQueryArray 是你全局定义的方法
-        var queryArray = window.convertToQueryArray(fieldData, "0");
-
         // 3. 核心：使用 table.reload 重载表格
         table.reload('ID-table-demo-data', { // 注意这里填的是 elem 的 ID (去掉#)
             where: {
-                params: JSON.stringify(queryArray)
+                params: JSON.stringify(fieldData)
             },
             page: {
                 curr: 1 // 搜索时重置到第 1 页

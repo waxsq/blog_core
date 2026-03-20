@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -10,6 +11,7 @@ using Blog.Core.Entities.Vo.Tag;
 using Blog.Core.Exceptions;
 using Blog.Core.Interfaces;
 using Blog.Service.Intefaces;
+using Microsoft.IdentityModel.Tokens;
 using SqlSugar;
 
 namespace Blog.Service.Commons
@@ -40,14 +42,21 @@ namespace Blog.Service.Commons
             return Result.Success(result > 0, result > 0 ? "添加成功" : "添加失败");
         }
 
-        public Task<ResultReponse<BlogTag>> Query(TagTableQueryVo queryVo)
+        public async Task<ResultReponse<BlogTag>> Query(TagTableQueryVo queryVo)
         {
             var pageModel = new PageModel
             {
                 PageIndex = queryVo.PageIndex,
                 PageSize = queryVo.PageSize,
             };
-            
+
+            var whereExp = Expressionable.Create<BlogTag>()
+                .AndIF(queryVo.TagName.IsNullOrEmpty(), dto => dto.TagName.Equals(queryVo.TagName))
+                .AndIF(queryVo.IsValid != -1 , dto => dto.IsValid.Equals(queryVo.IsValid))
+                .ToExpression();
+            Expression<Func<BlogTag, object>> orderBy = dto => dto.TagName;
+            var result = await _repository.QueryPagedAsync(pageModel, whereExp, orderBy);
+
         }
     }
 }
