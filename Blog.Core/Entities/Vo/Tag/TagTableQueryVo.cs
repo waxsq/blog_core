@@ -8,10 +8,9 @@ using Blog.Core.Commons;
 
 namespace Blog.Core.Entities.Vo.Tag
 {
-    public class TagTableQueryVo : PageModel<object>
+    public class TagTableQueryVo : PageRequest
     {
         public string? TagName { get; set; }
         public int IsValid { get; set; } = 1; // 默认查询有效数据
-        public SortModel Sort { get; set; }
     }
 }

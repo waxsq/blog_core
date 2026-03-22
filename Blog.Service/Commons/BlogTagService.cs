@@ -10,6 +10,7 @@ using Blog.Core.Entities;
 using Blog.Core.Entities.Vo.Tag;
 using Blog.Core.Exceptions;
 using Blog.Core.Interfaces;
+using Blog.Core.Utils;
 using Blog.Service.Intefaces;
 using Microsoft.IdentityModel.Tokens;
 using SqlSugar;
@@ -21,28 +22,28 @@ namespace Blog.Service.Commons
         private readonly IRepository<BlogTag, long> _repository;
         private readonly IMapper _mapper;
 
-        public BlogTagService(IRepository<BlogTag, long> repository,IMapper mapper) : base(repository)
+        public BlogTagService(IRepository<BlogTag, long> repository, IMapper mapper) : base(repository)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task<ResultReponse<bool>> Add(TagAddOrEdit tag)
+        public async Task<EditReponse<bool>> Add(TagAddOrEdit tag)
         {
-            if(!tag.Action.Equals("Add") && tag.BlogTagId != 0)
+            if (!tag.Action.Equals("Add") && tag.BlogTagId != 0)
             {
                 List<BlogTag> queryResult = await _repository.QueryAsync(dto => dto.BlogTagId == tag.BlogTagId);
-                if(queryResult != null && queryResult.Count != 0)
+                if (queryResult != null && queryResult.Count != 0)
                 {
                     throw new BusinessException("当前操作异常");
                 }
             }
             var entity = _mapper.Map<BlogTag>(tag);
             int result = await _repository.InsertAsync(entity);
-            return Result.Success(result > 0, result > 0 ? "添加成功" : "添加失败");
+            return ResultUtil.Success(result > 0, result > 0 ? "添加成功" : "添加失败");
         }
 
-        public async Task<ResultReponse<BlogTag>> Query(TagTableQueryVo queryVo)
+        public async Task<EditReponse<BlogTag>> Query(TagTableQueryVo queryVo)
         {
             var pageModel = new PageModel
             {
@@ -52,11 +53,11 @@ namespace Blog.Service.Commons
 
             var whereExp = Expressionable.Create<BlogTag>()
                 .AndIF(queryVo.TagName.IsNullOrEmpty(), dto => dto.TagName.Equals(queryVo.TagName))
-                .AndIF(queryVo.IsValid != -1 , dto => dto.IsValid.Equals(queryVo.IsValid))
+                .AndIF(queryVo.IsValid != -1, dto => dto.IsValid.Equals(queryVo.IsValid))
                 .ToExpression();
             Expression<Func<BlogTag, object>> orderBy = dto => dto.TagName;
             var result = await _repository.QueryPagedAsync(pageModel, whereExp, orderBy);
-
+            return ResultUtil.SuccessPage<TagTablePageVo>()
         }
     }
 }

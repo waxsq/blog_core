@@ -12,8 +12,8 @@ namespace Blog.Service.Intefaces
 {
     public interface IBlogTagService : IService<BlogTag, long>
     {
-        Task<ResultReponse<bool>> Add(TagAddOrEdit tag);
+        Task<EditReponse<bool>> Add(TagAddOrEdit tag);
 
-        Task<ResultReponse<BlogTag>> Query(TagTableQueryVo queryVo);
+        Task<EditReponse<BlogTag>> Query(TagTableQueryVo queryVo);
     }
 }

@@ -10,7 +10,7 @@ namespace Blog.Core.Commons
     /// 分页数据模型
     /// </summary>
     /// <typeparam name="T">列表项的类型</typeparam>
-    public class PageModel<T>
+    public class PageReponse<T> : ResultBase
     {
         /// <summary>
         /// 当前页码 (从 1 开始)
@@ -25,14 +25,12 @@ namespace Blog.Core.Commons
         /// <summary>
         /// 总记录数
         /// </summary>
-        public int TotalCount { get; set; }
+        public int TotalCount { get; set; } = 0;
 
 
         /// <summary>
         /// 当前页的数据列表
         /// </summary>
-        public List<T> Items { get; set; } = new List<T>();
-
-
+        public List<T> Datas { get; set; } = new List<T>();
     }
 }

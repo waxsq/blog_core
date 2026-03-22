@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Blog.Core.Commons
 {
-    public class ResultReponse<T>
+    public class ResultBase
     {
         /// <summary>
         /// 是否成功
@@ -25,23 +25,14 @@ namespace Blog.Core.Commons
         public string Message { get; set; }
 
         /// <summary>
-        /// 返回的数据实体
-        /// </summary>
-        public T Data { get; set; }
-
-        /// <summary>
         /// 时间戳 (可选，用于前端调试或防缓存)
         /// </summary>
         public long Timestamp { get; set; }
 
-        public ResultReponse()
+        public ResultBase()
         {
             Timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
         }
-    }
 
-    public class ResultReponse : ResultReponse<object>
-    {
-        public ResultReponse() : base() { }
     }
 }

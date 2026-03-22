@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Blog.Core.Commons;
 using Blog.Core.Interfaces;
 using SqlSugar;
 
@@ -64,7 +65,7 @@ namespace Blog.Repository.Commons
         /// <summary>
         /// 分页查询（使用 SqlSugar 的 PageModel）
         /// </summary>
-        public async Task<List<TEntity>> QueryPagedAsync(PageModel pageModel,
+        public async Task<PageReponse<TEntity>> QueryPagedAsync(PageModel pageModel,
             Expression<Func<TEntity, bool>>? predicate = null,
             Expression<Func<TEntity, object>>? orderBy = null,
             bool isAsc = true)

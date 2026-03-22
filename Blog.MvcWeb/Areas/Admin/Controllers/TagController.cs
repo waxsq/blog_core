@@ -27,8 +27,9 @@ namespace Blog.MvcWeb.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] TagAddOrEdit tag){
-            return Json( await _blogTagService.Add(tag));
+        public async Task<IActionResult> Add([FromBody] TagAddOrEdit tag)
+        {
+            return Json(await _blogTagService.Add(tag));
         }
 
     }
