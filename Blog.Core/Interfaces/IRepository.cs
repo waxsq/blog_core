@@ -51,7 +51,9 @@ namespace Blog.Core.Interfaces
 
         // --- Update ---
         Task<int> UpdateAsync(TEntity entity);
+        Task<int> UpdateNotNullAsync(TEntity entity);
         Task<int> UpdateAsync(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, TEntity>> updateExpression);
+
 
         // --- Delete ---
         Task<int> DeleteByIdAsync(TKey id);

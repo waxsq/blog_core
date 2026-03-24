@@ -23,7 +23,7 @@ namespace Blog.Core.Entities
         [MaxLength(150)]
         [Required]
         [SugarColumn(ColumnName = "name")]
-        public string Name { get; set; }
+        public string CategoryName { get; set; }
 
         /// <summary>
         /// URL 友好标识
@@ -71,6 +71,9 @@ namespace Blog.Core.Entities
         /// </summary>
         [SugarColumn(ColumnName = "update_by")]
         public long? UpdateBy { get; set; }
+
+        [SugarColumn(ColumnName = "is_valid")]
+        public int isValid { get; set; } = 1;
 
     }
 }

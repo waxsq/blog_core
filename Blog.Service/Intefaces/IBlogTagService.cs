@@ -14,5 +14,8 @@ namespace Blog.Service.Intefaces
     {
         Task<EditReponse<bool>> Add(TagAddOrEdit tag);
         Task<PageReponse<BlogTag>> QueryPage(TagTableQueryVo queryVo);
+        Task<EditReponse<TagAddOrEdit>> GetById(TagAddOrEdit tagAddOrEdit);
+        Task<EditReponse<int>> DeleteById(TagAddOrEdit tagAddOrEdit);
+        Task<EditReponse<int>> EditById(TagAddOrEdit tagAddOrEdit);
     }
 }

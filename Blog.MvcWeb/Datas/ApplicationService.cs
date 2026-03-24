@@ -42,7 +42,7 @@ namespace Blog.MvcWeb.Datas
                             // 可以在这里格式化输出参数
                             logger.LogDebug("SQL Executing: {Sql}", sql);
                         }
-                        // Console.WriteLine(sql); 
+                         Console.WriteLine(sql);
                     };
 
                     // 【AOP 2】执行后：可以记录执行时间等

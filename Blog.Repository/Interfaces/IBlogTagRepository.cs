@@ -8,6 +8,8 @@ using Blog.Core.Interfaces;
 
 namespace Blog.Repository.Interfaces
 {
-    public interface IBlogTagRepository : IRepository<BlogTag, long> { }
+    public interface IBlogTagRepository : IRepository<BlogTag, long>
+    {
+    }
 
 }

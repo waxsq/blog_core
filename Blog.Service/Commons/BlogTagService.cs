@@ -11,20 +11,21 @@ using Blog.Core.Entities.Vo.Tag;
 using Blog.Core.Exceptions;
 using Blog.Core.Interfaces;
 using Blog.Core.Utils;
+using Blog.Repository.Interfaces;
 using Blog.Service.Intefaces;
-using Microsoft.IdentityModel.Tokens;
+using Dm.util;
 using SqlSugar;
 
 namespace Blog.Service.Commons
 {
     public class BlogTagService : Service<BlogTag, long>, IBlogTagService
     {
-        private readonly IRepository<BlogTag, long> _repository;
+        private readonly IBlogTagRepository _blogTagRepository;
         private readonly IMapper _mapper;
 
-        public BlogTagService(IRepository<BlogTag, long> repository, IMapper mapper) : base(repository)
+        public BlogTagService(IBlogTagRepository repository, IMapper mapper) : base(repository)
         {
-            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _blogTagRepository = repository ?? throw new ArgumentNullException(nameof(repository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
@@ -53,12 +54,49 @@ namespace Blog.Service.Commons
             };
 
             var whereExp = Expressionable.Create<BlogTag>()
-                .AndIF(!queryVo.TagName.IsNullOrEmpty(), dto => dto.TagName.Equals(queryVo.TagName))
+                .AndIF(!queryVo.TagName.isEmpty(), dto => dto.TagName.Equals(queryVo.TagName))
                 .AndIF(queryVo.IsValid != -1, dto => dto.IsValid.Equals(queryVo.IsValid))
                 .ToExpression();
            
             var result = await QueryPagedAsync(queryVo, whereExp, null);
             return ResultUtil.SuccessPage<BlogTag>(result);
+        }
+
+        public async Task<EditReponse<TagAddOrEdit>> GetById(TagAddOrEdit tagAddOrEdit)
+        {
+            if(tagAddOrEdit== null || tagAddOrEdit.BlogTagId == 0)
+            {
+                throw new BusinessException("请选择一笔数据");
+            }
+            var result = await base.GetByIdAsync(tagAddOrEdit.BlogTagId);
+            var mapResult = _mapper.Map<TagAddOrEdit>(result);
+            return ResultUtil.Success(mapResult);
+        }
+
+        public async Task<EditReponse<int>> DeleteById(TagAddOrEdit tagAddOrEdit)
+        {
+            if (tagAddOrEdit == null || tagAddOrEdit.BlogTagId == 0)
+            {
+                throw new BusinessException("请选择一笔数据");
+            }
+            var result = await base.DeleteByIdAsync(tagAddOrEdit.BlogTagId);
+            return ResultUtil.Success(result);
+        }
+
+        public async Task<EditReponse<int>> EditById(TagAddOrEdit tagAddOrEdit)
+        {
+            if (tagAddOrEdit == null || tagAddOrEdit.BlogTagId == 0)
+            {
+                throw new BusinessException("请选择一笔数据");
+            }
+            var dto = await _blogTagRepository.GetByIdAsync(tagAddOrEdit.BlogTagId);
+            if(dto == null)
+            {
+                throw new BusinessException("请检查数据是否存在");
+            }
+            var newDto = _mapper.Map<BlogTag>(tagAddOrEdit);
+            int result = await _repository.UpdateNotNullAsync(newDto);
+            return ResultUtil.Success(result);
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Text.Json;
 using Azure.Core.Serialization;
+using Blog.Core.Commons;
 using Blog.MvcWeb.Datas;
 using SqlSugar;
 
@@ -21,6 +22,7 @@ namespace Blog.MvcWeb
             }).AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
+                options.JsonSerializerOptions.Converters.Add(new LongToStringConverter());
             });
 
             builder.Services.AddEndpointsApiExplorer();

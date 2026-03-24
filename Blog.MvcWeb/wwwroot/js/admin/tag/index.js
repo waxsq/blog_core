@@ -4,7 +4,6 @@
     var layer = layui.layer;
     var $ = layui.$;
 
-
     var currentTable = table.render({
         elem: '#ID-table-demo-data',
         url: '/Tag/QueryPage',
@@ -66,11 +65,11 @@
         var event = obj.event;
         switch (event) {
             case 'Edit':
-                openDialog(data.blogTagId, 'edit')
+                openDialog(data.blogTagId, event)
                 break;
             case 'Del':
                 layer.confirm(`是否删除该数据:标签${data.tagName}?`, { icon: 3, title: 'tips' }, function (index) {
-                    sendAjax("/Tag/Delete", { blogTagId: data.blogTagId }, function (res) {
+                    sendAjax("/Tag/DeleteById", { blogTagId: data.blogTagId }, function (res) {
                         if (res.success && res.code == 200) {
                             layer.msg('操作成功', { icon: 1, time: 2000 });
                         } else {
@@ -78,6 +77,9 @@
                         }
                     }, function (error) { }, function () { layui.close(index) })
                 });
+                break;
+            case 'View':
+                openDialog(data.blogTagId, event)
                 break;
         }
     })
@@ -87,12 +89,13 @@
         var checkStatus = table.checkStatus(options.id);
         switch (obj.event) {
             case 'Add':
-                openDialog(0, 'Add')
+                openDialog(0, obj.event)
                 break;
         }
     })
 
-    let openDialog = function (id, action = 'view') {
+
+    let openDialog = function (id, action = 'View') {
         layer.open({
             type: 2,
             content: `/Admin/Tag/AddOrEdit?id=${id}&action=${action}`, //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
@@ -102,7 +105,7 @@
                 var iframeWin = window[layero.find('iframe')[0]['name']];
                 var addOrEditFormObj = iframeWin.$('#addOrEditForm');
                 var data = addOrEditFormObj.serializeObject();
-                if (action != 'view') {
+                if (action != 'View') {
                     sendAjax(`/Tag/${action}`, data,
                         function (res) {
                             if (res.success) {

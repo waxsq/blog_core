@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Blog.Core.Entities;
+using Blog.Core.Entities.Vo.Category;
 using Blog.Core.Entities.Vo.Tag;
 
 namespace Blog.Core.Profiles
@@ -14,6 +15,10 @@ namespace Blog.Core.Profiles
         public MappingProfile()
         {
             CreateMap<TagAddOrEdit, BlogTag>();
+            CreateMap<BlogTag,TagAddOrEdit>();
+
+            CreateMap<CategoryAddOrEdit, BlogCategory>();
+            CreateMap<BlogCategory, CategoryAddOrEdit>();
         }
     }
 }

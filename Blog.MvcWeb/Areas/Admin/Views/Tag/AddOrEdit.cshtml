@@ -31,8 +31,8 @@
 </form>
 
 <script>
-    var id = @(ViewData["id"] != null ? ViewData["id"] : 0);
-    var action = '@ViewData["action"]';
+    let id = '@(ViewData["id"] != null ? ViewData["id"] : 0)';
+    let action = '@ViewData["action"]';
 </script>
 
 @section Scripts {

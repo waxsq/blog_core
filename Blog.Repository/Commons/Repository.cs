@@ -147,6 +147,12 @@ namespace Blog.Repository.Commons
             return await _db.Updateable(entity).ExecuteCommandAsync();
         }
 
+        public async Task<int> UpdateNotNullAsync(TEntity entity)
+        {
+            if (entity == null) throw new ArgumentNullException(nameof(entity));
+            return await _db.Updateable(entity).IgnoreColumns(ignoreAllNullColumns: true).ExecuteCommandAsync();
+        }
+
         public async Task<int> UpdateAsync(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, TEntity>> updateExpression)
         {
             if (predicate == null) throw new ArgumentNullException(nameof(predicate));
@@ -157,6 +163,8 @@ namespace Blog.Repository.Commons
                             .Where(predicate)
                             .ExecuteCommandAsync();
         }
+
+
 
         // --- Delete ---
         public async Task<int> DeleteByIdAsync(TKey id)

@@ -1,7 +1,86 @@
 ﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+  For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    Layout = null;
+  Layout = "~/Views/Shared/_AdminTableLayout.cshtml";
+
 }
-<div>category</div>
+@section Head {
+  <style>
+    .layui-table-tool {
+      background-color: white !important; /* 改成你想要的背景色 */
+      padding: 10px 15px;
+      border-bottom: 1px solid #e6e6e6;
+    }
+
+    .custom-blue-link {
+      color: #007bff !important; /* 强制蓝色，防止被其他样式覆盖 */
+      text-decoration: underline !important; /* 强制下划线 */
+      cursor: pointer;
+    }
+  </style>
+}
+<div class="layui-fluid">
+  <div class="layui-card">
+    <form class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="search-form" id="search-form">
+      <div class="layui-form-item">
+        <div class="layui-inline">
+          <label class="layui-form-label">类型名称</label>
+          <div class="layui-input-inline">
+            <input type="text" name="categoryName" placeholder="请输入" autocomplete="off" class="layui-input" lay-affix="clear">
+          </div>
+        </div>
+        <div class="layui-inline">
+          <label class="layui-form-label">是否启用</label>
+          <div class="layui-input-inline">
+            <select name="isValid">
+              <option value="1" selected>是</option>
+              <option value="0">否</option>
+            </select>
+          </div>
+        </div>
+        <div class="layui-inline">
+          <button class="layui-btn layuiadmin-btn-list" lay-submit lay-filter="submit-form">
+            <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+    <table class="layui-row" id="ID-table-demo-data" lay-filter="ID-table-demo-data"></table>
+  </div>
+</div>
+
+<script type="text/html" id="rowToolbarTpl">
+  <div class="layui-btn-group">
+    <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" lay-event="Edit">
+      <i class="layui-icon">&#xe642;</i>
+    </button>
+    <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" lay-event="Del">
+      <i class="layui-icon">&#xe640;</i>
+    </button>
+  </div>
+</script>
+
+<script type="text/html" id="toolbarTpl">
+  <div class="layui-btn-group">
+    <button type="button" class="layui-btn" lay-event="Add">
+      新增
+    </button>
+  </div>
+</script>
+
+<script type="text/html" id="isValidTpl">
+  {{# if(d.isValid == 0){ }}
+  <p>未启用</p>
+  {{#  } else{  }}
+  <p>启用</p>
+  {{# }  }}
+</script>
+
+<script type="text/html" id="viewDetailTpl">
+  <a href="#" key="{{= d.blogCategoryId}}" lay-event="View" class="custom-blue-link">{{= d.categoryName}}</a>
+</script>
+
+@section Scripts {
+  <script src="~/js/admin/category/index.js"></script>
+}

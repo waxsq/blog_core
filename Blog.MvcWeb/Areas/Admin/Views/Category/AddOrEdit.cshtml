@@ -1,0 +1,40 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminFormLayout.cshtml";
+}
+
+@section Head {
+    <style>
+
+    </style>
+}
+
+<form class="layui-form" action="" id="addOrEditForm" lay-filter="addOrEditForm">
+    <input type="hidden" name="blogCategoryId" value="@(ViewData["id"] ?? "0")" />
+    <input type="hidden" name="action" value="@(ViewData["action"])" />
+    <div class="layui-form-item">
+        <label class="layui-form-label">分类名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="categoryName" required lay-verify="required"
+                   placeholder="请输入分类名称" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">启用状态</label>
+        <div class="layui-input-block">
+            <select name="isValid" lay-verify="required" lay-search>
+                <option value="0">禁用</option>
+                <option value="1" selected>启用</option>
+            </select>
+        </div>
+    </div>
+</form>
+
+<script>
+    let id = '@(ViewData["id"] != null ? ViewData["id"] : 0)';
+    let action = '@ViewData["action"]';
+</script>
+
+@section Scripts {
+    <script src="~/js/admin/category/addOrEdit.js"></script>
+}

@@ -29,9 +29,30 @@ namespace Blog.MvcWeb.Controllers
 
         [HttpPost]
         [Route("Add")]
-        public async Task<EditReponse<bool>> Add(TagAddOrEdit tagAddOrEdit)
+        public async Task<EditReponse<bool>> Add(CategoryAddOrEdit tagAddOrEdit)
         {
             return await _blogTagService.Add(tagAddOrEdit);
+        }
+
+        [HttpPost]
+        [Route("GetById")]
+        public async Task<EditReponse<CategoryAddOrEdit>> GetById(CategoryAddOrEdit tagAddOrEdit)
+        {
+            return await _blogTagService.GetById(tagAddOrEdit);
+        }
+
+        [HttpPost]
+        [Route("DeleteById")]
+        public async Task<EditReponse<int>> DeleteById(CategoryAddOrEdit tagAddOrEdit)
+        {
+            return await _blogTagService.DeleteById(tagAddOrEdit);
+        }
+
+        [HttpPost]
+        [Route("Edit")]
+        public async Task<EditReponse<int>> Edit(CategoryAddOrEdit tagAddOrEdit)
+        {
+            return await _blogTagService.EditById(tagAddOrEdit);
         }
 
     }

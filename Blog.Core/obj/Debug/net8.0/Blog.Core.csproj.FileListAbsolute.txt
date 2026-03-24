@@ -31,7 +31,6 @@ C:\Users\16483\Source\Repos\blog\Blog.Core\bin\Debug\net8.0\DM.DmProvider.dll
 C:\Users\16483\Source\Repos\blog\Blog.Core\bin\Debug\net8.0\Kdbndp.dll
 C:\Users\16483\Source\Repos\blog\Blog.Core\bin\Debug\net8.0\System.ClientModel.dll
 C:\Users\16483\Source\Repos\blog\Blog.Core\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
-C:\Users\16483\Source\Repos\blog\Blog.Core\bin\Debug\net8.0\System.Diagnostics.EventLog.dll
 C:\Users\16483\Source\Repos\blog\Blog.Core\bin\Debug\net8.0\System.Diagnostics.PerformanceCounter.dll
 C:\Users\16483\Source\Repos\blog\Blog.Core\bin\Debug\net8.0\System.DirectoryServices.Protocols.dll
 C:\Users\16483\Source\Repos\blog\Blog.Core\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
@@ -76,8 +75,6 @@ C:\Users\16483\Source\Repos\blog\Blog.Core\bin\Debug\net8.0\runtimes\win-arm\nat
 C:\Users\16483\Source\Repos\blog\Blog.Core\bin\Debug\net8.0\runtimes\win-arm64\native\e_sqlite3.dll
 C:\Users\16483\Source\Repos\blog\Blog.Core\bin\Debug\net8.0\runtimes\win-x64\native\e_sqlite3.dll
 C:\Users\16483\Source\Repos\blog\Blog.Core\bin\Debug\net8.0\runtimes\win-x86\native\e_sqlite3.dll
-C:\Users\16483\Source\Repos\blog\Blog.Core\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.Messages.dll
-C:\Users\16483\Source\Repos\blog\Blog.Core\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.dll
 C:\Users\16483\Source\Repos\blog\Blog.Core\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.PerformanceCounter.dll
 C:\Users\16483\Source\Repos\blog\Blog.Core\bin\Debug\net8.0\runtimes\linux\lib\net8.0\System.DirectoryServices.Protocols.dll
 C:\Users\16483\Source\Repos\blog\Blog.Core\bin\Debug\net8.0\runtimes\osx\lib\net8.0\System.DirectoryServices.Protocols.dll
@@ -201,6 +198,6 @@ D:\Code\Blog\Blog.Core\obj\Debug\net8.0\Blog.Core.genruntimeconfig.cache
 D:\Code\Blog\Blog.Core\obj\Debug\net8.0\ref\Blog.Core.dll
 C:\Users\16483\source\repos\Blog\Blog.Core\bin\Debug\net8.0\AutoMapper.dll
 C:\Users\16483\source\repos\Blog\Blog.Core\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
-C:\Users\16483\source\repos\Blog\Blog.Core\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
-C:\Users\16483\source\repos\Blog\Blog.Core\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
-C:\Users\16483\source\repos\Blog\Blog.Core\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+C:\Users\16483\source\repos\Blog\Blog.Core\bin\Debug\net8.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\16483\source\repos\Blog\Blog.Core\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\16483\source\repos\Blog\Blog.Core\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll
