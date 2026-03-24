@@ -9,5 +9,12 @@ namespace Blog.MvcWeb.Areas.Admin.Controllers
         {
             return View();
         }
+
+        public IActionResult AddOrEdit([FromQuery] long id, [FromQuery] string action)
+        {
+            ViewData["action"] = action;
+            ViewData["id"] = id;
+            return View();
+        }
     }
 }

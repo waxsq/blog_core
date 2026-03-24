@@ -93,6 +93,11 @@ C:\Users\16483\Source\Repos\blog\Blog.Core\obj\Debug\net8.0\refint\Blog.Core.dll
 C:\Users\16483\Source\Repos\blog\Blog.Core\obj\Debug\net8.0\Blog.Core.pdb
 C:\Users\16483\Source\Repos\blog\Blog.Core\obj\Debug\net8.0\Blog.Core.genruntimeconfig.cache
 C:\Users\16483\Source\Repos\blog\Blog.Core\obj\Debug\net8.0\ref\Blog.Core.dll
+C:\Users\16483\source\repos\Blog\Blog.Core\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\16483\source\repos\Blog\Blog.Core\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\16483\source\repos\Blog\Blog.Core\bin\Debug\net8.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\16483\source\repos\Blog\Blog.Core\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\16483\source\repos\Blog\Blog.Core\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll
 D:\Code\Blog\Blog.Core\bin\Debug\net8.0\Blog.Core.exe
 D:\Code\Blog\Blog.Core\bin\Debug\net8.0\Blog.Core.deps.json
 D:\Code\Blog\Blog.Core\bin\Debug\net8.0\Blog.Core.runtimeconfig.json
@@ -102,12 +107,11 @@ D:\Code\Blog\Blog.Core\bin\Debug\net8.0\AutoMapper.dll
 D:\Code\Blog\Blog.Core\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 D:\Code\Blog\Blog.Core\bin\Debug\net8.0\Azure.Core.dll
 D:\Code\Blog\Blog.Core\bin\Debug\net8.0\Azure.Identity.dll
+D:\Code\Blog\Blog.Core\bin\Debug\net8.0\Microsoft.AspNetCore.JsonPatch.dll
+D:\Code\Blog\Blog.Core\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 D:\Code\Blog\Blog.Core\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
 D:\Code\Blog\Blog.Core\bin\Debug\net8.0\Microsoft.Data.SqlClient.dll
 D:\Code\Blog\Blog.Core\bin\Debug\net8.0\Microsoft.Data.Sqlite.dll
-D:\Code\Blog\Blog.Core\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
-D:\Code\Blog\Blog.Core\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
-D:\Code\Blog\Blog.Core\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
 D:\Code\Blog\Blog.Core\bin\Debug\net8.0\Microsoft.Identity.Client.dll
 D:\Code\Blog\Blog.Core\bin\Debug\net8.0\Microsoft.Identity.Client.Extensions.Msal.dll
 D:\Code\Blog\Blog.Core\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
@@ -119,6 +123,7 @@ D:\Code\Blog\Blog.Core\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 D:\Code\Blog\Blog.Core\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
 D:\Code\Blog\Blog.Core\bin\Debug\net8.0\MySqlConnector.dll
 D:\Code\Blog\Blog.Core\bin\Debug\net8.0\Newtonsoft.Json.dll
+D:\Code\Blog\Blog.Core\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll
 D:\Code\Blog\Blog.Core\bin\Debug\net8.0\Npgsql.dll
 D:\Code\Blog\Blog.Core\bin\Debug\net8.0\Oracle.ManagedDataAccess.dll
 D:\Code\Blog\Blog.Core\bin\Debug\net8.0\Oscar.Data.SqlClient.dll
@@ -131,7 +136,6 @@ D:\Code\Blog\Blog.Core\bin\Debug\net8.0\DM.DmProvider.dll
 D:\Code\Blog\Blog.Core\bin\Debug\net8.0\Kdbndp.dll
 D:\Code\Blog\Blog.Core\bin\Debug\net8.0\System.ClientModel.dll
 D:\Code\Blog\Blog.Core\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
-D:\Code\Blog\Blog.Core\bin\Debug\net8.0\System.Diagnostics.EventLog.dll
 D:\Code\Blog\Blog.Core\bin\Debug\net8.0\System.Diagnostics.PerformanceCounter.dll
 D:\Code\Blog\Blog.Core\bin\Debug\net8.0\System.DirectoryServices.Protocols.dll
 D:\Code\Blog\Blog.Core\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
@@ -176,8 +180,6 @@ D:\Code\Blog\Blog.Core\bin\Debug\net8.0\runtimes\win-arm\native\e_sqlite3.dll
 D:\Code\Blog\Blog.Core\bin\Debug\net8.0\runtimes\win-arm64\native\e_sqlite3.dll
 D:\Code\Blog\Blog.Core\bin\Debug\net8.0\runtimes\win-x64\native\e_sqlite3.dll
 D:\Code\Blog\Blog.Core\bin\Debug\net8.0\runtimes\win-x86\native\e_sqlite3.dll
-D:\Code\Blog\Blog.Core\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.Messages.dll
-D:\Code\Blog\Blog.Core\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.dll
 D:\Code\Blog\Blog.Core\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.PerformanceCounter.dll
 D:\Code\Blog\Blog.Core\bin\Debug\net8.0\runtimes\linux\lib\net8.0\System.DirectoryServices.Protocols.dll
 D:\Code\Blog\Blog.Core\bin\Debug\net8.0\runtimes\osx\lib\net8.0\System.DirectoryServices.Protocols.dll
@@ -196,8 +198,3 @@ D:\Code\Blog\Blog.Core\obj\Debug\net8.0\refint\Blog.Core.dll
 D:\Code\Blog\Blog.Core\obj\Debug\net8.0\Blog.Core.pdb
 D:\Code\Blog\Blog.Core\obj\Debug\net8.0\Blog.Core.genruntimeconfig.cache
 D:\Code\Blog\Blog.Core\obj\Debug\net8.0\ref\Blog.Core.dll
-C:\Users\16483\source\repos\Blog\Blog.Core\bin\Debug\net8.0\AutoMapper.dll
-C:\Users\16483\source\repos\Blog\Blog.Core\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
-C:\Users\16483\source\repos\Blog\Blog.Core\bin\Debug\net8.0\Microsoft.AspNetCore.JsonPatch.dll
-C:\Users\16483\source\repos\Blog\Blog.Core\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
-C:\Users\16483\source\repos\Blog\Blog.Core\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll

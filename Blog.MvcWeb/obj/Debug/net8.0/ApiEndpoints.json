@@ -1,5 +1,135 @@
 [
   {
+    "ContainingType": "Blog.MvcWeb.Controllers.CategoryController",
+    "Method": "Add",
+    "RelativePath": "Category/Add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoryAddOrEdit",
+        "Type": "Blog.Core.Entities.Vo.Category.CategoryAddOrEdit",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Blog.Core.Commons.EditReponse\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Blog.MvcWeb.Controllers.CategoryController",
+    "Method": "DeleteById",
+    "RelativePath": "Category/DeleteById",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoryAddOrEdit",
+        "Type": "Blog.Core.Entities.Vo.Category.CategoryAddOrEdit",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Blog.Core.Commons.EditReponse\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Blog.MvcWeb.Controllers.CategoryController",
+    "Method": "Edit",
+    "RelativePath": "Category/Edit",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoryAddOrEdit",
+        "Type": "Blog.Core.Entities.Vo.Category.CategoryAddOrEdit",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Blog.Core.Commons.EditReponse\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Blog.MvcWeb.Controllers.CategoryController",
+    "Method": "GetById",
+    "RelativePath": "Category/GetById",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoryAddOrEdit",
+        "Type": "Blog.Core.Entities.Vo.Category.CategoryAddOrEdit",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Blog.Core.Commons.EditReponse\u00601[[Blog.Core.Entities.Vo.Category.CategoryAddOrEdit, Blog.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Blog.MvcWeb.Controllers.CategoryController",
+    "Method": "QueryPage",
+    "RelativePath": "Category/QueryPage",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoryTableQueryVo",
+        "Type": "Blog.Core.Entities.Vo.Category.CategoryTableQueryVo",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Blog.Core.Commons.PageReponse\u00601[[Blog.Core.Entities.BlogCategory, Blog.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "Blog.MvcWeb.Controllers.TagController",
     "Method": "Add",
     "RelativePath": "Tag/Add",

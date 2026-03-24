@@ -320,6 +320,11 @@ C:\Users\16483\Source\Repos\blog\Blog.MvcWeb\obj\Debug\net8.0\refint\Blog.MvcWeb
 C:\Users\16483\Source\Repos\blog\Blog.MvcWeb\obj\Debug\net8.0\Blog.MvcWeb.pdb
 C:\Users\16483\Source\Repos\blog\Blog.MvcWeb\obj\Debug\net8.0\Blog.MvcWeb.genruntimeconfig.cache
 C:\Users\16483\Source\Repos\blog\Blog.MvcWeb\obj\Debug\net8.0\ref\Blog.MvcWeb.dll
+C:\Users\16483\source\repos\Blog\Blog.MvcWeb\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\16483\source\repos\Blog\Blog.MvcWeb\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\16483\source\repos\Blog\Blog.MvcWeb\bin\Debug\net8.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\16483\source\repos\Blog\Blog.MvcWeb\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\16483\source\repos\Blog\Blog.MvcWeb\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll
 D:\Code\Blog\Blog.MvcWeb\bin\Debug\net8.0\Blog.Core.deps.json
 D:\Code\Blog\Blog.MvcWeb\bin\Debug\net8.0\Blog.Core.runtimeconfig.json
 D:\Code\Blog\Blog.MvcWeb\bin\Debug\net8.0\Blog.Core.exe
@@ -337,6 +342,8 @@ D:\Code\Blog\Blog.MvcWeb\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.Depend
 D:\Code\Blog\Blog.MvcWeb\bin\Debug\net8.0\Azure.Core.dll
 D:\Code\Blog\Blog.MvcWeb\bin\Debug\net8.0\Azure.Identity.dll
 D:\Code\Blog\Blog.MvcWeb\bin\Debug\net8.0\Humanizer.dll
+D:\Code\Blog\Blog.MvcWeb\bin\Debug\net8.0\Microsoft.AspNetCore.JsonPatch.dll
+D:\Code\Blog\Blog.MvcWeb\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 D:\Code\Blog\Blog.MvcWeb\bin\Debug\net8.0\Microsoft.AspNetCore.Razor.Language.dll
 D:\Code\Blog\Blog.MvcWeb\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
 D:\Code\Blog\Blog.MvcWeb\bin\Debug\net8.0\Microsoft.Build.dll
@@ -387,6 +394,7 @@ D:\Code\Blog\Blog.MvcWeb\bin\Debug\net8.0\Microsoft.VisualStudio.Web.CodeGenerat
 D:\Code\Blog\Blog.MvcWeb\bin\Debug\net8.0\Mono.TextTemplating.dll
 D:\Code\Blog\Blog.MvcWeb\bin\Debug\net8.0\MySqlConnector.dll
 D:\Code\Blog\Blog.MvcWeb\bin\Debug\net8.0\Newtonsoft.Json.dll
+D:\Code\Blog\Blog.MvcWeb\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll
 D:\Code\Blog\Blog.MvcWeb\bin\Debug\net8.0\Npgsql.dll
 D:\Code\Blog\Blog.MvcWeb\bin\Debug\net8.0\NuGet.Common.dll
 D:\Code\Blog\Blog.MvcWeb\bin\Debug\net8.0\NuGet.Configuration.dll
@@ -644,8 +652,3 @@ D:\Code\Blog\Blog.MvcWeb\obj\Debug\net8.0\refint\Blog.MvcWeb.dll
 D:\Code\Blog\Blog.MvcWeb\obj\Debug\net8.0\Blog.MvcWeb.pdb
 D:\Code\Blog\Blog.MvcWeb\obj\Debug\net8.0\Blog.MvcWeb.genruntimeconfig.cache
 D:\Code\Blog\Blog.MvcWeb\obj\Debug\net8.0\ref\Blog.MvcWeb.dll
-C:\Users\16483\source\repos\Blog\Blog.MvcWeb\bin\Debug\net8.0\AutoMapper.dll
-C:\Users\16483\source\repos\Blog\Blog.MvcWeb\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
-C:\Users\16483\source\repos\Blog\Blog.MvcWeb\bin\Debug\net8.0\Microsoft.AspNetCore.JsonPatch.dll
-C:\Users\16483\source\repos\Blog\Blog.MvcWeb\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
-C:\Users\16483\source\repos\Blog\Blog.MvcWeb\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll

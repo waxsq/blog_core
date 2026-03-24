@@ -57,14 +57,14 @@ namespace Blog.Service.Commons
                 .AndIF(!queryVo.TagName.isEmpty(), dto => dto.TagName.Equals(queryVo.TagName))
                 .AndIF(queryVo.IsValid != -1, dto => dto.IsValid.Equals(queryVo.IsValid))
                 .ToExpression();
-           
+
             var result = await QueryPagedAsync(queryVo, whereExp, null);
             return ResultUtil.SuccessPage<BlogTag>(result);
         }
 
         public async Task<EditReponse<TagAddOrEdit>> GetById(TagAddOrEdit tagAddOrEdit)
         {
-            if(tagAddOrEdit== null || tagAddOrEdit.BlogTagId == 0)
+            if (tagAddOrEdit == null || tagAddOrEdit.BlogTagId == 0)
             {
                 throw new BusinessException("请选择一笔数据");
             }
@@ -90,7 +90,7 @@ namespace Blog.Service.Commons
                 throw new BusinessException("请选择一笔数据");
             }
             var dto = await _blogTagRepository.GetByIdAsync(tagAddOrEdit.BlogTagId);
-            if(dto == null)
+            if (dto == null)
             {
                 throw new BusinessException("请检查数据是否存在");
             }

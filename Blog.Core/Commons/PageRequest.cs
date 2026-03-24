@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Blog.Core.Commons
 {
-     public class PageRequest
+    public class PageRequest
     {
         /// <summary>
         /// 当前页码 (从 1 开始)

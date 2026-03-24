@@ -10,7 +10,6 @@ namespace Blog.MvcWeb.Areas.Admin.Controllers
     [Area("Admin")]
     public class TagController : Controller
     {
-        private readonly IBlogTagService _blogTagService;
 
         public IActionResult Index()
         {

@@ -22,7 +22,7 @@ namespace Blog.Core.Entities
         /// </summary>
         [MaxLength(150)]
         [Required]
-        [SugarColumn(ColumnName = "name")]
+        [SugarColumn(ColumnName = "category_name")]
         public string CategoryName { get; set; }
 
         /// <summary>

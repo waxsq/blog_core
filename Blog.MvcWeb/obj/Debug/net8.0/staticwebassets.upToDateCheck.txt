@@ -1,6 +1,9 @@
 wwwroot\css\admin.css
 wwwroot\favicon.ico
+wwwroot\js\admin\category\addOrEdit.js
+wwwroot\js\admin\category\index.js
 wwwroot\js\admin\layout.js
+wwwroot\js\admin\post\index.js
 wwwroot\js\admin\tag\addOrEdit.js
 wwwroot\js\admin\tag\index.js
 wwwroot\js\jquery-serializeObject.js

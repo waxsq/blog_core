@@ -15,7 +15,7 @@ namespace Blog.Core.Profiles
         public MappingProfile()
         {
             CreateMap<TagAddOrEdit, BlogTag>();
-            CreateMap<BlogTag,TagAddOrEdit>();
+            CreateMap<BlogTag, TagAddOrEdit>();
 
             CreateMap<CategoryAddOrEdit, BlogCategory>();
             CreateMap<BlogCategory, CategoryAddOrEdit>();

@@ -45,7 +45,7 @@ namespace Blog.Core.Utils
         public static PageReponse<T> SuccessPage<T>(
             PageReponse<T> pageReponse,
             string message = "查询成功",
-            int code = 200) 
+            int code = 200)
         {
             return new PageReponse<T>
             {

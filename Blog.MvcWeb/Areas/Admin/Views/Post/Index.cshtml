@@ -1,0 +1,83 @@
+﻿@*
+  For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Shared/_AdminTableLayout.cshtml";
+
+}
+@section Head {
+    <style>
+        .layui-table-tool {
+            background-color: white !important; /* 改成你想要的背景色 */
+            padding: 10px 15px;
+            border-bottom: 1px solid #e6e6e6;
+        }
+
+        .custom-blue-link {
+            color: #007bff !important; /* 强制蓝色，防止被其他样式覆盖 */
+            text-decoration: underline !important; /* 强制下划线 */
+            cursor: pointer;
+        }
+    </style>
+}
+<div class="layui-fluid">
+    <div class="layui-card">
+        <form class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="search-form" id="search-form">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">文章标题</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="title" placeholder="请输入" autocomplete="off" class="layui-input" lay-affix="clear">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">文章状态</label>
+                    <div class="layui-input-inline">
+                        <select name="status">
+                            <option value="" selected>全部</option>
+                            <option value="0">草稿</option>
+                            <option value="1">已发布</option>
+                            <option value="2">已归档</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">是否为推荐</label>
+                    <div class="layui-input-inline">
+                        <select name="isFeatured">
+                            <option value="" selected>全部</option>
+                            <option value="0">否</option>
+                            <option value="1">是</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">是否顶置</label>
+                    <div class="layui-input-inline">
+                        <select name="isTop">
+                            <option value="" selected>全部</option>
+                            <option value="0">否</option>
+                            <option value="1">是</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">发布时间</label>
+                    <div class="layui-input-inline">
+                        <input readonly name="publishedAt" id="publishedAt" class="layui-input" placeholder=" - " />
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn layuiadmin-btn-list" lay-submit lay-filter="submit-form">
+                        <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <table class="layui-row" id="ID-table-demo-data" lay-filter="ID-table-demo-data"></table>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/admin/post/index.js"></script>
+}
