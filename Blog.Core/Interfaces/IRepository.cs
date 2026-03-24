@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Blog.Core.Commons;
 using SqlSugar;
 
 namespace Blog.Core.Interfaces
@@ -34,7 +35,7 @@ namespace Blog.Core.Interfaces
         /// <param name="predicate">可选筛选表达式</param>
         /// <param name="orderBy">可选排序表达式</param>
         /// <param name="isAsc">排序方向，默认升序</param>
-        Task<List<TEntity>> QueryPagedAsync(PageModel pageModel,
+        Task<PageReponse<TEntity>> QueryPagedAsync(PageRequest pageRequest,
             Expression<Func<TEntity, bool>>? predicate = null,
             Expression<Func<TEntity, object>>? orderBy = null,
             bool isAsc = true);

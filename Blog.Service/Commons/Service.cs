@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Blog.Core.Commons;
+using Blog.Core.Entities;
 using Blog.Core.Interfaces;
 using SqlSugar;
 
@@ -55,13 +57,13 @@ namespace Blog.Service.Commons
             return await _repository.QueryAsync(predicate);
         }
 
-        public virtual async Task<List<TEntity>> QueryPagedAsync(PageModel pageModel,
+        public virtual async Task<PageReponse<TEntity>> QueryPagedAsync(PageRequest pageRequest,
             Expression<Func<TEntity, bool>>? predicate = null,
             Expression<Func<TEntity, object>>? orderBy = null,
             bool isAsc = true)
         {
-            if (pageModel == null) throw new ArgumentNullException(nameof(pageModel));
-            return await _repository.QueryPagedAsync(pageModel, predicate, orderBy, isAsc);
+            if (pageRequest == null) throw new ArgumentNullException(nameof(pageRequest));
+            return await _repository.QueryPagedAsync(pageRequest, predicate, orderBy, isAsc);
         }
 
         public virtual async Task<List<TEntity>> QueryByTreeAsync<TTree>(TTree tree, Expression<Func<TEntity, bool>>? predicate = null)

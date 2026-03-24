@@ -2,20 +2,27 @@
     var form = layui.form;
     var table = layui.table;
     var layer = layui.layer;
+    var $ = layui.$;
 
 
-    table.render({
+    var currentTable = table.render({
         elem: '#ID-table-demo-data',
-        url: '/Admin/Tag/Query',
+        url: '/Tag/QueryPage',
+        contentType: 'application/json', // 👈 关键：告诉服务器我发的是 JSON
         page: true,
         cols: [[
             { field: 'blogTagId', title: '主键', hide: true },
             { type: 'checkbox', fixed: 'left' },
-            { field: 'tagName', title: '标签名称' },
+            { field: 'tagName', title: '标签名称', templet :'#viewDetailTpl' },
             { field: 'isValid', title: '状态', templet: '#isValidTpl' },
             { fixed: 'right', title: '操作', align: 'center', toolbar: '#rowToolbarTpl' }
         ]],
-        where: {},
+        method: 'post',
+        where: {
+            PageIndex: 1,
+            PageSize: 10,
+            ...($("#search-form").serializeObject())
+        },
         request: {
             pageName: 'PageIndex',
             limitName: 'PageSize'
@@ -32,19 +39,17 @@
             return {
                 code: 0, // Layui 要求成功为 0
                 msg: res.message || 'success',
-                count: res.data.totalCount, // 总条数
-                data: res.data.items        // 数据列表
+                count: res.totalCount, // 总条数
+                data: res.datas        // 数据列表
             };
         }
     })
 
-    form.on('submit(search-form)', function (data) {
-        var fieldData = data.field; // 获取表单所有字段 { id: "1", name: "jack" ... }
-
+    form.on('submit(submit-form)', function (data) {
         // 3. 核心：使用 table.reload 重载表格
         table.reload('ID-table-demo-data', { // 注意这里填的是 elem 的 ID (去掉#)
             where: {
-                params: JSON.stringify(fieldData)
+                ...data.field
             },
             page: {
                 curr: 1 // 搜索时重置到第 1 页
@@ -64,6 +69,15 @@
                 openDialog(data.blogTagId, 'edit')
                 break;
             case 'Del':
+                layer.confirm(`是否删除该数据:标签${data.tagName}?`, { icon: 3, title: 'tips' }, function (index) {
+                    sendAjax("/Tag/Delete", { blogTagId: data.blogTagId }, function (res) {
+                        if (res.success && res.code == 200) {
+                            layer.msg('操作成功', { icon: 1, time: 2000 });
+                        } else {
+                            layer.msg(`操作失败:${res.message}`, { icon: 2, time: 4000 });
+                        }
+                    }, function (error) { }, function () { layui.close(index) })
+                });
                 break;
         }
     })
@@ -89,8 +103,7 @@
                 var addOrEditFormObj = iframeWin.$('#addOrEditForm');
                 var data = addOrEditFormObj.serializeObject();
                 if (action != 'view') {
-                    debugger
-                    sendAjax(`/Admin/Tag/${action}`, data,
+                    sendAjax(`/Tag/${action}`, data,
                         function (res) {
                             if (res.success) {
                                 layer.msg('操作成功', { icon: 1, time: 2000 });
@@ -100,6 +113,12 @@
                         }, function (error) {
                             layer.msg('操作失败', { icon: 2, time: 4000 })
                         }, function () {
+                            currentTable.reload({
+                                page: {
+                                    curr: 1
+                                },
+                                where: form.val('search-form')
+                            })
                             layer.close(index)
                         })
                 }
@@ -109,29 +128,4 @@
             }
         });
     }
-
-
-
-    let sendAjax = function (url, data = {}, success, error, complete, type = "POST", dataType = 'json', contentType = 'application/json', headers = {},) {
-        if (contentType === 'application/json' && typeof data === 'object' && data !== null) {
-            data = JSON.stringify(data);
-        }
-        $.ajax({
-            url,          // 请求地址
-            type,                    // 请求方式：'GET', 'POST', 'PUT', 'DELETE' 等
-            data,
-            dataType,               // 预期服务器返回的数据类型：'json', 'xml', 'html', 'text'
-            contentType, // 发送数据的格式 (默认是 'application/x-www-form-urlencoded')
-            timeout: 5000,                  // 超时时间 (毫秒)
-            headers,
-            // --- 回调函数 ---
-            // 请求成功时调用 (注意：只有当 dataType 匹配且 HTTP 状态码为 2xx 时才触发)
-            success,
-            // 请求失败时调用 (网络错误、超时、HTTP 4xx/5xx、JSON 解析失败)
-            error,
-            // 请求完成时调用 (无论成功失败都会执行，常用于关闭 loading 遮罩)
-            complete
-        });
-    }
-
 })

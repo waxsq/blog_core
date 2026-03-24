@@ -1,4 +1,6 @@
 using System.Threading.Tasks;
+using Blog.Core.Commons;
+using Blog.Core.Entities;
 using Blog.Core.Entities.Vo.Tag;
 using Blog.Service.Intefaces;
 using Microsoft.AspNetCore.Mvc;
@@ -9,10 +11,6 @@ namespace Blog.MvcWeb.Areas.Admin.Controllers
     public class TagController : Controller
     {
         private readonly IBlogTagService _blogTagService;
-        public TagController(IBlogTagService blogTagService)
-        {
-            this._blogTagService = blogTagService;
-        }
 
         public IActionResult Index()
         {
@@ -25,12 +23,5 @@ namespace Blog.MvcWeb.Areas.Admin.Controllers
             ViewData["id"] = id;
             return View();
         }
-
-        [HttpPost]
-        public async Task<IActionResult> Add([FromBody] TagAddOrEdit tag)
-        {
-            return Json(await _blogTagService.Add(tag));
-        }
-
     }
 }

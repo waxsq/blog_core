@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Blog.Core.Entities.Vo.Tag
 {
-    public class TagTablePageVo
+    public class TagTablePageVo : BlogTag
     {
     }
 }

@@ -644,3 +644,5 @@ D:\Code\Blog\Blog.MvcWeb\obj\Debug\net8.0\refint\Blog.MvcWeb.dll
 D:\Code\Blog\Blog.MvcWeb\obj\Debug\net8.0\Blog.MvcWeb.pdb
 D:\Code\Blog\Blog.MvcWeb\obj\Debug\net8.0\Blog.MvcWeb.genruntimeconfig.cache
 D:\Code\Blog\Blog.MvcWeb\obj\Debug\net8.0\ref\Blog.MvcWeb.dll
+C:\Users\16483\source\repos\Blog\Blog.MvcWeb\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\16483\source\repos\Blog\Blog.MvcWeb\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

@@ -11,7 +11,7 @@ namespace Blog.MvcWeb
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            SnowFlakeSingle.WorkId = 100;
+            SnowFlakeSingle.WorkId = 1;
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

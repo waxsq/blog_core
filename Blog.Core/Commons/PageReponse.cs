@@ -31,6 +31,6 @@ namespace Blog.Core.Commons
         /// <summary>
         /// 当前页的数据列表
         /// </summary>
-        public List<T> Datas { get; set; } = new List<T>();
+        public IEnumerable<T> Datas { get; set; } = new List<T>();
     }
 }

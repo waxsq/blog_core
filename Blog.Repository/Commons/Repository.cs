@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Blog.Core.Commons;
 using Blog.Core.Interfaces;
+using Dm.util;
 using SqlSugar;
 
 namespace Blog.Repository.Commons
@@ -65,12 +66,12 @@ namespace Blog.Repository.Commons
         /// <summary>
         /// 分页查询（使用 SqlSugar 的 PageModel）
         /// </summary>
-        public async Task<PageReponse<TEntity>> QueryPagedAsync(PageModel pageModel,
+        public async Task<PageReponse<TEntity>> QueryPagedAsync(PageRequest pageRequest,
             Expression<Func<TEntity, bool>>? predicate = null,
             Expression<Func<TEntity, object>>? orderBy = null,
             bool isAsc = true)
         {
-            if (pageModel == null) throw new ArgumentNullException(nameof(pageModel));
+            if (pageRequest == null) throw new ArgumentNullException(nameof(pageRequest));
 
             var query = _db.Queryable<TEntity>();
             if (predicate != null) query = query.Where(predicate);
@@ -80,12 +81,23 @@ namespace Blog.Repository.Commons
                 // 使用 OrderBy(Expression, OrderByType) 保持与 SqlSugar 的约定
                 query = query.OrderBy(orderBy, isAsc ? OrderByType.Asc : OrderByType.Desc);
             }
+            if (pageRequest.Field.isEmpty())
+            {
+                query = query.OrderBy($"{pageRequest.Field} {pageRequest.Order}");
+            }
+            var pageReponse = new PageReponse<TEntity>
+            {
+                PageIndex = pageRequest.PageIndex,
+                PageSize = pageRequest.PageSize,
+                TotalCount = 0
+            };
 
             // 修复：SqlSugar 的 ToPageListAsync 需要传递 pageIndex, pageSize, RefAsync<int> totalNumber
-            RefAsync<int> totalNumber = new RefAsync<int>(pageModel.TotalCount);
-            var result = await query.ToPageListAsync(pageModel.PageIndex, pageModel.PageSize, totalNumber);
-            pageModel.TotalCount = totalNumber.Value;
-            return result;
+            RefAsync<int> totalNumber = new RefAsync<int>(pageReponse.TotalCount);
+            var result = await query.ToPageListAsync(pageRequest.PageIndex, pageRequest.PageSize, totalNumber);
+            pageReponse.TotalCount = totalNumber.Value;
+            pageReponse.Datas = result;
+            return pageReponse;
         }
 
         /// <summary>

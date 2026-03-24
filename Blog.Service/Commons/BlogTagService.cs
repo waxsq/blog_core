@@ -39,25 +39,26 @@ namespace Blog.Service.Commons
                 }
             }
             var entity = _mapper.Map<BlogTag>(tag);
-            int result = await _repository.InsertAsync(entity);
+            entity.BlogTagId = SnowFlakeSingle.instance.NextId();
+            int result = await CreateAsync(entity);
             return ResultUtil.Success(result > 0, result > 0 ? "添加成功" : "添加失败");
         }
 
-        public async Task<EditReponse<BlogTag>> Query(TagTableQueryVo queryVo)
+        public async Task<PageReponse<BlogTag>> QueryPage(TagTableQueryVo queryVo)
         {
-            var pageModel = new PageModel
+            var pageRequest = new PageRequest
             {
                 PageIndex = queryVo.PageIndex,
                 PageSize = queryVo.PageSize,
             };
 
             var whereExp = Expressionable.Create<BlogTag>()
-                .AndIF(queryVo.TagName.IsNullOrEmpty(), dto => dto.TagName.Equals(queryVo.TagName))
+                .AndIF(!queryVo.TagName.IsNullOrEmpty(), dto => dto.TagName.Equals(queryVo.TagName))
                 .AndIF(queryVo.IsValid != -1, dto => dto.IsValid.Equals(queryVo.IsValid))
                 .ToExpression();
-            Expression<Func<BlogTag, object>> orderBy = dto => dto.TagName;
-            var result = await _repository.QueryPagedAsync(pageModel, whereExp, orderBy);
-            return ResultUtil.SuccessPage<TagTablePageVo>()
+           
+            var result = await QueryPagedAsync(queryVo, whereExp, null);
+            return ResultUtil.SuccessPage<BlogTag>(result);
         }
     }
 }

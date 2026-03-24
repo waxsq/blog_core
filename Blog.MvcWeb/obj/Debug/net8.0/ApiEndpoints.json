@@ -1,1 +1,54 @@
-[]
+[
+  {
+    "ContainingType": "Blog.MvcWeb.Controllers.TagController",
+    "Method": "Add",
+    "RelativePath": "Tag/Add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tagAddOrEdit",
+        "Type": "Blog.Core.Entities.Vo.Tag.TagAddOrEdit",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Blog.Core.Commons.EditReponse\u00601[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Blog.MvcWeb.Controllers.TagController",
+    "Method": "QueryPage",
+    "RelativePath": "Tag/QueryPage",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tagTableQueryVo",
+        "Type": "Blog.Core.Entities.Vo.Tag.TagTableQueryVo",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Blog.Core.Commons.PageReponse\u00601[[Blog.Core.Entities.BlogTag, Blog.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  }
+]

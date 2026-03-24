@@ -12,16 +12,21 @@
       padding: 10px 15px;
       border-bottom: 1px solid #e6e6e6;
     }
+    .custom-blue-link {
+      color: #007bff !important; /* 强制蓝色，防止被其他样式覆盖 */
+      text-decoration: underline !important; /* 强制下划线 */
+      cursor: pointer;
+    }
   </style>
 }
 <div class="layui-fluid">
   <div class="layui-card">
-    <form class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="search-form">
+    <form class="layui-form layui-card-header layuiadmin-card-header-auto" lay-filter="search-form" id="search-form">
       <div class="layui-form-item">
         <div class="layui-inline">
-          <label class="layui-form-label">标签编码</label>
+          <label class="layui-form-label">标签名称</label>
           <div class="layui-input-inline">
-            <input type="text" name="tagCode" placeholder="请输入" autocomplete="off" class="layui-input">
+            <input type="text" name="tagName" placeholder="请输入" autocomplete="off" class="layui-input" lay-affix="clear">
           </div>
         </div>
         <div class="layui-inline">
@@ -34,7 +39,7 @@
           </div>
         </div>
         <div class="layui-inline">
-          <button class="layui-btn layuiadmin-btn-list" lay-submit lay-filter="LAY-app-contlist-search">
+          <button class="layui-btn layuiadmin-btn-list" lay-submit lay-filter="submit-form">
             <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
           </button>
         </div>
@@ -73,6 +78,10 @@
   {{#  } else{  }}
   <p>启用</p>
   {{# }  }}
+</script>
+
+<script type="text/html" id="viewDetailTpl">
+  <a href="/Tag/Detail?blogTagId={{= d.blogTagId}}" class="custom-blue-link">{{= d.tagName}}</a>
 </script>
 
 @section Scripts {

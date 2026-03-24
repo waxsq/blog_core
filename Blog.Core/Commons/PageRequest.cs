@@ -17,5 +17,8 @@ namespace Blog.Core.Commons
         /// 每页条数
         /// </summary>
         public int PageSize { get; set; } = 10;
+
+        public string Order { get; set; } = "desc";
+        public string Field { get; set; } = "update_at";
     }
 }

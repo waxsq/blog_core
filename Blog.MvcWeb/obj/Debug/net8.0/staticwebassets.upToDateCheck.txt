@@ -4,6 +4,7 @@ wwwroot\js\admin\layout.js
 wwwroot\js\admin\tag\addOrEdit.js
 wwwroot\js\admin\tag\index.js
 wwwroot\js\jquery-serializeObject.js
+wwwroot\js\util.js
 wwwroot\lib\bootstrap\dist\css\bootstrap.css
 wwwroot\lib\bootstrap\dist\css\bootstrap.css.map
 wwwroot\lib\bootstrap\dist\css\bootstrap.min.css

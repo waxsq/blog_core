@@ -65,7 +65,7 @@ namespace Blog.Core.Entities
         /// 数据状态
         /// </summary>
         [SugarColumn(ColumnName = "is_valid")]
-        public int? IsValid { get; set; }
+        public int IsValid { get; set; } = 1;
 
     }
 }

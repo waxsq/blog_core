@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Blog.Core.Commons;
 using SqlSugar;
 
@@ -41,21 +42,20 @@ namespace Blog.Core.Utils
         /// @param code 可选的状态码，默认为 200
         /// @return 包含分页数据和分页信息的 PageReponse 对象
         /// </summary>
-        public static PageReponse<T> SuccessPage<T,F>(
-            List<T> datas,
-            PageRequest pageRequest,
+        public static PageReponse<T> SuccessPage<T>(
+            PageReponse<T> pageReponse,
             string message = "查询成功",
-            int code = 200)
+            int code = 200) 
         {
             return new PageReponse<T>
             {
                 Success = true,
                 Code = code,
+                Datas = pageReponse.Datas,
                 Message = message,
-                Datas = datas,
-                PageIndex = pageRequest.PageIndex,
-                PageSize = pageRequest.PageSize,
-                TotalCount = datas.Count // 注意：这里需要你自己计算总数，通常是通过数据库查询获取的
+                PageIndex = pageReponse.PageIndex,
+                PageSize = pageReponse.PageSize,
+                TotalCount = pageReponse.TotalCount
             };
         }
 
