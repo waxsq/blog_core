@@ -93,7 +93,7 @@ namespace Blog.Core.Entities
         /// 最后登录时间
         /// </summary>
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}", ApplyFormatInEditMode = true)]
-        [JsonConverter(typeof(JsonNullableDateTimeConverter))]
+        [JsonConverter(typeof(JsonDateTimeConverter))]
         [SugarColumn(ColumnName = "last_login_at")]
         public DateTime? LastLoginAt { get; set; }
 

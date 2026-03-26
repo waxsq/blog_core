@@ -1,15 +1,48 @@
-﻿layui.use(['form', 'table', 'layer','laydate'], function () {
+﻿layui.use(['form', 'table', 'layer','laydate','util'], function () {
     var form = layui.form;
     var table = layui.table;
     var $ = layui.$;
     var laydate = layui.laydate;
+    var util = layui.util;
 
 
     //初始化时间组件
     laydate.render({
-        elem: '#publishedAt',
+        elem: '#publishedBeginAt',
         type: 'datetime',
-        range: true 
+        format: 'yyyy-MM-dd HH:mm:ss',
+        done: function (value,beginDate,endDate) {
+            var endDate = $('#publishedEndAt').val();
+            if (endDate && value && (endDate < value)) {
+                layer.msg('结束时间不能早于开始时间，请重新选择！', {
+                    icon: 2,      // 【关键】图标：2 代表哭脸/错误/异常 (0-6都有不同含义)
+                    time: 3000,   // 停留时间：3000毫秒 (3秒)，默认是3000，可省略
+                    shift: 6,     // 动画：6 代表抖动动画 (强调错误)
+                    shade: 0.1    // 遮罩透明度：0.1 (轻微遮罩，让用户注意到但不过分干扰)
+                });
+                setTimeout(() => $('#publishedBeginAt').val(''),50)
+                return;
+            }
+            
+        }
+    })
+    laydate.render({
+        elem: '#publishedEndAt',
+        type: 'datetime',
+        format: 'yyyy-MM-dd HH:mm:ss',
+        done: function (value, beginDate, endDate) {
+            var beginDate = $('#publishedBeginAt').val();
+            if (value && beginDate && (value < beginDate)) {
+                layer.msg('结束时间不能早于开始时间，请重新选择！', {
+                    icon: 2,      // 【关键】图标：2 代表哭脸/错误/异常 (0-6都有不同含义)
+                    time: 3000,   // 停留时间：3000毫秒 (3秒)，默认是3000，可省略
+                    shift: 6,     // 动画：6 代表抖动动画 (强调错误)
+                    shade: 0.1    // 遮罩透明度：0.1 (轻微遮罩，让用户注意到但不过分干扰)
+                });
+                setTimeout(() => $('#publishedEndAt').val(''), 50)
+                return;
+            }
+        }
     })
 
     //渲染表格
@@ -18,7 +51,60 @@
         url: '/Post/QueryPage',
         contentType: 'application/json', // 👈 关键：告诉服务器我发的是 JSON
         page: true,
-
+        cols: [[
+            { Field: 'blogPostId', title: '主键', hide: true },
+            { type: 'checkbox', fixed: 'left' },
+            { Field: 'title', title: '文章标题', templet:'viewDetailTpl' },
+            { Field: 'summary', title: '文章简介' },
+            { Field: 'status', title: '发布状态' },
+            { Field: 'isFeatured', title: '是否推荐' },
+            { Field: 'isTop', title: '是否顶置' },
+            { Field: 'categoryId', hide: true },
+            { Field: 'categoryName', title: '分类' },
+            { Field: 'viewCount', title: '查看人数' },
+            { Field: 'commentsCount', title: '评论人数' },
+            { Field: 'likesCount', title: '点赞人数' },
+            { Field: 'updateAt', title: '最近修改时间' },
+        ]],
+        method: 'post',
+        where: {
+            ...($("#search-form").serializeObject())
+        },
+        request: {
+            pageName: 'PageIndex',
+            limitName: 'PageSize'
+        },
+        parseData: function (res) {
+            // 如果你的后端返回格式特殊，可以在这里统一转换
+            // 假设后端返回: { code: 200, data: { list: [...], total: 100 } }
+            if (res.code !== 200) {
+                return { code: 1, msg: res.message, count: 0, data: [] };
+            }
+            // 适配你的 ResultReponse<PageModel<T>> 结构
+            // 假设 res.data 就是 PageModel 对象
+            debugger
+            return {
+                code: 0, // Layui 要求成功为 0
+                msg: res.message || 'success',
+                count: res.totalCount, // 总条数
+                data: res.datas        // 数据列表
+            };
+        }
     })
+
+    form.on('submit(submit-form)', function (data) {
+        // 3. 核心：使用 table.reload 重载表格
+        table.reload('ID-table-demo-data', { // 注意这里填的是 elem 的 ID (去掉#)
+            where: {
+                ...data.field
+            },
+            page: {
+                curr: 1 // 搜索时重置到第 1 页
+            },
+            method: 'post' // 建议改为 POST，因为查询条件数组可能很长
+        });
+
+        return false; // 阻止表单默认跳转
+    });
 
 })

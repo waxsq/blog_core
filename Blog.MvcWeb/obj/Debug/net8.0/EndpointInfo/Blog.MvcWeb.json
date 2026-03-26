@@ -245,6 +245,54 @@
         }
       }
     },
+    "/Post/QueryPage": {
+      "post": {
+        "tags": [
+          "Post"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostTableQueryVo"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostTableQueryVo"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostTableQueryVo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostTablePageVoPageReponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostTablePageVoPageReponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostTablePageVoPageReponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/Tag/QueryPage": {
       "post": {
         "tags": [
@@ -794,6 +842,194 @@
         },
         "additionalProperties": false
       },
+      "PostTablePageVo": {
+        "required": [
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "blogPostId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "authorId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "title": {
+            "maxLength": 255,
+            "minLength": 1,
+            "type": "string"
+          },
+          "slug": {
+            "maxLength": 255,
+            "type": "string",
+            "nullable": true
+          },
+          "summary": {
+            "type": "string",
+            "nullable": true
+          },
+          "content": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isFeatured": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isTop": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "categoryId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "viewsCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "commentsCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "likesCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "publishedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "createAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createBy": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "updateAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updateBy": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "authorName": {
+            "type": "string",
+            "nullable": true
+          },
+          "categoryName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PostTablePageVoPageReponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "pageIndex": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "datas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PostTablePageVo"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PostTableQueryVo": {
+        "type": "object",
+        "properties": {
+          "pageIndex": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "order": {
+            "type": "string",
+            "nullable": true
+          },
+          "field": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isFeatured": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isTop": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "categoryName": {
+            "type": "string",
+            "nullable": true
+          },
+          "publishedBeginAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "publishedEndAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "TagAddOrEdit": {
         "type": "object",
         "properties": {
@@ -876,6 +1112,9 @@
   "tags": [
     {
       "name": "Category"
+    },
+    {
+      "name": "Post"
     },
     {
       "name": "Tag"

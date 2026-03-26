@@ -18,8 +18,6 @@
         ]],
         method: 'post',
         where: {
-            PageIndex: 1,
-            PageSize: 10,
             ...($("#search-form").serializeObject())
         },
         request: {

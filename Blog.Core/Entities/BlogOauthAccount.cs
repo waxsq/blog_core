@@ -55,7 +55,7 @@ namespace Blog.Core.Entities
         /// 令牌到期时间
         /// </summary>
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}", ApplyFormatInEditMode = true)]
-        [JsonConverter(typeof(JsonNullableDateTimeConverter))]
+        [JsonConverter(typeof(JsonDateTimeConverter))]
         [SugarColumn(ColumnName = "expires_at")]
         public DateTime? ExpiresAt { get; set; }
 

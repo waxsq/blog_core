@@ -42,7 +42,7 @@ namespace Blog.Core.Entities
         /// 下一次执行时间
         /// </summary>
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}", ApplyFormatInEditMode = true)]
-        [JsonConverter(typeof(JsonNullableDateTimeConverter))]
+        [JsonConverter(typeof(JsonDateTimeConverter))]
         [SugarColumn(ColumnName = "next_run_at")]
         public DateTime? NextRunAt { get; set; }
 
@@ -50,7 +50,7 @@ namespace Blog.Core.Entities
         /// 最后一次执行时间
         /// </summary>
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}", ApplyFormatInEditMode = true)]
-        [JsonConverter(typeof(JsonNullableDateTimeConverter))]
+        [JsonConverter(typeof(JsonDateTimeConverter))]
         [SugarColumn(ColumnName = "last_run_at")]
         public DateTime? LastRunAt { get; set; }
 

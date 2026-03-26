@@ -96,7 +96,7 @@ namespace Blog.Core.Entities
         /// 发布时间
         /// </summary>
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}", ApplyFormatInEditMode = true)]
-        [JsonConverter(typeof(JsonNullableDateTimeConverter))]
+        [JsonConverter(typeof(JsonDateTimeConverter))]
         [SugarColumn(ColumnName = "published_at")]
         public DateTime? PublishedAt { get; set; }
 

@@ -130,6 +130,32 @@
     ]
   },
   {
+    "ContainingType": "Blog.MvcWeb.Controllers.PostController",
+    "Method": "QueryPage",
+    "RelativePath": "Post/QueryPage",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "postTableQueryVo",
+        "Type": "Blog.Core.Entities.Vo.Post.PostTableQueryVo",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Blog.Core.Commons.PageReponse\u00601[[Blog.Core.Entities.Vo.Post.PostTablePageVo, Blog.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "Blog.MvcWeb.Controllers.TagController",
     "Method": "Add",
     "RelativePath": "Tag/Add",
