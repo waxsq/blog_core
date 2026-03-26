@@ -107,4 +107,79 @@
         return false; // 阻止表单默认跳转
     });
 
+
+
+    table.on('tool(ID-table-demo-data)', function (obj) {
+        var data = obj.data;
+        var event = obj.event;
+        switch (event) {
+            case 'Edit':
+                openDialog(data.blogPostId, event)
+                break;
+            case 'Del':
+                layer.confirm(`是否删除该数据:文章${data.title}?`, { icon: 3, title: 'tips' }, function (index) {
+                    sendAjax("/Post/DeleteById", { blogPostId: data.blogPostId }, function (res) {
+                        if (res.success && res.code == 200) {
+                            layer.msg('操作成功', { icon: 1, time: 2000 });
+                        } else {
+                            layer.msg(`操作失败:${res.message}`, { icon: 2, time: 4000 });
+                        }
+                    }, function (error) { }, function () { layui.close(index) })
+                });
+                break;
+            case 'View':
+                openDialog(data.blogPostId, event)
+                break;
+        }
+    })
+
+    table.on('toolbar(ID-table-demo-data)', function (obj) {
+        var options = obj.config;
+        var checkStatus = table.checkStatus(options.id);
+        switch (obj.event) {
+            case 'Add':
+                openDialog(0, obj.event)
+                break;
+        }
+    })
+
+
+
+    let openDialog = function (id, action = 'View') {
+        layer.open({
+            type: 2,
+            content: `/Admin/Tag/AddOrEdit?id=${id}&action=${action}`, //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+            area: ['600px', '400px'],
+            btn: ['确定', '取消'],
+            yes: function (index, layero) {
+                var iframeWin = window[layero.find('iframe')[0]['name']];
+                var addOrEditFormObj = iframeWin.$('#addOrEditForm');
+                var data = addOrEditFormObj.serializeObject();
+                if (action != 'View') {
+                    sendAjax(`/Post/${action}`, data,
+                        function (res) {
+                            if (res.success) {
+                                layer.msg('操作成功', { icon: 1, time: 2000 });
+                            } else {
+                                layer.msg(`操作失败:${res.message}`, { icon: 2, time: 4000 });
+                            }
+                        }, function (error) {
+                            layer.msg('操作失败', { icon: 2, time: 4000 })
+                        }, function () {
+                            currentTable.reload({
+                                page: {
+                                    curr: 1
+                                },
+                                where: form.val('search-form')
+                            })
+                            layer.close(index)
+                        })
+                }
+            },
+            btn1: function (index) {
+
+            }
+        });
+    }
+
 })
