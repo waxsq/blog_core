@@ -1,4 +1,4 @@
-﻿layui.use(['form', 'table', 'layer','laydate','util'], function () {
+﻿layui.use(['form', 'table', 'layer', 'laydate', 'util'], function () {
     var form = layui.form;
     var table = layui.table;
     var $ = layui.$;
@@ -11,7 +11,7 @@
         elem: '#publishedBeginAt',
         type: 'datetime',
         format: 'yyyy-MM-dd HH:mm:ss',
-        done: function (value,beginDate,endDate) {
+        done: function (value, beginDate, endDate) {
             var endDate = $('#publishedEndAt').val();
             if (endDate && value && (endDate < value)) {
                 layer.msg('结束时间不能早于开始时间，请重新选择！', {
@@ -20,10 +20,10 @@
                     shift: 6,     // 动画：6 代表抖动动画 (强调错误)
                     shade: 0.1    // 遮罩透明度：0.1 (轻微遮罩，让用户注意到但不过分干扰)
                 });
-                setTimeout(() => $('#publishedBeginAt').val(''),50)
+                setTimeout(() => $('#publishedBeginAt').val(''), 50)
                 return;
             }
-            
+
         }
     })
     laydate.render({
@@ -54,11 +54,11 @@
         cols: [[
             { Field: 'blogPostId', title: '主键', hide: true },
             { type: 'checkbox', fixed: 'left' },
-            { Field: 'title', title: '文章标题', templet:'viewDetailTpl' },
+            { Field: 'title', title: '文章标题', templet: '#viewDetailTpl' },
             { Field: 'summary', title: '文章简介' },
-            { Field: 'status', title: '发布状态' },
-            { Field: 'isFeatured', title: '是否推荐' },
-            { Field: 'isTop', title: '是否顶置' },
+            { Field: 'status', title: '发布状态', templet: '#statusTpl' },
+            { Field: 'isFeatured', title: '是否推荐', templet: '#isFeaturedTpl' },
+            { Field: 'isTop', title: '是否顶置', templet: '#isTopTpl' },
             { Field: 'categoryId', hide: true },
             { Field: 'categoryName', title: '分类' },
             { Field: 'viewCount', title: '查看人数' },
@@ -66,6 +66,7 @@
             { Field: 'likesCount', title: '点赞人数' },
             { Field: 'updateAt', title: '最近修改时间' },
         ]],
+        toolbar:'#toolbarTpl',
         method: 'post',
         where: {
             ...($("#search-form").serializeObject())
@@ -82,7 +83,6 @@
             }
             // 适配你的 ResultReponse<PageModel<T>> 结构
             // 假设 res.data 就是 PageModel 对象
-            debugger
             return {
                 code: 0, // Layui 要求成功为 0
                 msg: res.message || 'success',

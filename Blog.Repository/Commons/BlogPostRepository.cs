@@ -13,7 +13,7 @@ namespace Blog.Repository.Commons
     {
         private readonly ISqlSugarClient _db;
         private readonly IMapper _mapper;
-        public BlogPostRepository(ISqlSugarClient db,IMapper mapper) : base(db)
+        public BlogPostRepository(ISqlSugarClient db, IMapper mapper) : base(db)
         {
             _db = db;
             _mapper = mapper;

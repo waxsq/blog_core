@@ -8,26 +8,17 @@
     </style>
 }
 
-<form class="layui-form" action="" id="addOrEditForm" lay-filter="addOrEditForm">
-    <input type="hidden" name="blogTagId" value="@(ViewData["id"] ?? "0")" />
-    <input type="hidden" name="action" value="@(ViewData["action"])" />
-    <div class="layui-form-item">
-        <label class="layui-form-label">标签名称</label>
+<form class="layui-form" action="#" id="addOrEditForm" lay-filter="addOrEditForm">
+  <div class="layui-form-item">
+        <label class="layui-form-label">文章标题</label>
         <div class="layui-input-block">
-            <input type="text" name="tagName" required lay-verify="required"
-                   placeholder="请输入标签名称" autocomplete="off" class="layui-input">
+            <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
         </div>
-    </div>
-
-    <div class="layui-form-item">
-        <label class="layui-form-label">启用状态</label>
+        <label class="layui-form-label">文章摘要</label>
         <div class="layui-input-block">
-            <select name="isValid" lay-verify="required" lay-search>
-                <option value="0">禁用</option>
-                <option value="1" selected>启用</option>
-            </select>
+            <textarea name="" required lay-verify="required" placeholder="请输入" class="layui-textarea"></textarea>
         </div>
-    </div>
+  </div>
 </form>
 
 <script>
@@ -36,5 +27,5 @@
 </script>
 
 @section Scripts {
-    <script src="~/js/admin/tag/addOrEdit.js"></script>
+    <script src="~/js/admin/post/addOrEdit.js"></script>
 }

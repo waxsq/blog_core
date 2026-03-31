@@ -9389,23 +9389,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\16483\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\16224\\.nuget\\packages\\": {},
+    "D:\\Data\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\16483\\source\\repos\\Blog\\Blog.MvcWeb\\Blog.MvcWeb.csproj",
+      "projectUniqueName": "D:\\Code\\Blog\\Blog.MvcWeb\\Blog.MvcWeb.csproj",
       "projectName": "Blog.MvcWeb",
-      "projectPath": "C:\\Users\\16483\\source\\repos\\Blog\\Blog.MvcWeb\\Blog.MvcWeb.csproj",
-      "packagesPath": "C:\\Users\\16483\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\16483\\source\\repos\\blog\\Blog.MvcWeb\\obj\\",
+      "projectPath": "D:\\Code\\Blog\\Blog.MvcWeb\\Blog.MvcWeb.csproj",
+      "packagesPath": "C:\\Users\\16224\\.nuget\\packages\\",
+      "outputPath": "D:\\Code\\Blog\\Blog.MvcWeb\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "D:\\Data\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\16483\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\16224\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -9420,8 +9420,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\16483\\source\\repos\\Blog\\Blog.Service\\Blog.Service.csproj": {
-              "projectPath": "C:\\Users\\16483\\source\\repos\\Blog\\Blog.Service\\Blog.Service.csproj"
+            "D:\\Code\\Blog\\Blog.Service\\Blog.Service.csproj": {
+              "projectPath": "D:\\Code\\Blog\\Blog.Service\\Blog.Service.csproj"
             }
           }
         }
@@ -9474,7 +9474,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.311/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
