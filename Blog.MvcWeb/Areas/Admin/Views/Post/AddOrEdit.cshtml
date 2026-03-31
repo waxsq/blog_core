@@ -1,31 +1,77 @@
 ﻿@{
-    Layout = "~/Views/Shared/_AdminFormLayout.cshtml";
+  Layout = null;
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="~/lib/layuiadmin/layui/css/layui.css" media="all" />
+  <link rel="stylesheet" href="~/lib/layuiadmin/style/admin.css" media="all" />
+  <link rel="stylesheet" href="~/lib/editor.md/css/editormd.css" />
+  <style>
+    html, body {
+      height:auto;
+      overflow-y:auto;
+      overflow-x:auto;
+    }
+  </style>
+</head>
+<body class="layui-layout-body" style="padding: 20px;">
 
-@section Head {
-    <style>
+  <form class="layui-form" id="addOrEdit">
 
-    </style>
-}
+    <!-- 第一行：标题 -->
+    <div class="row align-items-center mb-3">
+      <div class="col-sm-1"></div>
+      <label class="col-sm-1 text-start">标题</label>
+      <div class="col-sm-10">
+        <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+      </div>
+    </div>
 
-<form class="layui-form" action="#" id="addOrEditForm" lay-filter="addOrEditForm">
-  <div class="layui-form-item">
-        <label class="layui-form-label">文章标题</label>
-        <div class="layui-input-block">
-            <input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+    <!-- 第二行：文章简要 -->
+    <div class="row align-items-center mb-3">
+      <div class="col-sm-1"></div>
+      <label class="col-sm-1 text-start">文章简要</label>
+      <div class="col-sm-10">
+        <textarea name="summary" required lay-verify="required" placeholder="请输入文章简要" class="layui-textarea" style="height: 100px;"></textarea>
+      </div>
+    </div>
+
+    <div class="row align-items-center mb-3">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-11">
+        <div id="content-editormd" name="content" lay-verify="requird" placeholder="请输入文章内容">
+          <textarea style="display:none;"></textarea>
         </div>
-        <label class="layui-form-label">文章摘要</label>
-        <div class="layui-input-block">
-            <textarea name="" required lay-verify="required" placeholder="请输入" class="layui-textarea"></textarea>
-        </div>
-  </div>
-</form>
+      </div>
+    </div>
 
+  </form>
+
+
+</body>
+</html>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/js/jquery-serializeObject.js"></script>
+<script src="~/lib/layuiadmin/layui/layui.js"></script>
+<script src="~/lib/editor.md/editormd.js"></script>
+
+<!-- 添加LayuiAdmin初始化脚本（关键！） -->
+<script src="~/js/admin/layout.js"></script>
+<script src="~/js/util.js"></script>
 <script>
-    let id = '@(ViewData["id"] != null ? ViewData["id"] : 0)';
-    let action = '@ViewData["action"]';
+  //// 【关键修改 3】自动调整弹窗高度，消除底部空白
+  //// 等待 DOM 加载完成和 Layui 表单渲染完成后执行
+  //setTimeout(function () {
+  //  var height = document.body.scrollHeight || document.documentElement.scrollHeight;
+  //  // 调用父页面的 layer 方法来调整高度 (假设父页面引入了 layer)
+  //  if (parent.layer && parent.layer.getFrameIndex(window.name)) {
+  //    parent.layer.iframeAuto(parent.layer.getFrameIndex(window.name));
+  //  }
+  //}, 100); // 延迟 100ms 确保样式已应用
 </script>
-
-@section Scripts {
-    <script src="~/js/admin/post/addOrEdit.js"></script>
-}
+<script src="~/js/admin/post/addOrEdit.js"></script>

@@ -66,7 +66,7 @@
             { Field: 'likesCount', title: '点赞人数' },
             { Field: 'updateAt', title: '最近修改时间' },
         ]],
-        toolbar:'#toolbarTpl',
+        toolbar: '#toolbarTpl',
         method: 'post',
         where: {
             ...($("#search-form").serializeObject())
@@ -146,10 +146,14 @@
 
 
     let openDialog = function (id, action = 'View') {
-        layer.open({
+        var fullIndex = layer.open({
+            title: '文章',
+            maxmin: true,
             type: 2,
-            content: `/Admin/Tag/AddOrEdit?id=${id}&action=${action}`, //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
-            area: ['600px', '400px'],
+            scrollbar: true,
+            fixed: true,
+            resize: true,
+            content: `/Admin/Post/AddOrEdit?id=${id}&action=${action}`, //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
             btn: ['确定', '取消'],
             yes: function (index, layero) {
                 var iframeWin = window[layero.find('iframe')[0]['name']];
@@ -180,6 +184,7 @@
 
             }
         });
+        layer.full(fullIndex);
     }
 
 })
