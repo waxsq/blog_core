@@ -686,6 +686,7 @@ wwwroot\lib\layuiadmin\style\res\template\character.jpg
 wwwroot\lib\layuiadmin\style\res\template\huge.jpg
 wwwroot\lib\layuiadmin\style\res\template\portrait.png
 wwwroot\lib\layuiadmin\style\template.css
+wwwroot\lib\layuiadmin\tableSelect.js
 wwwroot\lib\layuiadmin\tpl\layim\demo.html
 wwwroot\lib\layuiadmin\tpl\system\about.html
 wwwroot\lib\layuiadmin\tpl\system\get.html
