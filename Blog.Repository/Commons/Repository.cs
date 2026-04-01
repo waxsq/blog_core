@@ -44,6 +44,24 @@ namespace Blog.Repository.Commons
             return await _db.Insertable(arr).ExecuteCommandAsync();
         }
 
+
+        /// <summary>
+        /// 使用 BulkCopy 批量插入（高性能，适合大数据量）
+        /// </summary>
+        /// <param name="entities">实体列表</param>
+        /// <param name="batchSize">每批次插入的数量，默认1000</param>
+        /// <returns>插入的总记录数</returns>
+        public async Task<int> BulkInsertAsync(List<TEntity> entities)
+        {
+            if (entities == null) throw new ArgumentNullException(nameof(entities));
+
+            var arr = entities as TEntity[] ?? entities.ToArray();
+            if (arr.Length == 0) return 0;
+
+            // 使用 SqlSugar 的 BulkCopy
+            return await _db.Fastest<TEntity>().BulkCopyAsync(entities);
+        }
+
         // --- Read ---
         public async Task<TEntity?> GetByIdAsync(TKey id)
         {

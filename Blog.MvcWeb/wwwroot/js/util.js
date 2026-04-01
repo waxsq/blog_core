@@ -22,6 +22,41 @@ function convertToQueryArray(formObj, defaultCondition = "0") {
         }));
 }
 
+/**
+ * 通用表单填充函数
+ * @param {Object} data - 数据对象
+ * @param {String|HTMLElement} formSelector - 表单选择器或DOM对象
+ */
+let fillForm = function (data, formSelector) {
+    const form = typeof formSelector === 'string' ? document.querySelector(formSelector) : formSelector;
+    if (!form) return;
+
+    // 遍历表单内的所有控件
+    Array.from(form.elements).forEach(el => {
+        const name = el.name;
+        if (!name || !(name in data)) return;
+
+        const value = data[name];
+
+        // 处理不同类型的控件
+        switch (el.type) {
+            case 'checkbox':
+                el.checked = Array.isArray(value) ? value.includes(el.value) : !!value;
+                break;
+            case 'radio':
+                el.checked = el.value === value;
+                break;
+            case 'select-one':
+            case 'select-multiple':
+                // select 需要特殊处理多选，这里简化处理
+                el.value = value;
+                break;
+            default:
+                el.value = value !== null && value !== undefined ? value : '';
+        }
+    });
+}
+
 
 let sendAjax = function (url, data = {}, success, error, complete, type = "POST", dataType = 'json', contentType = 'application/json', headers = {},) {
     if (contentType === 'application/json' && typeof data === 'object' && data !== null) {

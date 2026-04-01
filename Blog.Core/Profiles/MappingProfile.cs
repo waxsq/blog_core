@@ -7,6 +7,7 @@ using AutoMapper;
 using Blog.Core.Commons;
 using Blog.Core.Entities;
 using Blog.Core.Entities.Vo.Category;
+using Blog.Core.Entities.Vo.Post;
 using Blog.Core.Entities.Vo.Tag;
 
 namespace Blog.Core.Profiles
@@ -20,6 +21,9 @@ namespace Blog.Core.Profiles
 
             CreateMap<CategoryAddOrEdit, BlogCategory>();
             CreateMap<BlogCategory, CategoryAddOrEdit>();
+
+            CreateMap<PostAddOrEditVo, BlogPost>();
+            CreateMap<BlogPost, PostAddOrEditVo>();
         }
     }
 }

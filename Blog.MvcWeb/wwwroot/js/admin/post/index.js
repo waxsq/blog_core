@@ -76,13 +76,9 @@
             limitName: 'PageSize'
         },
         parseData: function (res) {
-            // 如果你的后端返回格式特殊，可以在这里统一转换
-            // 假设后端返回: { code: 200, data: { list: [...], total: 100 } }
             if (res.code !== 200) {
                 return { code: 1, msg: res.message, count: 0, data: [] };
             }
-            // 适配你的 ResultReponse<PageModel<T>> 结构
-            // 假设 res.data 就是 PageModel 对象
             return {
                 code: 0, // Layui 要求成功为 0
                 msg: res.message || 'success',

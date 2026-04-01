@@ -676,6 +676,7 @@ wwwroot\lib\layuiadmin\modules\set.js
 wwwroot\lib\layuiadmin\modules\user.js
 wwwroot\lib\layuiadmin\modules\useradmin.js
 wwwroot\lib\layuiadmin\modules\workorder.js
+wwwroot\lib\layuiadmin\selectM.js
 wwwroot\lib\layuiadmin\style\admin.css
 wwwroot\lib\layuiadmin\style\login.css
 wwwroot\lib\layuiadmin\style\res\bg-none.jpg

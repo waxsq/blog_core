@@ -54,19 +54,19 @@ namespace Blog.Core.Entities
         /// 文章状态：0=草稿，1=已发布，2=已归档
         /// </summary>
         [SugarColumn(ColumnName = "status")]
-        public int Status { get; set; }
+        public int Status { get; set; } = 0;
 
         /// <summary>
         /// 是否推荐/精选
         /// </summary>
         [SugarColumn(ColumnName = "is_featured")]
-        public int IsFeatured { get; set; }
+        public int IsFeatured { get; set; } = 0;
 
         /// <summary>
         /// 是否置顶
         /// </summary>
         [SugarColumn(ColumnName = "is_top")]
-        public int IsTop { get; set; }
+        public int IsTop { get; set; } = 0;
 
         /// <summary>
         /// 分类 id（引用 blog_category）
@@ -78,19 +78,19 @@ namespace Blog.Core.Entities
         /// 浏览次数
         /// </summary>
         [SugarColumn(ColumnName = "views_count")]
-        public long ViewsCount { get; set; }
+        public long ViewsCount { get; set; } = 0;
 
         /// <summary>
         /// 评论数量
         /// </summary>
         [SugarColumn(ColumnName = "comments_count")]
-        public int CommentsCount { get; set; }
+        public int CommentsCount { get; set; } = 0;
 
         /// <summary>
         /// 点赞数量
         /// </summary>
         [SugarColumn(ColumnName = "likes_count")]
-        public int LikesCount { get; set; }
+        public int LikesCount { get; set; } = 0;
 
         /// <summary>
         /// 发布时间

@@ -23,5 +23,6 @@ namespace Blog.MvcWeb.Controllers
         {
             return await _blogPostService.QueryPage(postTableQueryVo);
         }
+
     }
 }
