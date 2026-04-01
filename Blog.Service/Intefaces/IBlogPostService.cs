@@ -13,5 +13,6 @@ namespace Blog.Service.Intefaces
     public interface IBlogPostService : IService<BlogPost, long>
     {
         Task<PageReponse<PostTablePageVo>> QueryPage(PostTableQueryVo vo);
+        Task<EditReponse<int>> Add(PostAddOrEditVo postAddOrEditVo);
     }
 }

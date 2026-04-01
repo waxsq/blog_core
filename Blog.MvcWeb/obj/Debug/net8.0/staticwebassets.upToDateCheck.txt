@@ -676,7 +676,6 @@ wwwroot\lib\layuiadmin\modules\set.js
 wwwroot\lib\layuiadmin\modules\user.js
 wwwroot\lib\layuiadmin\modules\useradmin.js
 wwwroot\lib\layuiadmin\modules\workorder.js
-wwwroot\lib\layuiadmin\selectM.js
 wwwroot\lib\layuiadmin\style\admin.css
 wwwroot\lib\layuiadmin\style\login.css
 wwwroot\lib\layuiadmin\style\res\bg-none.jpg
@@ -695,3 +694,4 @@ wwwroot\lib\layuiadmin\tpl\system\more.html
 wwwroot\lib\layuiadmin\tpl\system\theme.html
 wwwroot\lib\layuiadmin\tpl\system\说明.txt
 wwwroot\lib\layuiadmin\tpl\说明.txt
+wwwroot\lib\layuiadmin\xm-select.js

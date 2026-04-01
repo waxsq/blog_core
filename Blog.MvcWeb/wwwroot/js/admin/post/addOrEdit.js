@@ -1,8 +1,7 @@
-﻿layui.use(['form', 'layer', 'tableSelect', 'selectM'], function () {
+﻿layui.use(['form', 'layer', 'tableSelect'], function () {
     var form = layui.form;
     var layer = layui.layer;
     var tableSelect = layui.tableSelect;
-    var selectM = layui.selectM;
     var $ = layui.$;
     var contentEditor;
     //tag的id
@@ -14,7 +13,10 @@
             width: "100%",
             height: "80vh",
             syncScrolling: "single",
-            path: "/lib/editor.md/lib/"
+            path: "/lib/editor.md/lib/",
+            imageUpload: true,
+            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            imageUploadURL:''
         })
     })
 
@@ -31,7 +33,7 @@
             cols: [[
                 { field: 'blogCategoryId', title: '主键', hide: true },
                 { type: 'radio', fixed: 'left' },
-                { field: 'categoryName', title: '分类名称', templet: '#viewDetailTpl' },
+                { field: 'categoryName', title: '分类名称' },
             ]],
             method: 'post',
             request: {
@@ -51,8 +53,6 @@
             }
         },
         done: function (elem, data) {
-            //选择完后的回调，包含2个返回值 elem:返回之前input对象；data:表格返回的选中的数据 []
-            //拿到data[]后 就按照业务需求做想做的事情啦~比如加个隐藏域放ID...
             if (data && data.data.length > 0) {
                 var choseData = data.data[0];
                 fillForm(choseData, '#addOrEdit');
@@ -60,17 +60,39 @@
         }
     });
 
-    selectM({
-        elem: '#tagSelect',
-        data: '/Tag/QueryPage',
-        selected: [],
-        max: 5,
-        field: {
-            idName: 'blogTagId',
-            titleName: 'tagName',
-            statusName: 'isValid'
+
+    xmSelect.render({
+        el: '#tagSelect',
+        checkbox: true,
+        paging: true,
+        pageSize: 10,
+        pageRemote: true,
+        prop: {
+            name: 'tagName',
+            value: 'blogTagId'
         },
-        name: 'tagName',
+        initValue: tagSelected,
+        remoteMethod: function (keywords, cb, isSearch, page) {
+            sendAjax(
+                '/Tag/QueryPage',  // 第1个参数：URL 字符串
+                {                  // 第2个参数：Data 对象
+                    tagName: keywords,
+                    pageIndex: page,
+                    pageSize: 10,
+                },
+                function (res) {    // 第3个参数：Success 回调函数
+                    if (res.code === 200) {
+                        cb(res.datas, res.totalCount);
+                    } else {
+                        cb([], 0);
+                    }
+                }
+            );
+        },
+        on: function (data) {
+            var arr = data.arr;
+            console.log(arr);
+        }
     })
 
 });

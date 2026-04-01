@@ -21,7 +21,7 @@ namespace Blog.Core.Utils
         /// 如果字段不存在或值为 null，返回 true；
         /// 如果字段存在且值不为 null，返回 false。
         /// </returns>
-        public static void IsFieldNullOrMissing<T>(T entity, string fieldName,string columnName = "")
+        public static void IsFieldNullOrMissing<T>(T entity, string fieldName, string columnName = "")
         {
             if (entity == null)
             {

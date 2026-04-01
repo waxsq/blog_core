@@ -24,5 +24,11 @@ namespace Blog.MvcWeb.Controllers
             return await _blogPostService.QueryPage(postTableQueryVo);
         }
 
+        [HttpPost]
+        [Route("Add")]
+        public async Task<EditReponse<int>> Add(PostAddOrEditVo postAddOrEditVo)
+        {
+            return await _blogPostService.Add(postAddOrEditVo);
+        }
     }
 }
