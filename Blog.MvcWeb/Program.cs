@@ -31,6 +31,9 @@ namespace Blog.MvcWeb
             builder.Services.AddApplicationService(builder.Configuration);
             builder.Services.AddAutoRegisteredServices();
 
+            //文件服务
+            builder.Services.AddFileStorage();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

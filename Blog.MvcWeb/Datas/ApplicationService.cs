@@ -1,5 +1,6 @@
 using Blog.Core.Exceptions;
 using Blog.Core.Profiles;
+using Blog.FileStorage.Core;
 using Blog.Repository;
 using Blog.Service;
 using SqlSugar;
@@ -129,6 +130,26 @@ namespace Blog.MvcWeb.Datas
                 .WithScopedLifetime());
 
             services.AddAutoMapper(typeof(MappingProfile).Assembly); // 注册 AutoMapper 配置    
+        }
+
+
+        public static void AddFileStorage(this IServiceCollection services)
+        {
+            services.AddSingleton<FileUploadStrategy, LocalFileStrategy>(sp =>
+            {
+                return new LocalFileStrategy(sp.GetRequiredService<IWebHostEnvironment>());
+            });
+
+            services.AddSingleton<FileUploadStrategy, MinioFileStrategy>(sp => new MinioFileStrategy("http://127.0.0.1:9000", "admin", "password", "mybucket"));
+
+            services.AddSingleton<FileUploadContext>(sp =>
+            {
+                // 1. 手动从 sp 获取所有的策略列表
+                var strategies = sp.GetServices<FileUploadStrategy>();
+
+                // 2. 手动 new Context，把列表传进去
+                return new FileUploadContext(strategies, "LocalFileStrategy");
+            });
         }
     }
 }
