@@ -6,6 +6,22 @@
     var util = layui.util;
 
 
+    //自定义验证规则
+    form.verify({
+        title: function (value, item) {
+            if (!title) return "标题为必填";
+            if (title.length < 2 || title.length > 100) return "标题长度必须在2-100之间";
+        },
+        summary: function (value, item) {
+            if (!value) return "简介为必填";
+            if (value.length < 10 || value.length > 500) return "简介长度必须在10-500之间";
+        },
+        content: function (value, item) {
+            if (!value) return "内容为必填";
+        }
+    });
+            
+
     //初始化时间组件
     laydate.render({
         elem: '#publishedBeginAt',

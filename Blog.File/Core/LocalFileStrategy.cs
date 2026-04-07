@@ -33,7 +33,7 @@ namespace Blog.FileStorage.Core
             }
 
             // 写入文件流
-            using (var stream = new FileStream(fullPath, FileMode.Create,FileAccess.ReadWrite))
+            using (var stream = new FileStream(fullPath, FileMode.Create, FileAccess.ReadWrite))
             {
                 await file.CopyToAsync(stream);
             }

@@ -5,7 +5,7 @@
     var $ = layui.$;
     var contentEditor;
     //tag的id
-    let tagSelected = [];
+    window.tagSelected = [];
 
     //初始化
     $(function () {
@@ -15,8 +15,22 @@
             syncScrolling: "single",
             path: "/lib/editor.md/lib/",
             imageUpload: true,
+            imagePaste: true,
             imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL:''
+            imageUploadURL: '',
+            imageUploadURL: "/File/Img",
+            onload: function () {
+                //处理图片复制粘贴上传
+                initPasteDragImg(this);
+            },
+            onfullscreen: function () {
+                //打开全屏
+                $(".full-hiden").hide();
+            },
+            onfullscreenExit: function () {
+                //退出全屏
+                $(".full-hiden").show();
+            }
         })
     })
 
@@ -96,3 +110,9 @@
     })
 
 });
+
+$(document).ready(function () {
+    $('#addOrEdit').valid({
+
+    })
+})

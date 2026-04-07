@@ -12,15 +12,15 @@ namespace Blog.FileStorage.Core
     public abstract class FileUploadStrategy
     {
         // --- 模版方法 (核心流程控制) ---
-        public async Task<FileResult> UploadAsync(IFormFile file, string subPath)
+        public async Task<FileResponseResult> UploadAsync(IFormFile file, string subPath)
         {
-            var result = new FileResult();
+            var result = new FileResponseResult();
 
             // 1. 基础校验 (通用逻辑)
             if (file == null || file.Length == 0)
             {
-                result.Success = false;
-                result.ErrorMessage = "文件为空";
+                result.Success = 0;
+                result.Message = "文件为空";
                 return result;
             }
 
@@ -34,17 +34,17 @@ namespace Blog.FileStorage.Core
                 await SaveFileAsync(file, fullPath);
 
                 // 4. 构建返回结果 (通用逻辑)
-                result.Success = true;
+                result.Success = 1;
                 result.FileName = fileName;
                 result.FileSize = file.Length;
-                result.FilePath = GetAccessUrl(fullPath); // 获取访问链接
+                result.Url = GetAccessUrl(fullPath); // 获取访问链接
 
                 return result;
             }
             catch (Exception ex)
             {
-                result.Success = false;
-                result.ErrorMessage = ex.Message;
+                result.Success = 0;
+                result.Message = ex.Message;
                 return result;
             }
         }
@@ -65,5 +65,4 @@ namespace Blog.FileStorage.Core
             return $"{DateTime.Now:yyyyMMddHHmmss}_{SnowFlakeSingle.Instance.NextId()}{ext}";
         }
     }
-}
 }

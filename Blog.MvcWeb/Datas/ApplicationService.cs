@@ -140,7 +140,7 @@ namespace Blog.MvcWeb.Datas
                 return new LocalFileStrategy(sp.GetRequiredService<IWebHostEnvironment>());
             });
 
-            services.AddSingleton<FileUploadStrategy, MinioFileStrategy>(sp => new MinioFileStrategy("http://127.0.0.1:9000", "admin", "password", "mybucket"));
+            //services.AddSingleton<FileUploadStrategy, MinioFileStrategy>(sp => new MinioFileStrategy("http://127.0.0.1:9000", "admin", "password", "mybucket"));
 
             services.AddSingleton<FileUploadContext>(sp =>
             {

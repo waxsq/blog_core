@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Blog.Core.Entities
 {
-    public class FileResult
+    public class FileResponseResult
     {
-        public bool Success { get; set; }
-        public string FilePath { get; set; } // 访问路径（URL）
+        public int Success { get; set; }
+        public string Url { get; set; } // 访问路径（URL）
         public string FileName { get; set; }
         public long FileSize { get; set; }
-        public string ErrorMessage { get; set; }
+        public string Message { get; set; }
     }
 }

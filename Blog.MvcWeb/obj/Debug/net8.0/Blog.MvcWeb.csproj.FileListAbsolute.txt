@@ -652,3 +652,11 @@ D:\Code\Blog\Blog.MvcWeb\obj\Debug\net8.0\refint\Blog.MvcWeb.dll
 D:\Code\Blog\Blog.MvcWeb\obj\Debug\net8.0\Blog.MvcWeb.pdb
 D:\Code\Blog\Blog.MvcWeb\obj\Debug\net8.0\Blog.MvcWeb.genruntimeconfig.cache
 D:\Code\Blog\Blog.MvcWeb\obj\Debug\net8.0\ref\Blog.MvcWeb.dll
+D:\Code\Blog\Blog.MvcWeb\bin\Debug\net8.0\CommunityToolkit.HighPerformance.dll
+D:\Code\Blog\Blog.MvcWeb\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+D:\Code\Blog\Blog.MvcWeb\bin\Debug\net8.0\Minio.dll
+D:\Code\Blog\Blog.MvcWeb\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
+D:\Code\Blog\Blog.MvcWeb\bin\Debug\net8.0\System.IO.Hashing.dll
+D:\Code\Blog\Blog.MvcWeb\bin\Debug\net8.0\System.Reactive.dll
+D:\Code\Blog\Blog.MvcWeb\bin\Debug\net8.0\Blog.FileStorage.dll
+D:\Code\Blog\Blog.MvcWeb\bin\Debug\net8.0\Blog.FileStorage.pdb

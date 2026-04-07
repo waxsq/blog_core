@@ -1,4 +1,5 @@
 using Blog.Core.Commons;
+using Blog.Core.Entities;
 using Blog.Core.Utils;
 using Blog.FileStorage.Core;
 using Microsoft.AspNetCore.Mvc;
@@ -16,9 +17,11 @@ namespace Blog.MvcWeb.Controllers
             _strategy = context.GetStrategy();
         }
 
-        public Task<EditReponse<FileResult>> UploadFile([FromForm] IFormFile file)
+        [Route("Img")]
+        [HttpPost]
+        public async Task<FileResponseResult> UploadFile([FromForm(Name = "editormd-image-file")] IFormFile file)
         {
-            return null;
+            return await _strategy.UploadAsync(file, "upload/img");
         }
     }
 }

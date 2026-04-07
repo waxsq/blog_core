@@ -245,6 +245,55 @@
         }
       }
     },
+    "/File/Img": {
+      "post": {
+        "tags": [
+          "File"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "file": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileResponseResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileResponseResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileResponseResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/Post/QueryPage": {
       "post": {
         "tags": [
@@ -865,6 +914,32 @@
         },
         "additionalProperties": false
       },
+      "FileResponseResult": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "url": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileName": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileSize": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "Int32EditReponse": {
         "type": "object",
         "properties": {
@@ -1195,6 +1270,9 @@
   "tags": [
     {
       "name": "Category"
+    },
+    {
+      "name": "File"
     },
     {
       "name": "Post"

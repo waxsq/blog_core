@@ -12,7 +12,7 @@ namespace Blog.FileStorage.Core
         private readonly string _defaultStrategyName;
 
         // 构造函数注入所有实现类
-        public FileUploadContext(IEnumerable<FileUploadStrategy> strategies, string defaultStrategy = "Local")
+        public FileUploadContext(IEnumerable<FileUploadStrategy> strategies, string defaultStrategy = "LocalFileStrategy")
         {
             _strategies = strategies.ToDictionary(s => s.GetType().Name, s => s);
             _defaultStrategyName = defaultStrategy;
