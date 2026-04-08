@@ -5,21 +5,7 @@
     var laydate = layui.laydate;
     var util = layui.util;
 
-
-    //自定义验证规则
-    form.verify({
-        title: function (value, item) {
-            if (!title) return "标题为必填";
-            if (title.length < 2 || title.length > 100) return "标题长度必须在2-100之间";
-        },
-        summary: function (value, item) {
-            if (!value) return "简介为必填";
-            if (value.length < 10 || value.length > 500) return "简介长度必须在10-500之间";
-        },
-        content: function (value, item) {
-            if (!value) return "内容为必填";
-        }
-    });
+    
             
 
     //初始化时间组件
@@ -62,7 +48,7 @@
     })
 
     //渲染表格
-    table.render({
+    var currentTable = table.render({
         elem: '#ID-table-demo-data',
         url: '/Post/QueryPage',
         contentType: 'application/json', // 👈 关键：告诉服务器我发的是 JSON
@@ -168,26 +154,29 @@
             content: `/Admin/Post/AddOrEdit?id=${id}&action=${action}`, //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
             btn: ['确定', '取消'],
             yes: function (index, layero) {
-                var iframeWin = window[layero.find('iframe')[0]['name']];
-                var addOrEditFormObj = iframeWin.$('#addOrEditForm');
-                var data = addOrEditFormObj.serializeObject();
+                var iframe = layero.find('iframe')[0];
+                var childWindow = iframe.contentWindow;
+                if (!childWindow.validate()) {
+                    return;
+                }
+                var data = childWindow.getAddOrEditData();
                 if (action != 'View') {
                     sendAjax(`/Post/${action}`, data,
                         function (res) {
                             if (res.success) {
                                 layer.msg('操作成功', { icon: 1, time: 2000 });
+                                currentTable.reload({
+                                    page: {
+                                        curr: 1
+                                    },
+                                    where: form.val('search-form')
+                                })
                             } else {
                                 layer.msg(`操作失败:${res.message}`, { icon: 2, time: 4000 });
                             }
                         }, function (error) {
                             layer.msg('操作失败', { icon: 2, time: 4000 })
                         }, function () {
-                            currentTable.reload({
-                                page: {
-                                    curr: 1
-                                },
-                                where: form.val('search-form')
-                            })
                             layer.close(index)
                         })
                 }

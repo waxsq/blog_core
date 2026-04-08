@@ -8,5 +8,10 @@ namespace Blog.Repository.Commons
     {
         private readonly ISqlSugarClient _db;
         public BlogCategoryRepository(ISqlSugarClient db) : base(db) => _db = db;
+
+        public int CountNumberByPk(long id)
+        {
+            return _db.Queryable<BlogCategory>().Where(x => x.BlogCategoryId == id).Count();
+        }
     }
 }

@@ -4,6 +4,23 @@
     var tableSelect = layui.tableSelect;
     var $ = layui.$;
     var contentEditor;
+
+    //自定义验证规则
+    form.verify({
+        title: function (value, item) {
+            if (!value) return "标题为必填";
+            if (value.length < 2 || value.length > 100) return "标题长度必须在2-100之间";
+        },
+        summary: function (value, item) {
+            if (!value) return "简介为必填";
+            if (value.length < 10 || value.length > 500) return "简介长度必须在10-500之间";
+        },
+        content: function (value, item) {
+            if (!value) return "内容为必填";
+        }
+    });
+    
+
     //tag的id
     window.tagSelected = [];
 
@@ -69,7 +86,7 @@
         done: function (elem, data) {
             if (data && data.data.length > 0) {
                 var choseData = data.data[0];
-                fillForm(choseData, '#addOrEdit');
+                form.val('addOrEdit', choseData)
             }
         }
     });
@@ -78,9 +95,14 @@
     xmSelect.render({
         el: '#tagSelect',
         checkbox: true,
+        name:'tagIds',
         paging: true,
         pageSize: 10,
         pageRemote: true,
+        layVerify: 'required',  // 验证规则
+        layVerType: 'tips',     // 验证提示方式
+        layReqText: '请选择标签', // 必填提示文字
+        tips: '请选择标签',       // 选择框默认提示文字
         prop: {
             name: 'tagName',
             value: 'blogTagId'
@@ -109,10 +131,12 @@
         }
     })
 
+    window.validate = function () {
+        return form.validate("#addOrEdit");
+    }
+
+    //返回数据
+    window.getAddOrEditData = function () {
+        return  form.val('addOrEdit');
+    }
 });
-
-$(document).ready(function () {
-    $('#addOrEdit').valid({
-
-    })
-})

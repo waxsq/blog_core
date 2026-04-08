@@ -8,6 +8,9 @@ using Blog.Core.Interfaces;
 
 namespace Blog.Repository.Interfaces
 {
-    public interface IBlogCategoryRepository : IRepository<BlogCategory, long> { }
+    public interface IBlogCategoryRepository : IRepository<BlogCategory, long>
+    {
+        int CountNumberByPk(long id);
+    }
 
 }
