@@ -38,7 +38,17 @@ namespace Blog.Repository.Commons
                 .WhereIF(!query.CategoryName.isEmpty(), (p, c) => c.CategoryName.Equals(query.CategoryName))
                 .Select((p, c) => new PostTablePageVo
                 {
-                    CategoryName = c.CategoryName
+                    CategoryName = c.CategoryName,
+                    Title = p.Title,
+                    Summary = p.Summary,
+                    Status = p.Status,
+                    IsFeatured = p.IsFeatured,
+                    IsTop = p.IsTop,
+                    TagNames = string.Join(",",
+                                _db.Queryable<BlogPostTag>()
+                                    .LeftJoin<BlogTag>((pt, t) => pt.TagId == t.BlogTagId)
+                                    .Where(pt => pt.PostId == p.BlogPostId)
+                                    .Select((pt, t) => t.TagName))
                 }, true)
                 .OrderBy($"p.{query.Field} {query.Order}")
                 .ToPageListAsync(pageReponse.PageIndex, pageReponse.PageSize, totalNumber);
