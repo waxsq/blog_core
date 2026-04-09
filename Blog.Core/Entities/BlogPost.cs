@@ -72,7 +72,7 @@ namespace Blog.Core.Entities
         /// 分类 id（引用 blog_category）
         /// </summary>
         [SugarColumn(ColumnName = "category_id")]
-        public long? CategoryId { get; set; }
+        public long CategoryId { get; set; } = 0;
 
         /// <summary>
         /// 浏览次数

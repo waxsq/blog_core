@@ -22,7 +22,7 @@ layui.define(['table', 'jquery', 'form'], function (exports) {
         opt.checkedKey = opt.checkedKey;
         opt.table.page = opt.table.page || true;
         opt.table.height = opt.table.height || 315;
-        
+        debugger
         elem.off('click').on('click', function(e) {
             e.stopPropagation();
 
@@ -46,7 +46,7 @@ layui.define(['table', 'jquery', 'form'], function (exports) {
             $('body').append(tableBox);
             
             //数据缓存
-            var checkedData = [];
+            var checkedData =[];
 
             //渲染TABLE
             opt.table.elem = "#"+tableName;

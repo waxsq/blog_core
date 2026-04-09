@@ -3,10 +3,11 @@
     var table = layui.table;
     var $ = layui.$;
     var laydate = layui.laydate;
+    var layer = layui.layer;
     var util = layui.util;
 
-    
-            
+
+
 
     //初始化时间组件
     laydate.render({
@@ -54,19 +55,20 @@
         contentType: 'application/json', // 👈 关键：告诉服务器我发的是 JSON
         page: true,
         cols: [[
-            { Field: 'blogPostId', title: '主键', hide: true },
+            { field: 'blogPostId', title: '主键', hide: true },
             { type: 'checkbox', fixed: 'left' },
-            { Field: 'title', title: '文章标题', templet: '#viewDetailTpl' },
-            { Field: 'summary', title: '文章简介' },
-            { Field: 'status', title: '发布状态', templet: '#statusTpl' },
-            { Field: 'isFeatured', title: '是否推荐', templet: '#isFeaturedTpl' },
-            { Field: 'isTop', title: '是否顶置', templet: '#isTopTpl' },
-            { Field: 'categoryId', hide: true },
-            { Field: 'categoryName', title: '分类' },
-            { Field: 'viewCount', title: '查看人数' },
-            { Field: 'commentsCount', title: '评论人数' },
-            { Field: 'likesCount', title: '点赞人数' },
-            { Field: 'updateAt', title: '最近修改时间' },
+            { field: 'title', title: '文章标题', templet: '#viewDetailTpl' },
+            { field: 'summary', title: '文章简介' },
+            { field: 'status', title: '发布状态', templet: '#statusTpl' },
+            { field: 'isFeatured', title: '是否推荐', templet: '#isFeaturedTpl' },
+            { field: 'isTop', title: '是否顶置', templet: '#isTopTpl' },
+            { field: 'categoryId', hide: true },
+            { field: 'categoryName', title: '分类' },
+            { field: 'viewsCount', title: '查看人数' },
+            { field: 'commentsCount', title: '评论人数' },
+            { field: 'likesCount', title: '点赞人数' },
+            { field: 'updateAt', title: '最近修改时间' },
+            { fixed: 'right', title: '操作', templet: '#rowToolbarTpl' }
         ]],
         toolbar: '#toolbarTpl',
         method: 'post',
@@ -119,10 +121,18 @@
                     sendAjax("/Post/DeleteById", { blogPostId: data.blogPostId }, function (res) {
                         if (res.success && res.code == 200) {
                             layer.msg('操作成功', { icon: 1, time: 2000 });
+                            currentTable.reload({
+                                page: {
+                                    curr: 1
+                                },
+                                where: form.val('search-form')
+                            })
                         } else {
                             layer.msg(`操作失败:${res.message}`, { icon: 2, time: 4000 });
                         }
-                    }, function (error) { }, function () { layui.close(index) })
+                    }, function (error) {
+                        layer.msg(`操作失败:${error.statusText}`, { icon: 2, time: 4000 });
+                    }, function () { layer.close(index) })
                 });
                 break;
             case 'View':

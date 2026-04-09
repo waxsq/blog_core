@@ -23,7 +23,22 @@ namespace Blog.Repository.Commons
         public new async Task<EditReponse<PostAddOrEditVo>> GetByIdAsync(long id)
         {
             BlogPost postDto = _db.Queryable<BlogPost>()
+                .LeftJoin<BlogCategory>((p,c) => p.CategoryId == c.BlogCategoryId)
                 .Where(p => p.BlogPostId == id)
+                .Select(p => new BlogPost
+                {
+                    BlogPostId = p.BlogPostId,
+                    Title = p.Title,
+                    Summary = p.Summary,
+                    CategoryId = p.CategoryId,
+                    IsTop = p.IsTop,
+                    IsFeatured = p.IsFeatured,
+                    Status = p.Status,
+                    ViewsCount = p.ViewsCount,
+                    CommentsCount = p.CommentsCount,
+                    LikesCount = p.LikesCount,
+                    Content = p.Content,
+                })
                 .First();
             if (postDto == null)
             {
@@ -64,8 +79,18 @@ namespace Blog.Repository.Commons
                 .WhereIF(!query.CategoryName.isEmpty(), (p, c) => c.CategoryName.Equals(query.CategoryName))
                 .Select((p, c) => new PostTablePageVo
                 {
-                    CategoryName = c.CategoryName
-                }, true)
+                    CategoryName = c.CategoryName,
+                    Title = p.Title,
+                    Summary = p.Summary,
+                    Status = p.Status,
+                    IsFeatured = p.IsFeatured,
+                    IsTop = p.IsTop,
+                    ViewsCount = p.ViewsCount,
+                    CommentsCount = p.CommentsCount,
+                    LikesCount = p.LikesCount,
+                    UpdateAt = p.UpdateAt,
+                    BlogPostId = p.BlogPostId
+                })
                 .OrderBy($"p.{query.Field} {query.Order}")
                 .ToPageListAsync(pageReponse.PageIndex, pageReponse.PageSize, totalNumber);
 

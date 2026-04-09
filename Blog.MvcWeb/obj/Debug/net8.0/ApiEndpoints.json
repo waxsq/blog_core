@@ -208,8 +208,8 @@
   },
   {
     "ContainingType": "Blog.MvcWeb.Controllers.PostController",
-    "Method": "Delete",
-    "RelativePath": "Post/Delete",
+    "Method": "DeleteById",
+    "RelativePath": "Post/DeleteById",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,

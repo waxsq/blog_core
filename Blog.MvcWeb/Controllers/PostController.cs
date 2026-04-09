@@ -35,14 +35,14 @@ namespace Blog.MvcWeb.Controllers
         [Route("GetById")]
         public async Task<EditReponse<PostAddOrEditVo>> GetById(PostAddOrEditVo postAddOrEditVo)
         {
-            return await _blogPostService.GetByIdAsync(postAddOrEditVo.BlogPostId);
+            return await _blogPostService.GetById(postAddOrEditVo.BlogPostId);
         }
 
         [HttpPost]
-        [Route("Delete")]
-        public async Task<EditReponse<int>> Delete(PostAddOrEditVo postAddOrEditVo)
+        [Route("DeleteById")]
+        public async Task<EditReponse<int>> DeleteById(PostAddOrEditVo postAddOrEditVo)
         {
-            return await _blogPostService.Delete(postAddOrEditVo);
+            return await _blogPostService.DeleteById(postAddOrEditVo);
         }
     }
 }

@@ -5,6 +5,7 @@
     var $ = layui.$;
     var contentEditor;
     var tagSelected = [];
+    var tableSelectDom;
 
     //自定义验证规则
     form.verify({
@@ -20,59 +21,8 @@
             if (!value) return "内容为必填";
         }
     });
-    
 
-    
-
-    //初始化
-    $(function () {
-        contentEditor = editormd('content-editormd', {
-            width: "100%",
-            height: "80vh",
-            syncScrolling: "single",
-            path: "/lib/editor.md/lib/",
-            imageUpload: true,
-            imagePaste: true,
-            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL: '',
-            imageUploadURL: "/File/Img",
-            onload: function () {
-                //处理图片复制粘贴上传
-                initPasteDragImg(this);
-            },
-            onfullscreen: function () {
-                //打开全屏
-                $(".full-hiden").hide();
-            },
-            onfullscreenExit: function () {
-                //退出全屏
-                $(".full-hiden").show();
-            }
-        })
-
-        if (action != 'Add') {
-            var loadIndex = layer.load(0);
-            //获取数据
-            sendAjax("/Post/GetById", { blogPostId: id, action }, function (result) {
-                if (result.code == 200) {
-                    debugger
-                    var data = result.data;
-                    tagSelected = data?.tags.map(item => item.blogTagId);
-                    form.val('addOrEdit', data);
-                } else {
-                    ayer.msg(`操作失败:${result.message}`, { icon: 2, time: 4000 });
-                }
-            }, function (error) {
-                layer.msg(`操作失败:${error}`, { icon: 2, time: 4000 });
-            }, function () {
-                layer.close(loadIndex);
-            })
-        }
-        
-    })
-
-    //下拉表格
-    tableSelect.render({
+    tableSelectDom = tableSelect.render({
         elem: '#categorySelect',
         checkedKey: 'blogCategoryId',
         searchKey: 'categoryName',
@@ -83,6 +33,7 @@
             page: true,
             cols: [[
                 { type: 'radio', fixed: 'left' },
+                { field: 'blogCategoryId', hide: true },
                 { field: 'categoryName', title: '分类名称' },
             ]],
             method: 'post',
@@ -112,10 +63,34 @@
     });
 
 
+    contentEditor = editormd('content-editormd', {
+        width: "100%",
+        height: "80vh",
+        syncScrolling: "single",
+        path: "/lib/editor.md/lib/",
+        imageUpload: true,
+        imagePaste: true,
+        imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+        imageUploadURL: '',
+        imageUploadURL: "/File/Img",
+        onload: function () {
+            //处理图片复制粘贴上传
+            initPasteDragImg(this);
+        },
+        onfullscreen: function () {
+            //打开全屏
+            $(".full-hiden").hide();
+        },
+        onfullscreenExit: function () {
+            //退出全屏
+            $(".full-hiden").show();
+        }
+    })
+
     xmSelect.render({
         el: '#tagSelect',
         checkbox: true,
-        name:'tagIds',
+        name: 'tagIds',
         paging: true,
         pageSize: 10,
         pageRemote: true,
@@ -151,12 +126,41 @@
         }
     })
 
+
+
+
+    //初始化
+    $(function () {
+
+        if (action != 'Add') {
+            var loadIndex = layer.load(0);
+            //获取数据
+            sendAjax("/Post/GetById", { blogPostId: id, action }, function (result) {
+                if (result.code == 200) {
+                    var data = result.data;
+                    tagSelected = data?.tags.map(item => item.blogTagId);
+                    $('#categorySelect').attr("ts-selected", data.categoryId);
+                    form.val('addOrEdit', data);
+
+                } else {
+                    layer.msg(`操作失败:${result.message}`, { icon: 2, time: 4000 });
+                }
+            }, function (error) {
+                layer.msg(`操作失败:${error}`, { icon: 2, time: 4000 });
+            }, function () {
+                layer.close(loadIndex);
+            })
+        }
+
+    })
+
+   
     window.validate = function () {
         return form.validate("#addOrEdit");
     }
 
     //返回数据
     window.getAddOrEditData = function () {
-        return  form.val('addOrEdit');
+        return form.val('addOrEdit');
     }
 });

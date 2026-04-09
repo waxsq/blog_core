@@ -80,12 +80,12 @@ namespace Blog.Service.Commons
             return ResultUtil.Success(i);
         }
 
-        public new async Task<EditReponse<PostAddOrEditVo>> GetByIdAsync(long id)
+        public async Task<EditReponse<PostAddOrEditVo>> GetById(long id)
         {
             return await _blogPostRepository.GetByIdAsync(id);
         }
 
-        public async Task<EditReponse<int>> Delete(PostAddOrEditVo vo)
+        public async Task<EditReponse<int>> DeleteById(PostAddOrEditVo vo)
         {
             int deleteResult = await _blogPostRepository.DeleteByIdAsync(vo.BlogPostId);
             if (deleteResult == 0)
