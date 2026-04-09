@@ -22,7 +22,7 @@
 
     <form class="layui-form" id="addOrEdit" lay-filter="addOrEdit">
         <input class="d-none" id="categoryId" name="categoryId" />
-        <input class="d-none" id="blogPostId" name="blogPostId" />
+        <input class="d-none" id="blogPostId" name="blogPostId" value="@ViewData["id"]"/>
         <!-- 第一行：标题 -->
         <div class="row align-items-center mb-3 ml-2 full-hiden">
             <label class="col-sm-1 text-start">标题</label>
@@ -69,6 +69,10 @@
 
 </body>
 </html>
+<script>
+  var id = '@ViewData["id"]';
+  var action = '@ViewData["action"]';
+</script>
 
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>

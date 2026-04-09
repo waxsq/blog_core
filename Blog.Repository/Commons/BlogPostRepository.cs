@@ -2,6 +2,7 @@ using AutoMapper;
 using Blog.Core.Commons;
 using Blog.Core.Entities;
 using Blog.Core.Entities.Vo.Post;
+using Blog.Core.Exceptions;
 using Blog.Core.Utils;
 using Blog.Repository.Interfaces;
 using Dm.util;
@@ -19,6 +20,31 @@ namespace Blog.Repository.Commons
             _mapper = mapper;
         }
 
+        public new async Task<EditReponse<PostAddOrEditVo>> GetByIdAsync(long id)
+        {
+            BlogPost postDto = _db.Queryable<BlogPost>()
+                .Where(p => p.BlogPostId == id)
+                .First();
+            if (postDto == null)
+            {
+                throw new BusinessException("请检查当前对象是否存在");
+            }
+
+            List<BlogTag> tags = await _db.Queryable<BlogPostTag>()
+                .LeftJoin<BlogTag>((pt, t) => pt.TagId == t.BlogTagId)
+                .Where((pt, t) => pt.PostId == postDto.BlogPostId)
+                .Select((pt, t) => new BlogTag
+                {
+                    TagName = t.TagName,
+                    BlogTagId = t.BlogTagId
+                })
+                .ToListAsync();
+            PostAddOrEditVo vo = _mapper.Map<PostAddOrEditVo>(postDto);
+            vo.Tags = tags;
+            return ResultUtil.Success(vo);
+
+        }
+
         public async Task<PageReponse<PostTablePageVo>> QueryPageAsync(PostTableQueryVo query)
         {
             var pageReponse = new PageReponse<PostTablePageVo>
@@ -28,7 +54,7 @@ namespace Blog.Repository.Commons
                 TotalCount = 0
             };
             RefAsync<int> totalNumber = new RefAsync<int>(pageReponse.TotalCount);
-            var result = await _db.Queryable<BlogPost>()
+            List<PostTablePageVo> result = await _db.Queryable<BlogPost>()
                 .LeftJoin<BlogCategory>((p, c) => p.CategoryId == c.BlogCategoryId)
                 .WhereIF(!query.Title.isEmpty(), (p, c) => p.Title.Equals(query.Title))
                 .WhereIF(query.Status != -1, (p, c) => p.Status.Equals(query.Status))
@@ -38,20 +64,43 @@ namespace Blog.Repository.Commons
                 .WhereIF(!query.CategoryName.isEmpty(), (p, c) => c.CategoryName.Equals(query.CategoryName))
                 .Select((p, c) => new PostTablePageVo
                 {
-                    CategoryName = c.CategoryName,
-                    Title = p.Title,
-                    Summary = p.Summary,
-                    Status = p.Status,
-                    IsFeatured = p.IsFeatured,
-                    IsTop = p.IsTop,
-                    TagNames = string.Join(",",
-                                _db.Queryable<BlogPostTag>()
-                                    .LeftJoin<BlogTag>((pt, t) => pt.TagId == t.BlogTagId)
-                                    .Where(pt => pt.PostId == p.BlogPostId)
-                                    .Select((pt, t) => t.TagName))
+                    CategoryName = c.CategoryName
                 }, true)
                 .OrderBy($"p.{query.Field} {query.Order}")
                 .ToPageListAsync(pageReponse.PageIndex, pageReponse.PageSize, totalNumber);
+
+            var postIds = result.Select(t => t.BlogPostId).ToList();
+
+
+            if (postIds.Any())
+            {
+                var tags = await _db.Queryable<BlogPost>()
+                    .LeftJoin<BlogPostTag>((p, pt) => p.BlogPostId == pt.PostId)
+                    .LeftJoin<BlogTag>((p, pt, t) => pt.TagId == t.BlogTagId)
+            .Where((p, pt, t) => postIds.Contains(pt.PostId))
+            .Select((p, pt, t) => new
+            {
+                PostId = p.BlogPostId,
+                TagName = t.TagName,
+                TagId = t.BlogTagId,
+            })
+            .ToListAsync();
+
+                Dictionary<long, List<BlogTag>> postMap = tags.GroupBy(x => x.PostId).ToDictionary(g => g.Key, g => g.Select(x => new BlogTag
+                {
+                    BlogTagId = x.TagId,
+                    TagName = x.TagName,
+                }).ToList());
+
+                foreach (var post in result)
+                {
+                    if (postMap.ContainsKey(post.BlogPostId))
+                    {
+                        post.Tags = postMap[post.BlogPostId];
+                    }
+                }
+            }
+
             pageReponse.Datas = result;
             return ResultUtil.SuccessPage(pageReponse);
         }

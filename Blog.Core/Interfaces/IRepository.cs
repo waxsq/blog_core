@@ -22,6 +22,7 @@ namespace Blog.Core.Interfaces
         Task<int> InsertAsync(TEntity entity);
         Task<int> InsertAsync(IEnumerable<TEntity> entities);
         Task<int> BulkInsertAsync(List<TEntity> entities);
+        Task<int> BatchInsertAsync(List<TEntity> entities);
 
         // --- Read ---
         Task<TEntity?> GetByIdAsync(TKey id);

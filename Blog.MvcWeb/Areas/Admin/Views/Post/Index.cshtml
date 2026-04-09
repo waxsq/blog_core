@@ -73,9 +73,10 @@
                     </div>
                 </div>
                 <div class="layui-inline">
-                    <button class="layui-btn layuiadmin-btn-list" lay-submit lay-filter="submit-form">
-                        <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
-                    </button>
+                  <button class="layui-btn layuiadmin-btn-list" lay-submit lay-filter="submit-form">
+                    <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                  </button>
+                  <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </div>
         </form>
@@ -96,17 +97,15 @@
 </script>
 
 <script type="text/html" id="statusTpl">
-    {{# switch(d.status) {  }}
-    {{#  case 0 :     }}
-    <p>草稿</p>
-    {{#   break;   }}
-      {{#  case 1 :     }}
-      <p>已发布</p>
-      {{#   break;   }}
-        {{#  case 2 :     }}
-      <p>已归档</p>
-      {{#   break;   }}
-    {{#  }    }}
+  {{# if(d.status == 0 || d.status == '0') { }}
+  <span class="layui-badge layui-bg-gray">草稿</span>
+  {{# } else if(d.status == 1 || d.status == '1') { }}
+  <span class="layui-badge layui-bg-green">已发布</span>
+  {{# } else if(d.status == 2 || d.status == '2') { }}
+  <span class="layui-badge layui-bg-black">已归档</span>
+  {{# } else { }}
+  {{= d.status}}
+  {{# } }}
 </script>
 <script type="text/html" id="isFeaturedTpl">
     {{#  if(d.isFeatured == 0) {  }}

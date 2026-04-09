@@ -54,7 +54,7 @@ namespace Blog.Core.Entities
         /// 文章状态：0=草稿，1=已发布，2=已归档
         /// </summary>
         [SugarColumn(ColumnName = "status")]
-        public int Status { get; set; } = 0;
+        public int Status { get; set; } = 1;
 
         /// <summary>
         /// 是否推荐/精选

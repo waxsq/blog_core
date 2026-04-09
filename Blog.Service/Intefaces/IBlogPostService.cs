@@ -14,5 +14,7 @@ namespace Blog.Service.Intefaces
     {
         Task<PageReponse<PostTablePageVo>> QueryPage(PostTableQueryVo vo);
         Task<EditReponse<int>> Add(PostAddOrEditVo postAddOrEditVo);
+        new Task<EditReponse<PostAddOrEditVo>> GetByIdAsync(long id);
+        Task<EditReponse<int>> Delete(PostAddOrEditVo vo);
     }
 }

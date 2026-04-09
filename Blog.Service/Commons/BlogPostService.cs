@@ -24,7 +24,10 @@ namespace Blog.Service.Commons
         private readonly IBlogPostTagRepository _blogPostTagRepository;
         private readonly IBlogCategoryRepository _blogCategoryRepository;
         private readonly IMapper _mapper;
-        public BlogPostService(IBlogPostRepository blogPostRepository, IBlogPostTagRepository blogPostTagRepository, IMapper mapper, IBlogCategoryRepository blogCategoryRepository) : base(blogPostRepository)
+        public BlogPostService(IBlogPostRepository blogPostRepository,
+            IBlogPostTagRepository blogPostTagRepository,
+            IMapper mapper,
+            IBlogCategoryRepository blogCategoryRepository) : base(blogPostRepository)
         {
             _blogPostRepository = blogPostRepository;
             _blogPostTagRepository = blogPostTagRepository;
@@ -72,9 +75,25 @@ namespace Blog.Service.Commons
                     Tags.Add(realtionDto);
                 }
 
-                await _blogPostTagRepository.BulkInsertAsync(Tags);
+                await _blogPostTagRepository.BatchInsertAsync(Tags);
             }
             return ResultUtil.Success(i);
+        }
+
+        public new async Task<EditReponse<PostAddOrEditVo>> GetByIdAsync(long id)
+        {
+            return await _blogPostRepository.GetByIdAsync(id);
+        }
+
+        public async Task<EditReponse<int>> Delete(PostAddOrEditVo vo)
+        {
+            int deleteResult = await _blogPostRepository.DeleteByIdAsync(vo.BlogPostId);
+            if (deleteResult == 0)
+            {
+                throw new BusinessException("删除异常");
+            }
+            await _blogPostTagRepository.DeleteAsync(pt => pt.PostId == vo.BlogPostId);
+            return ResultUtil.Success(deleteResult);
         }
     }
 }

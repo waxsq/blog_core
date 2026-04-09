@@ -62,6 +62,15 @@ namespace Blog.Repository.Commons
             return await _db.Fastest<TEntity>().BulkCopyAsync(entities);
         }
 
+        public async Task<int> BatchInsertAsync(List<TEntity> entities)
+        {
+            if (entities == null) throw new ArgumentNullException(nameof(entities));
+            var arr = entities as TEntity[] ?? entities.ToArray();
+            if (arr.Length == 0) return 0;
+
+            return await _db.Insertable<TEntity>(entities).ExecuteCommandAsync();
+        }
+
         // --- Read ---
         public async Task<TEntity?> GetByIdAsync(TKey id)
         {

@@ -4,6 +4,7 @@
     var tableSelect = layui.tableSelect;
     var $ = layui.$;
     var contentEditor;
+    var tagSelected = [];
 
     //自定义验证规则
     form.verify({
@@ -21,8 +22,7 @@
     });
     
 
-    //tag的id
-    window.tagSelected = [];
+    
 
     //初始化
     $(function () {
@@ -49,6 +49,26 @@
                 $(".full-hiden").show();
             }
         })
+
+        if (action != 'Add') {
+            var loadIndex = layer.load(0);
+            //获取数据
+            sendAjax("/Post/GetById", { blogPostId: id, action }, function (result) {
+                if (result.code == 200) {
+                    debugger
+                    var data = result.data;
+                    tagSelected = data?.tags.map(item => item.blogTagId);
+                    form.val('addOrEdit', data);
+                } else {
+                    ayer.msg(`操作失败:${result.message}`, { icon: 2, time: 4000 });
+                }
+            }, function (error) {
+                layer.msg(`操作失败:${error}`, { icon: 2, time: 4000 });
+            }, function () {
+                layer.close(loadIndex);
+            })
+        }
+        
     })
 
     //下拉表格
@@ -62,7 +82,6 @@
             contentType: 'application/json', // 👈 关键：告诉服务器我发的是 JSON
             page: true,
             cols: [[
-                { field: 'blogCategoryId', title: '主键', hide: true },
                 { type: 'radio', fixed: 'left' },
                 { field: 'categoryName', title: '分类名称' },
             ]],
@@ -87,6 +106,7 @@
             if (data && data.data.length > 0) {
                 var choseData = data.data[0];
                 form.val('addOrEdit', choseData)
+                $('#categoryId').val(choseData.blogCategoryId);
             }
         }
     });

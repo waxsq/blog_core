@@ -30,5 +30,19 @@ namespace Blog.MvcWeb.Controllers
         {
             return await _blogPostService.Add(postAddOrEditVo);
         }
+
+        [HttpPost]
+        [Route("GetById")]
+        public async Task<EditReponse<PostAddOrEditVo>> GetById(PostAddOrEditVo postAddOrEditVo)
+        {
+            return await _blogPostService.GetByIdAsync(postAddOrEditVo.BlogPostId);
+        }
+
+        [HttpPost]
+        [Route("Delete")]
+        public async Task<EditReponse<int>> Delete(PostAddOrEditVo postAddOrEditVo)
+        {
+            return await _blogPostService.Delete(postAddOrEditVo);
+        }
     }
 }

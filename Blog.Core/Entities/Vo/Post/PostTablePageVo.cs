@@ -10,7 +10,7 @@ namespace Blog.Core.Entities.Vo.Post
     {
         public string AuthorName { get; set; }
         public string CategoryName { get; set; }
-        public string TagNames { get; set; }
+        public List<BlogTag>? Tags { get; set; }
     }
 }
 

@@ -208,6 +208,58 @@
   },
   {
     "ContainingType": "Blog.MvcWeb.Controllers.PostController",
+    "Method": "Delete",
+    "RelativePath": "Post/Delete",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "postAddOrEditVo",
+        "Type": "Blog.Core.Entities.Vo.Post.PostAddOrEditVo",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Blog.Core.Commons.EditReponse\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Blog.MvcWeb.Controllers.PostController",
+    "Method": "GetById",
+    "RelativePath": "Post/GetById",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "postAddOrEditVo",
+        "Type": "Blog.Core.Entities.Vo.Post.PostAddOrEditVo",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Blog.Core.Commons.EditReponse\u00601[[Blog.Core.Entities.Vo.Post.PostAddOrEditVo, Blog.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Blog.MvcWeb.Controllers.PostController",
     "Method": "QueryPage",
     "RelativePath": "Post/QueryPage",
     "HttpMethod": "POST",
