@@ -22,7 +22,7 @@ layui.define(['table', 'jquery', 'form'], function (exports) {
         opt.checkedKey = opt.checkedKey;
         opt.table.page = opt.table.page || true;
         opt.table.height = opt.table.height || 315;
-        debugger
+        
         elem.off('click').on('click', function(e) {
             e.stopPropagation();
 
@@ -107,16 +107,18 @@ layui.define(['table', 'jquery', 'form'], function (exports) {
             });
 
             //渲染表格后选中
-            function setChecked (res, curr, count) {
+            function setChecked(res, curr, count) {
 				for(var i=0;i<res.data.length;i++){
             		for (var j=0;j<checkedData.length;j++) {
             			if(res.data[i][opt.checkedKey] == checkedData[j][opt.checkedKey]){
             				res.data[i].LAY_CHECKED = true;
-                            var index= res.data[i]['LAY_TABLE_INDEX'];
+                            var index = res.data[i]['LAY_INDEX'];
                             var checkbox = $('#'+tableName+'').next().find('tr[data-index=' + index + '] input[type="checkbox"]');
-            				    checkbox.prop('checked', true).next().addClass('layui-form-checked');
+                            //checkbox.prop('checked', true).next().addClass('layui-form-checked');
+                            checkbox.prop('checked', true)
                             var radio  = $('#'+tableName+'').next().find('tr[data-index=' + index + '] input[type="radio"]');
-                                radio.prop('checked', true).next().addClass('layui-form-radioed').find("i").html('&#xe643;');
+                            //radio.prop('checked', true).next().addClass('layui-form-radioed').find("i").html('&#xe643;');
+                            radio.prop('checked', true)
             			}
             		}
             	}

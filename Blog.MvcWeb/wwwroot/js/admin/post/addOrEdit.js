@@ -5,7 +5,6 @@
     var $ = layui.$;
     var contentEditor;
     var tagSelected = [];
-    var tableSelectDom;
 
     //自定义验证规则
     form.verify({
@@ -87,46 +86,46 @@
         }
     })
 
-    xmSelect.render({
-        el: '#tagSelect',
-        checkbox: true,
-        name: 'tagIds',
-        paging: true,
-        pageSize: 10,
-        pageRemote: true,
-        layVerify: 'required',  // 验证规则
-        layVerType: 'tips',     // 验证提示方式
-        layReqText: '请选择标签', // 必填提示文字
-        tips: '请选择标签',       // 选择框默认提示文字
-        prop: {
-            name: 'tagName',
-            value: 'blogTagId'
-        },
-        initValue: tagSelected,
-        remoteMethod: function (keywords, cb, isSearch, page) {
-            sendAjax(
-                '/Tag/QueryPage',  // 第1个参数：URL 字符串
-                {                  // 第2个参数：Data 对象
-                    tagName: keywords,
-                    pageIndex: page,
-                    pageSize: 10,
-                },
-                function (res) {    // 第3个参数：Success 回调函数
-                    if (res.code === 200) {
-                        cb(res.datas, res.totalCount);
-                    } else {
-                        cb([], 0);
+    function initTagSelect() {
+        var tagSelect = xmSelect.render({
+            el: '#tagSelect',
+            checkbox: true,
+            name: 'tagIds',
+            paging: true,
+            pageSize: 10,
+            pageRemote: true,
+            layVerify: 'required',  // 验证规则
+            layVerType: 'tips',     // 验证提示方式
+            layReqText: '请选择标签', // 必填提示文字
+            tips: '请选择标签',       // 选择框默认提示文字
+            prop: {
+                name: 'tagName',
+                value: 'blogTagId'
+            },
+            initValue: tagSelected,
+            remoteMethod: function (keywords, cb, isSearch, page) {
+                sendAjax(
+                    '/Tag/QueryPage',  // 第1个参数：URL 字符串
+                    {                  // 第2个参数：Data 对象
+                        tagName: keywords,
+                        pageIndex: page,
+                        pageSize: 10,
+                    },
+                    function (res) {    // 第3个参数：Success 回调函数
+                        if (res.code === 200) {
+                            cb(res.datas, res.totalCount);
+                        } else {
+                            cb([], 0);
+                        }
                     }
-                }
-            );
-        },
-        on: function (data) {
-            var arr = data.arr;
-            console.log(arr);
-        }
-    })
-
-
+                );
+            },
+            on: function (data) {
+                var arr = data.arr;
+                console.log(arr);
+            }
+        })
+    }
 
 
     //初始化
@@ -138,8 +137,19 @@
             sendAjax("/Post/GetById", { blogPostId: id, action }, function (result) {
                 if (result.code == 200) {
                     var data = result.data;
-                    tagSelected = data?.tags.map(item => item.blogTagId);
+                    tagSelected = data?.tags.map(item => {
+                        return {
+                            blogTagId: item.blogTagId,
+                            tagName: item.tagName
+                        }
+                    });
+
+                    initTagSelect();
+
+
                     $('#categorySelect').attr("ts-selected", data.categoryId);
+                    $('#categorySelect').val(data.categoryName);
+
                     form.val('addOrEdit', data);
 
                 } else {
@@ -154,7 +164,7 @@
 
     })
 
-   
+
     window.validate = function () {
         return form.validate("#addOrEdit");
     }

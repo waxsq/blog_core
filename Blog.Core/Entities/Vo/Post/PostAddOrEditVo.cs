@@ -15,5 +15,6 @@ namespace Blog.Core.Entities.Vo.Post
         public long CategoryId { get; set; }
         public List<BlogTag>? Tags { get; set; }
         public string? TagIds { get; set; }
+        public string? CategoryName { get; set; }
     }
 }

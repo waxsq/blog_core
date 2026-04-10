@@ -55,6 +55,13 @@ namespace Blog.Repository.Commons
                 })
                 .ToListAsync();
             PostAddOrEditVo vo = _mapper.Map<PostAddOrEditVo>(postDto);
+
+            BlogCategory category = await _db.Queryable<BlogCategory>()
+                .InSingleAsync(vo.CategoryId);
+               
+
+            vo.CategoryName = category.CategoryName;
+
             vo.Tags = tags;
             return ResultUtil.Success(vo);
 
