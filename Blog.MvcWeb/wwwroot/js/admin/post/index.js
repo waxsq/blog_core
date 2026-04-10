@@ -154,6 +154,9 @@
 
 
     let openDialog = function (id, action = 'View') {
+
+        var btn = action == "View" ? [] : ['确定', '取消'];
+
         var fullIndex = layer.open({
             title: '文章',
             maxmin: true,
@@ -162,7 +165,7 @@
             fixed: true,
             resize: true,
             content: `/Admin/Post/AddOrEdit?id=${id}&action=${action}`, //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
-            btn: ['确定', '取消'],
+            btn: btn,
             yes: function (index, layero) {
                 var iframe = layero.find('iframe')[0];
                 var childWindow = iframe.contentWindow;

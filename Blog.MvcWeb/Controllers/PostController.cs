@@ -44,5 +44,12 @@ namespace Blog.MvcWeb.Controllers
         {
             return await _blogPostService.DeleteById(postAddOrEditVo);
         }
+
+        [HttpPost]
+        [Route("Edit")]
+        public Task<EditReponse<int>> Edit(PostAddOrEditVo postAddOrEditVo)
+        {
+            return _blogPostService.Edit(postAddOrEditVo);
+        }
     }
 }

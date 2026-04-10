@@ -3,8 +3,8 @@
     var layer = layui.layer;
     var tableSelect = layui.tableSelect;
     var $ = layui.$;
-    var contentEditor;
     var tagSelected = [];
+    var contentEditor;
 
     //自定义验证规则
     form.verify({
@@ -63,14 +63,12 @@
 
 
     contentEditor = editormd('content-editormd', {
-        width: "100%",
-        height: "80vh",
         syncScrolling: "single",
         path: "/lib/editor.md/lib/",
         imageUpload: true,
         imagePaste: true,
+        readOnly: action == "View",
         imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-        imageUploadURL: '',
         imageUploadURL: "/File/Img",
         onload: function () {
             //处理图片复制粘贴上传
@@ -83,17 +81,41 @@
         onfullscreenExit: function () {
             //退出全屏
             $(".full-hiden").show();
+            // 【关键代码】强制重置宽度和高度
+            var that = this;
+            setTimeout(function () {
+                // 重置父容器宽度
+                that.container.css({
+                    "width": "100%",
+                    "height": "80vh"
+                });
+                // 重置编辑器内部宽度
+                that.editor.css({
+                    "width": "100%",
+                    "height": "80vh"
+                });
+
+                // 如果还有预览区域，也需要重置
+                if (that.preview) {
+                    that.preview.css("height", "80vh");
+                }
+
+                // 触发窗口resize事件，让editor.md重新计算布局（可选）
+                $(window).trigger('resize');
+            }, 10);
         }
     })
 
+
     function initTagSelect() {
-        var tagSelect = xmSelect.render({
+        xmSelect.render({
             el: '#tagSelect',
             checkbox: true,
             name: 'tagIds',
             paging: true,
             pageSize: 10,
             pageRemote: true,
+            disabled: action == "View",
             layVerify: 'required',  // 验证规则
             layVerType: 'tips',     // 验证提示方式
             layReqText: '请选择标签', // 必填提示文字
@@ -130,8 +152,10 @@
 
     //初始化
     $(function () {
-
         if (action != 'Add') {
+            if (action == 'View') {
+                $("#addOrEdit input, #addOrEdit select,#addOrEdit textarea").prop("disabled", true);
+            }
             var loadIndex = layer.load(0);
             //获取数据
             sendAjax("/Post/GetById", { blogPostId: id, action }, function (result) {
@@ -143,13 +167,10 @@
                             tagName: item.tagName
                         }
                     });
-
                     initTagSelect();
-
-
                     $('#categorySelect').attr("ts-selected", data.categoryId);
                     $('#categorySelect').val(data.categoryName);
-
+                    contentEditor.setMarkdown(data.content)
                     form.val('addOrEdit', data);
 
                 } else {
@@ -160,6 +181,8 @@
             }, function () {
                 layer.close(loadIndex);
             })
+        } else {
+            initTagSelect()
         }
 
     })

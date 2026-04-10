@@ -48,11 +48,7 @@ namespace Blog.Service.Commons
             BeanUtil.IsFieldNullOrMissing(postAddOrEditVo, "CategoryId", "文章分类");
 
             //判断分类是否存在
-            int count = _blogCategoryRepository.CountNumberByPk(postAddOrEditVo.CategoryId);
-            if (count == 0)
-            {
-                throw new BusinessException("文章分类不存在");
-            }
+            await CheckData(postAddOrEditVo);
 
             var newDto = _mapper.Map<BlogPost>(postAddOrEditVo);
             newDto.BlogPostId = SnowFlakeSingle.instance.NextId();
@@ -94,6 +90,66 @@ namespace Blog.Service.Commons
             }
             await _blogPostTagRepository.DeleteAsync(pt => pt.PostId == vo.BlogPostId);
             return ResultUtil.Success(deleteResult);
+        }
+
+        public async Task<EditReponse<int>> Edit(PostAddOrEditVo postAddOrEditVo)
+        {
+            BeanUtil.IsFieldNullOrMissing(postAddOrEditVo, "BlogPostId", "文章");
+            await CheckData(postAddOrEditVo);
+
+            var updatePost = new BlogPost
+            {
+                BlogPostId = postAddOrEditVo.BlogPostId,
+                Title = postAddOrEditVo.Title,
+                Summary = postAddOrEditVo.Summary,
+                Content = postAddOrEditVo.Content,
+                CategoryId = postAddOrEditVo.CategoryId
+            };
+
+            var result = await _blogPostRepository.UpdateNotNullAsync(updatePost);
+
+            if(result == 0)
+            {
+                throw new BusinessException("更新异常");
+            }
+
+            List<long> tagIds = postAddOrEditVo.TagIds?.Split(",").Select(x => Convert.ToInt64(x)).ToList() ?? new List<long>();
+
+            var insertRecord = tagIds.Select(id => new BlogPostTag
+            {
+                BlogPostTagId = SnowFlakeSingle.instance.NextId(),
+                PostId = postAddOrEditVo.BlogPostId,
+                TagId = id
+            }).ToList();
+
+            await _blogPostTagRepository.DeleteAsync(pt => pt.PostId == postAddOrEditVo.BlogPostId);
+            await _blogPostTagRepository.BatchInsertAsync(insertRecord);
+
+            return ResultUtil.Success(result);
+
+
+        }
+
+
+        public async Task CheckData(PostAddOrEditVo postAddOrEditVo)
+        {
+            BeanUtil.IsFieldNullOrMissing(postAddOrEditVo, "Title", "文章标题");
+            BeanUtil.IsFieldNullOrMissing(postAddOrEditVo, "Summary", "文章摘要");
+            BeanUtil.IsFieldNullOrMissing(postAddOrEditVo, "Content", "文章内容");
+            BeanUtil.IsFieldNullOrMissing(postAddOrEditVo, "CategoryId", "文章分类");
+            //判断分类是否存在
+            int count = _blogCategoryRepository.CountNumberByPk(postAddOrEditVo.CategoryId);
+            if (count == 0)
+            {
+                throw new BusinessException("文章分类不存在");
+            }
+
+            List<string> tagIdList = postAddOrEditVo.TagIds?.Split(",").Select(i => i.Trim()).ToList() ?? new List<string>();
+            var result = (await _blogPostTagRepository.QueryAsync(pt => tagIdList.Contains(pt.TagId.ToString()))).Count();
+            if (result == 0 || tagIdList.Count() == 0)
+            {
+                throw new BusinessException("文章标签不存在");
+            }
         }
     }
 }
