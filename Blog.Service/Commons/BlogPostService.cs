@@ -9,10 +9,12 @@ using Blog.Core.Entities;
 using Blog.Core.Entities.Vo.Post;
 using Blog.Core.Exceptions;
 using Blog.Core.Interfaces;
+using Blog.Core.Records;
 using Blog.Core.Utils;
 using Blog.Repository.Commons;
 using Blog.Repository.Interfaces;
 using Blog.Service.Intefaces;
+using MediatR;
 using Microsoft.IdentityModel.Tokens;
 using SqlSugar;
 
@@ -24,15 +26,18 @@ namespace Blog.Service.Commons
         private readonly IBlogPostTagRepository _blogPostTagRepository;
         private readonly IBlogCategoryRepository _blogCategoryRepository;
         private readonly IMapper _mapper;
+        private readonly ISender _sender;
         public BlogPostService(IBlogPostRepository blogPostRepository,
             IBlogPostTagRepository blogPostTagRepository,
             IMapper mapper,
+            ISender sender,
             IBlogCategoryRepository blogCategoryRepository) : base(blogPostRepository)
         {
             _blogPostRepository = blogPostRepository;
             _blogPostTagRepository = blogPostTagRepository;
             _mapper = mapper;
             _blogCategoryRepository = blogCategoryRepository;
+            _sender = sender;
         }
 
         public Task<PageReponse<PostTablePageVo>> QueryPage(PostTableQueryVo vo)
@@ -42,23 +47,19 @@ namespace Blog.Service.Commons
 
         public async Task<EditReponse<int>> Add(PostAddOrEditVo postAddOrEditVo)
         {
-            BeanUtil.IsFieldNullOrMissing(postAddOrEditVo, "Title", "文章标题");
-            BeanUtil.IsFieldNullOrMissing(postAddOrEditVo, "Summary", "文章摘要");
-            BeanUtil.IsFieldNullOrMissing(postAddOrEditVo, "Content", "文章内容");
-            BeanUtil.IsFieldNullOrMissing(postAddOrEditVo, "CategoryId", "文章分类");
-
             //判断分类是否存在
             await CheckData(postAddOrEditVo);
 
             var newDto = _mapper.Map<BlogPost>(postAddOrEditVo);
             newDto.BlogPostId = SnowFlakeSingle.instance.NextId();
+            newDto.PublishedAt = DbTimeUtil.GetDbTime();
             int i = await _blogPostRepository.InsertAsync(newDto);
 
             newDto = await _repository.GetByIdAsync(newDto.BlogPostId);
 
-            List<long> TagIds = postAddOrEditVo.TagIds.Split(',').Select(x => Convert.ToInt64(x)).ToList();
+            List<long> TagIds = postAddOrEditVo.TagIds?.Split(',').Select(x => Convert.ToInt64(x)).ToList()  ?? [];
             List<BlogPostTag> Tags = new List<BlogPostTag>();
-            if (!TagIds.IsNullOrEmpty() && i > 0 && newDto != null)
+            if (TagIds.Any() && i > 0 && newDto != null)
             {
                 foreach (var item in TagIds)
                 {
@@ -72,6 +73,9 @@ namespace Blog.Service.Commons
                 }
 
                 await _blogPostTagRepository.BatchInsertAsync(Tags);
+
+                var recod = new TagCountRecord(TagIds, 1);
+                await _sender.Send(recod);
             }
             return ResultUtil.Success(i);
         }
@@ -88,7 +92,13 @@ namespace Blog.Service.Commons
             {
                 throw new BusinessException("删除异常");
             }
-            await _blogPostTagRepository.DeleteAsync(pt => pt.PostId == vo.BlogPostId);
+            List<long> tags = _blogPostTagRepository.QueryTagIdsByPostId(vo.BlogPostId);
+            int deleteTagResult = await _blogPostTagRepository.DeleteAsync(pt => pt.PostId == vo.BlogPostId);
+            if(deleteTagResult == tags.Count)
+            {
+                 var message = new TagCountRecord(tags, -1);
+                await _sender.Send(message);
+            }
             return ResultUtil.Success(deleteResult);
         }
 

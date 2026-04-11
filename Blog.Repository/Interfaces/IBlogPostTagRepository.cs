@@ -8,6 +8,9 @@ using Blog.Core.Interfaces;
 
 namespace Blog.Repository.Interfaces
 {
-    public interface IBlogPostTagRepository : IRepository<BlogPostTag, long> { }
+    public interface IBlogPostTagRepository : IRepository<BlogPostTag, long>
+    {
+        public List<long> QueryTagIdsByPostId(long postId);
+    }
 
 }

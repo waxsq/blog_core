@@ -71,7 +71,7 @@ namespace Blog.MvcWeb.Middlewares
                 _logger.LogError(ex, "发生未捕获的系统异常 | Path: {Path} | Method: {Method}",
                     context.Request.Path, context.Request.Method);
             }
-
+            Console.WriteLine($"当前异常信息为:{ex.Message}");
             response.StatusCode = statusCode;
             await response.WriteAsync(JsonSerializer.Serialize(result));
         }

@@ -82,7 +82,8 @@ namespace Blog.Repository.Commons
                 .WhereIF(query.Status != -1, (p, c) => p.Status.Equals(query.Status))
                 .WhereIF(query.IsFeatured != -1, (p, c) => p.IsFeatured.Equals(query.IsFeatured))
                 .WhereIF(query.IsTop != -1, (p, c) => p.IsTop.Equals(query.IsTop))
-                .WhereIF(query.PublishedBeginAt != null && query.PublishedEndAt != null, (p, c) => p.PublishedAt >= query.PublishedBeginAt && p.PublishedAt <= query.PublishedEndAt)
+                .WhereIF(query.PublishedBeginAt != null , (p, c) => p.PublishedAt >= query.PublishedBeginAt)
+                .WhereIF(query.PublishedEndAt != null, (p, c) =>  p.PublishedAt <= query.PublishedEndAt)
                 .WhereIF(!query.CategoryName.isEmpty(), (p, c) => c.CategoryName.Equals(query.CategoryName))
                 .Select((p, c) => new PostTablePageVo
                 {

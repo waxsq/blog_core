@@ -75,5 +75,7 @@ namespace Blog.Core.Entities
         [SugarColumn(ColumnName = "is_valid")]
         public int isValid { get; set; } = 1;
 
+        [SugarColumn(ColumnName = "ref_count")]
+        public int RefCount { get; set; } = 0;
     }
 }

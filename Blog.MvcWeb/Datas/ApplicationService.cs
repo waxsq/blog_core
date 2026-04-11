@@ -1,8 +1,11 @@
+using System.Reflection;
 using Blog.Core.Exceptions;
 using Blog.Core.Profiles;
+using Blog.Core.Utils;
 using Blog.FileStorage.Core;
 using Blog.Repository;
 using Blog.Service;
+using Microsoft.CodeAnalysis.FlowAnalysis;
 using SqlSugar;
 
 namespace Blog.MvcWeb.Datas
@@ -41,7 +44,7 @@ namespace Blog.MvcWeb.Datas
                         if (logger != null)
                         {
                             // 可以在这里格式化输出参数
-                            logger.LogDebug("SQL Executing: {Sql}", sql);
+                            logger.LogDebug("SQL Executing: {Sql}\n", sql);
                         }
                         Console.WriteLine(sql);
                     };
@@ -57,7 +60,7 @@ namespace Blog.MvcWeb.Datas
                     {
                         if (logger != null)
                         {
-                            logger.LogError(ex, "数据库执行异常: {Message}", ex.Message);
+                            logger.LogError(ex, "数据库执行异常: {Message}\n", ex.Message);
                         }
 
                         string msg = ex.Message;
@@ -91,7 +94,7 @@ namespace Blog.MvcWeb.Datas
                     // var userId = httpContextAccessor?.HttpContext?.User?.FindFirst("UserId")?.Value;
                     // 你可以在 OnLogExecuting 中把 userId 记录到日志里
                 });
-
+                DbTimeUtil.InitDb(sqlSugar);
                 return sqlSugar;
             });
         }
@@ -149,6 +152,15 @@ namespace Blog.MvcWeb.Datas
 
                 // 2. 手动 new Context，把列表传进去
                 return new FileUploadContext(strategies, "LocalFileStrategy");
+            });
+        }
+
+
+        public static void AddMediatR(this  IServiceCollection services)
+        {
+            services.AddMediatR(cfg => {
+                // 这里配置 MediatR 的行为，例如配置服务生命周期
+                cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
             });
         }
     }

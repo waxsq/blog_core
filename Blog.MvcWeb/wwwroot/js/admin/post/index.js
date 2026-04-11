@@ -107,6 +107,20 @@
         return false; // 阻止表单默认跳转
     });
 
+    form.on('submit(reset-form)', function (data) {
+        // 1. 清空表单输入框
+        data.form.reset(); // data.form 是原生的 form DOM 对象
+
+        // 2. 重载表格
+        table.reload('ID-table-demo-data', {
+            page: { curr: 1 },
+            where: {}, // 清空查询参数
+            method: 'post'
+        });
+
+        return false; // 阻止表单跳转
+    });
+
 
 
     table.on('tool(ID-table-demo-data)', function (obj) {
