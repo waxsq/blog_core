@@ -11,7 +11,7 @@ namespace Blog.Repository.Commons
 
         public List<long> QueryTagIdsByPostId(long postId)
         {
-            return _db.Queryable<BlogPostTag>().Where(pt => pt.PostId == postId).Select(pt =>  pt.PostId).ToList();
+            return _db.Queryable<BlogPostTag>().Where(pt => pt.PostId == postId).Select(pt => pt.PostId).ToList();
         }
     }
 }

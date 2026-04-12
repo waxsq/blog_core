@@ -198,3 +198,8 @@ D:\Code\Blog\Blog.Core\obj\Debug\net8.0\refint\Blog.Core.dll
 D:\Code\Blog\Blog.Core\obj\Debug\net8.0\Blog.Core.pdb
 D:\Code\Blog\Blog.Core\obj\Debug\net8.0\Blog.Core.genruntimeconfig.cache
 D:\Code\Blog\Blog.Core\obj\Debug\net8.0\ref\Blog.Core.dll
+D:\Code\Blog\Blog.Core\bin\Debug\net8.0\MediatR.dll
+D:\Code\Blog\Blog.Core\bin\Debug\net8.0\MediatR.Contracts.dll
+D:\Code\Blog\Blog.Core\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Code\Blog\Blog.Core\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Code\Blog\Blog.Core\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll

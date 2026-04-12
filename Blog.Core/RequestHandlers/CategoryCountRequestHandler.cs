@@ -21,7 +21,7 @@ namespace Blog.Core.RequestHandlers
         {
             var count = request.Count;
             var id = request.Id;
-            _db.Updateable<BlogCategory>().UpdateColumns(c => c.RefCount + count).Where(c => c.BlogCategoryId  == id && (c.RefCount + count) >= 0).ExecuteCommand();
+            _db.Updateable<BlogCategory>().SetColumns(c => c.RefCount == c.RefCount + count).Where(c => c.BlogCategoryId == id && (c.RefCount + count) >= 0).ExecuteCommand();
             return Task.CompletedTask;
         }
     }

@@ -34,6 +34,8 @@ namespace Blog.MvcWeb
             //文件服务
             builder.Services.AddFileStorage();
 
+            builder.Services.AddMediatR();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

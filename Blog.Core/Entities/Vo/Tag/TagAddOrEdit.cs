@@ -12,7 +12,7 @@ namespace Blog.Core.Entities.Vo.Tag
         public long BlogTagId { get; set; }
         public string? TagName { get; set; }
         public int? IsValid { get; set; }
-        public int? RefCount { get; set; } =0;
+        public int? RefCount { get; set; } = 0;
 
         public string? Action { get; set; } = "View";
     }

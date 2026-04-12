@@ -1,4 +1,5 @@
 using System.Reflection;
+using Blog.Core;
 using Blog.Core.Exceptions;
 using Blog.Core.Profiles;
 using Blog.Core.Utils;
@@ -156,11 +157,12 @@ namespace Blog.MvcWeb.Datas
         }
 
 
-        public static void AddMediatR(this  IServiceCollection services)
+        public static void AddMediatR(this IServiceCollection services)
         {
-            services.AddMediatR(cfg => {
+            services.AddMediatR(cfg =>
+            {
                 // 这里配置 MediatR 的行为，例如配置服务生命周期
-                cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+                cfg.RegisterServicesFromAssemblies(typeof(CoreProgram).Assembly);
             });
         }
     }

@@ -16,7 +16,8 @@ namespace Blog.Core.RequestHandlers
         {
             var tags = request.Tags;
             var count = request.Count;
-            _db.Updateable<BlogTag>().UpdateColumns(t => t.RefCount + count)
+            _db.Updateable<BlogTag>()
+                .SetColumns(t => t.RefCount == t.RefCount + count)
                 .Where(t => tags.Contains(t.BlogTagId) && (t.RefCount + count) >= 0)
                 .ExecuteCommand();
             return Task.CompletedTask;

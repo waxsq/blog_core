@@ -25,10 +25,12 @@ namespace Blog.Service.Commons
         private readonly IBlogPostRepository _blogPostRepository;
         private readonly IBlogPostTagRepository _blogPostTagRepository;
         private readonly IBlogCategoryRepository _blogCategoryRepository;
+        private readonly IBlogTagRepository _blogTagRepository;
         private readonly IMapper _mapper;
         private readonly ISender _sender;
         public BlogPostService(IBlogPostRepository blogPostRepository,
             IBlogPostTagRepository blogPostTagRepository,
+            IBlogTagRepository blogTagRepository,
             IMapper mapper,
             ISender sender,
             IBlogCategoryRepository blogCategoryRepository) : base(blogPostRepository)
@@ -37,6 +39,7 @@ namespace Blog.Service.Commons
             _blogPostTagRepository = blogPostTagRepository;
             _mapper = mapper;
             _blogCategoryRepository = blogCategoryRepository;
+            _blogTagRepository = blogTagRepository;
             _sender = sender;
         }
 
@@ -57,7 +60,7 @@ namespace Blog.Service.Commons
 
             newDto = await _repository.GetByIdAsync(newDto.BlogPostId);
 
-            List<long> TagIds = postAddOrEditVo.TagIds?.Split(',').Select(x => Convert.ToInt64(x)).ToList()  ?? [];
+            List<long> TagIds = postAddOrEditVo.TagIds?.Split(',').Select(x => Convert.ToInt64(x)).ToList() ?? [];
             List<BlogPostTag> Tags = new List<BlogPostTag>();
             if (TagIds.Any() && i > 0 && newDto != null)
             {
@@ -77,6 +80,12 @@ namespace Blog.Service.Commons
                 var recod = new TagCountRecord(TagIds, 1);
                 await _sender.Send(recod);
             }
+
+            if(newDto != null && newDto.CategoryId != 0)
+            {
+                var record = new CategoryCountRecord(newDto.CategoryId, 1);
+                await _sender.Send(record);
+            }
             return ResultUtil.Success(i);
         }
 
@@ -87,6 +96,8 @@ namespace Blog.Service.Commons
 
         public async Task<EditReponse<int>> DeleteById(PostAddOrEditVo vo)
         {
+            var queryDto = _mapper.Map<BlogPost>(vo);
+            
             int deleteResult = await _blogPostRepository.DeleteByIdAsync(vo.BlogPostId);
             if (deleteResult == 0)
             {
@@ -94,10 +105,13 @@ namespace Blog.Service.Commons
             }
             List<long> tags = _blogPostTagRepository.QueryTagIdsByPostId(vo.BlogPostId);
             int deleteTagResult = await _blogPostTagRepository.DeleteAsync(pt => pt.PostId == vo.BlogPostId);
-            if(deleteTagResult == tags.Count)
+            if (deleteTagResult == tags.Count)
             {
-                 var message = new TagCountRecord(tags, -1);
+                var message = new TagCountRecord(tags, -1);
                 await _sender.Send(message);
+
+                var record = new CategoryCountRecord(newDto.CategoryId, 1);
+                await _sender.Send(record);
             }
             return ResultUtil.Success(deleteResult);
         }
@@ -118,7 +132,7 @@ namespace Blog.Service.Commons
 
             var result = await _blogPostRepository.UpdateNotNullAsync(updatePost);
 
-            if(result == 0)
+            if (result == 0)
             {
                 throw new BusinessException("更新异常");
             }
@@ -154,8 +168,8 @@ namespace Blog.Service.Commons
                 throw new BusinessException("文章分类不存在");
             }
 
-            List<string> tagIdList = postAddOrEditVo.TagIds?.Split(",").Select(i => i.Trim()).ToList() ?? new List<string>();
-            var result = (await _blogPostTagRepository.QueryAsync(pt => tagIdList.Contains(pt.TagId.ToString()))).Count();
+            List<long> tagIdList = postAddOrEditVo.TagIds?.Split(",").Select(i => long.Parse(i)).ToList() ?? new List<long>();
+            var result = (await _blogTagRepository.QueryAsync(t => tagIdList.Contains(t.BlogTagId))).Count();
             if (result == 0 || tagIdList.Count() == 0)
             {
                 throw new BusinessException("文章标签不存在");

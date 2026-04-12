@@ -13,6 +13,7 @@ namespace Blog.MvcWeb.Filters
             var result = ResultUtil.Error<object>("系统繁忙，请稍后重试", context.Exception);
             context.Result = new JsonResult(result);
             context.ExceptionHandled = true; // 标记异常已处理
+            Console.WriteLine($"==================================>{result.Message}");
         }
     }
 }

@@ -14,6 +14,7 @@
             { type: 'checkbox', fixed: 'left' },
             { field: 'categoryName', title: '分类名称', templet :'#viewDetailTpl' },
             { field: 'isValid', title: '状态', templet: '#isValidTpl' },
+            { field: 'refCount', title: '引用次数' },
             { fixed: 'right', title: '操作', align: 'center', toolbar: '#rowToolbarTpl' }
         ]],
         method: 'post',
