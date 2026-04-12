@@ -670,3 +670,16 @@ D:\Code\Blog\Blog.MvcWeb\obj\Debug\net8.0\Blog.MvcWeb.genruntimeconfig.cache
 D:\Code\Blog\Blog.MvcWeb\obj\Debug\net8.0\ref\Blog.MvcWeb.dll
 D:\Code\Blog\Blog.MvcWeb\bin\Debug\net8.0\MediatR.dll
 D:\Code\Blog\Blog.MvcWeb\bin\Debug\net8.0\MediatR.Contracts.dll
+D:\Code\blog_core\Blog.MvcWeb\obj\Debug\net8.0\Blog.MvcWeb.csproj.AssemblyReference.cache
+D:\Code\blog_core\Blog.MvcWeb\obj\Debug\net8.0\rpswa.dswa.cache.json
+D:\Code\blog_core\Blog.MvcWeb\obj\Debug\net8.0\Blog.MvcWeb.GeneratedMSBuildEditorConfig.editorconfig
+D:\Code\blog_core\Blog.MvcWeb\obj\Debug\net8.0\Blog.MvcWeb.AssemblyInfoInputs.cache
+D:\Code\blog_core\Blog.MvcWeb\obj\Debug\net8.0\Blog.MvcWeb.AssemblyInfo.cs
+D:\Code\blog_core\Blog.MvcWeb\obj\Debug\net8.0\Blog.MvcWeb.csproj.CoreCompileInputs.cache
+D:\Code\blog_core\Blog.MvcWeb\obj\Debug\net8.0\Blog.MvcWeb.MvcApplicationPartsAssemblyInfo.cs
+D:\Code\blog_core\Blog.MvcWeb\obj\Debug\net8.0\Blog.MvcWeb.MvcApplicationPartsAssemblyInfo.cache
+D:\Code\blog_core\Blog.MvcWeb\obj\Debug\net8.0\Blog.MvcWeb.RazorAssemblyInfo.cache
+D:\Code\blog_core\Blog.MvcWeb\obj\Debug\net8.0\Blog.MvcWeb.RazorAssemblyInfo.cs
+D:\Code\blog_core\Blog.MvcWeb\obj\Debug\net8.0\Blog.MvcWeb.dll
+D:\Code\blog_core\Blog.MvcWeb\obj\Debug\net8.0\refint\Blog.MvcWeb.dll
+D:\Code\blog_core\Blog.MvcWeb\obj\Debug\net8.0\Blog.MvcWeb.pdb

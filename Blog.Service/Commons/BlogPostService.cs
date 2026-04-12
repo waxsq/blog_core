@@ -83,7 +83,11 @@ namespace Blog.Service.Commons
 
             if(newDto != null && newDto.CategoryId != 0)
             {
-                var record = new CategoryCountRecord(newDto.CategoryId, 1);
+                var list = new List<long>()
+                {
+                    newDto.CategoryId
+                };
+                var record = new CategoryCountRecord(list, 1);
                 await _sender.Send(record);
             }
             return ResultUtil.Success(i);
@@ -91,15 +95,16 @@ namespace Blog.Service.Commons
 
         public async Task<EditReponse<PostAddOrEditVo>> GetById(long id)
         {
-            return await _blogPostRepository.GetByIdAsync(id);
+            return await _blogPostRepository.GetById(id);
         }
 
         public async Task<EditReponse<int>> DeleteById(PostAddOrEditVo vo)
         {
             var queryDto = _mapper.Map<BlogPost>(vo);
-            
+
+            var postDto = await _blogPostRepository.GetByIdAsync(vo.BlogPostId);
             int deleteResult = await _blogPostRepository.DeleteByIdAsync(vo.BlogPostId);
-            if (deleteResult == 0)
+            if (deleteResult == 0 || postDto == null)
             {
                 throw new BusinessException("删除异常");
             }
@@ -110,7 +115,11 @@ namespace Blog.Service.Commons
                 var message = new TagCountRecord(tags, -1);
                 await _sender.Send(message);
 
-                var record = new CategoryCountRecord(newDto.CategoryId, 1);
+                var list = new List<long>()
+                {
+                    postDto.CategoryId
+                };
+                var record = new CategoryCountRecord(list, 1);
                 await _sender.Send(record);
             }
             return ResultUtil.Success(deleteResult);
@@ -145,9 +154,11 @@ namespace Blog.Service.Commons
                 PostId = postAddOrEditVo.BlogPostId,
                 TagId = id
             }).ToList();
-
+            var list = await _blogPostTagRepository.QueryAsync(pt => pt.PostId == postAddOrEditVo.BlogPostId);
+            var ids = list.Select(dto => dto.TagId).ToList();
             await _blogPostTagRepository.DeleteAsync(pt => pt.PostId == postAddOrEditVo.BlogPostId);
             await _blogPostTagRepository.BatchInsertAsync(insertRecord);
+            var list1= ids.Union(insertRecord.Select(dto => dto.TagId).ToList());
 
             return ResultUtil.Success(result);
 

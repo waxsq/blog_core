@@ -13,7 +13,7 @@ namespace Blog.Repository.Interfaces
     public interface IBlogPostRepository : IRepository<BlogPost, long>
     {
         Task<PageReponse<PostTablePageVo>> QueryPageAsync(PostTableQueryVo query);
-        new Task<EditReponse<PostAddOrEditVo>> GetByIdAsync(long id);
+        Task<EditReponse<PostAddOrEditVo>> GetById(long id);
 
 
     }

@@ -40,3 +40,11 @@ D:\Code\Blog\Blog.Service\obj\Debug\net8.0\Blog.Service.dll
 D:\Code\Blog\Blog.Service\obj\Debug\net8.0\refint\Blog.Service.dll
 D:\Code\Blog\Blog.Service\obj\Debug\net8.0\Blog.Service.pdb
 D:\Code\Blog\Blog.Service\obj\Debug\net8.0\ref\Blog.Service.dll
+D:\Code\blog_core\Blog.Service\obj\Debug\net8.0\Blog.Service.csproj.AssemblyReference.cache
+D:\Code\blog_core\Blog.Service\obj\Debug\net8.0\Blog.Service.GeneratedMSBuildEditorConfig.editorconfig
+D:\Code\blog_core\Blog.Service\obj\Debug\net8.0\Blog.Service.AssemblyInfoInputs.cache
+D:\Code\blog_core\Blog.Service\obj\Debug\net8.0\Blog.Service.AssemblyInfo.cs
+D:\Code\blog_core\Blog.Service\obj\Debug\net8.0\Blog.Service.csproj.CoreCompileInputs.cache
+D:\Code\blog_core\Blog.Service\obj\Debug\net8.0\Blog.Service.dll
+D:\Code\blog_core\Blog.Service\obj\Debug\net8.0\refint\Blog.Service.dll
+D:\Code\blog_core\Blog.Service\obj\Debug\net8.0\Blog.Service.pdb
