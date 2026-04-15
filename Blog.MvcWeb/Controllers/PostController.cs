@@ -51,5 +51,19 @@ namespace Blog.MvcWeb.Controllers
         {
             return _blogPostService.Edit(postAddOrEditVo);
         }
+
+        [HttpPost]
+        [Route("Top")]
+        public Task<EditReponse<int>> Top(List<PostAddOrEditVo> list)
+        {
+            return _blogPostService.Top(list);
+        }
+
+        [HttpPost]
+        [Route("Featured")]
+        public Task<EditReponse<int>> Featured(List<PostAddOrEditVo> list)
+        {
+            return _blogPostService.Featured(list);
+        }
     }
 }

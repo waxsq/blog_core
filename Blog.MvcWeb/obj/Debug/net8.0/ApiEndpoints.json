@@ -130,6 +130,32 @@
     ]
   },
   {
+    "ContainingType": "Blog.MvcWeb.Controllers.CommonController",
+    "Method": "QueryPage",
+    "RelativePath": "Comment/QueryPage",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vo",
+        "Type": "Blog.Core.Entities.Vo.Comment.CommentTableQueryVo",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Blog.Core.Commons.PageReponse\u00601[[Blog.Core.Entities.Vo.Comment.CommentTablePageVo, Blog.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "Blog.MvcWeb.Controllers.FileController",
     "Method": "UploadFile",
     "RelativePath": "File/Img",
@@ -260,6 +286,32 @@
   },
   {
     "ContainingType": "Blog.MvcWeb.Controllers.PostController",
+    "Method": "Featured",
+    "RelativePath": "Post/Featured",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "list",
+        "Type": "System.Collections.Generic.List\u00601[[Blog.Core.Entities.Vo.Post.PostAddOrEditVo, Blog.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Blog.Core.Commons.EditReponse\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Blog.MvcWeb.Controllers.PostController",
     "Method": "GetById",
     "RelativePath": "Post/GetById",
     "HttpMethod": "POST",
@@ -301,6 +353,32 @@
     "ReturnTypes": [
       {
         "Type": "Blog.Core.Commons.PageReponse\u00601[[Blog.Core.Entities.Vo.Post.PostTablePageVo, Blog.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Blog.MvcWeb.Controllers.PostController",
+    "Method": "Top",
+    "RelativePath": "Post/Top",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "list",
+        "Type": "System.Collections.Generic.List\u00601[[Blog.Core.Entities.Vo.Post.PostAddOrEditVo, Blog.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Blog.Core.Commons.EditReponse\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

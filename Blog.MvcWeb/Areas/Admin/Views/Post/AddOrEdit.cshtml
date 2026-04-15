@@ -31,50 +31,67 @@
 </head>
 <body class="layui-layout-body" style="padding: 20px;">
 
-    <form class="layui-form" id="addOrEdit" lay-filter="addOrEdit">
-        <input class="d-none" id="categoryId" name="categoryId" />
-        <input class="d-none" id="blogPostId" name="blogPostId" value="@ViewData["id"]" />
-        <!-- 第一行：标题 -->
-        <div class="row align-items-center mb-3 ml-2 full-hiden">
-            <label class="col-sm-1 text-start">标题</label>
-            <div class="col-sm-11">
-                <input type="text" name="title" lay-verify="required|title" placeholder="请输入标题" autocomplete="off" class="layui-input">
-            </div>
-        </div>
+  <form class="layui-form" id="addOrEdit" lay-filter="addOrEdit">
+    <input class="d-none" id="categoryId" name="categoryId" />
+    <input class="d-none" id="blogPostId" name="blogPostId" value="@ViewData["id"]" />
+    <!-- 第一行：标题 -->
+    <div class="row align-items-center mb-3 ml-2 full-hiden">
+      <label class="col-sm-1 text-start">标题</label>
+      <div class="col-sm-11">
+        <input type="text" name="title" lay-verify="required|title" placeholder="请输入标题" autocomplete="off" class="layui-input">
+      </div>
+    </div>
 
-        <!-- 第二行：文章简要 -->
-        <div class="row align-items-center mb-3 ml-2 full-hiden">
-            <label class="col-sm-1 text-start">文章简要</label>
-            <div class="col-sm-11">
-                <textarea name="summary" lay-verify="required|summary" placeholder="请输入文章简要" class="layui-textarea" style="height: 100px;"></textarea>
-            </div>
-        </div>
+    <!-- 第二行：文章简要 -->
+    <div class="row align-items-center mb-3 ml-2 full-hiden">
+      <label class="col-sm-1 text-start">文章简要</label>
+      <div class="col-sm-11">
+        <textarea name="summary" lay-verify="required|summary" placeholder="请输入文章简要" class="layui-textarea" style="height: 100px;"></textarea>
+      </div>
+    </div>
 
-        <div class="row align-items-center mb-3 ml-2">
-            <div class="col-sm-12">
-                <div id="content-editormd" placeholder="请输入文章内容">
-                    <textarea name="content" lay-verify="content" style="display:none;"></textarea>
-                </div>
-            </div>
+    <div class="row align-items-center mb-3 ml-2">
+      <div class="col-sm-12">
+        <div id="content-editormd" placeholder="请输入文章内容">
+          <textarea name="content" lay-verify="content" style="display:none;"></textarea>
         </div>
+      </div>
+    </div>
 
-        <div class="row align-items-center mb-3 ml-2 full-hiden">
-            <label class="col-sm-1 text-start">分类</label>
-            <div class="col-sm-11">
-                <input type="text" name="categoryName" id="categorySelect"
-                       placeholder="请输入标题" ts-selected="11111"
-                       lay-verify="required"
-                       autocomplete="off" class="layui-input">
-            </div>
+    <div class="row align-items-center mb-3 ml-2 full-hiden">
+      <div class="col-sm-6 row align-items-center">
+        <label class="col-2 text-start">是否推荐</label>
+        <div class="col-10">
+          <input type="radio" name="isFeatured" value="是" title="是" />
+          <input type="radio" name="isFeatured" value="否" title="否" checked/>
         </div>
-
-        <div class="row align-items-center mb-3 ml-2 full-hiden">
-            <label class="col-sm-1 text-start">标签</label>
-            <div class="col-sm-11" id="tagSelect">
-            </div>
+      </div>
+      <div class="col-sm-6 row align-items-center">
+        <label class="col-2 text-start">是否置顶</label>
+        <div class="col-10">
+          <input type="radio" name="isTop" value="是" title="是" />
+          <input type="radio" name="isTop" value="否" title="否" checked/>
         </div>
+      </div>
+    </div>
 
-    </form>
+    <div class="row align-items-center mb-3 ml-2 full-hiden">
+      <label class="col-sm-1 text-start">分类</label>
+      <div class="col-sm-11">
+        <input type="text" name="categoryName" id="categorySelect"
+               placeholder="请选择分类" ts-selected="11111"
+               lay-verify="required"
+               autocomplete="off" class="layui-input">
+      </div>
+    </div>
+
+    <div class="row align-items-center mb-3 ml-2 full-hiden">
+      <label class="col-sm-1 text-start">标签</label>
+      <div class="col-sm-11" id="tagSelect">
+      </div>
+    </div>
+
+  </form>
 
 
 </body>

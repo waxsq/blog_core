@@ -16,5 +16,7 @@ namespace Blog.Core.Entities.Vo.Post
         public List<BlogTag>? Tags { get; set; }
         public string? TagIds { get; set; }
         public string? CategoryName { get; set; }
+        public int isTop { get; set; } = 0;
+        public int isFeatured { get; set; } = 0;
     }
 }

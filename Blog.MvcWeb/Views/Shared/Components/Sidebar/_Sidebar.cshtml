@@ -1,31 +1,33 @@
 ﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+  For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 }
 <div class="layui-side-scroll">
-    <div class="layui-logo" lay-href="home/console.html">
-        <span>Blog</span>
-    </div>
+  <div class="layui-logo" lay-href="home/console.html">
+    <span>Blog</span>
+  </div>
 
-    <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
-        <li data-name="tag" class="layui-nav-item layui-nav-itemed">
-            <a href="javascript:;" lay-tips="标签管理" lay-href="/Admin/Tag">
-                <i class="layui-icon layui-icon-note"></i>
-                <cite>标签管理</cite>
-            </a>
-        </li>
-        <li data-name="category" class="layui-nav-item layui-nav-itemed">
-            <a href="javascript:;" lay-tips="分类管理" lay-href="/Admin/Category">
-                <i class="layui-icon layui-icon-note"></i>
-                <cite>分类管理</cite>
-            </a>
-        </li>
-        <li data-name="post" class="layui-nav-item layui-nav-itemed">
-            <a href="javascript:;" lay-tips="文章管理" lay-href="/Admin/Post">
-                <i class="layui-icon layui-icon-note"></i>
-                <cite>文章管理</cite>
-            </a>
-        </li>
-    </ul>
+  <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
+    <li data-name="blog" class="layui-nav-item layui-nav-itemed">
+      <a href="javascript:;" lay-tips="博客管理" lay-direction="2">
+        <i class="layui-icon layui-icon-read"></i>
+        <cite>博客管理</cite>
+      </a>
+      <dl class="layui-nav-child">
+        <dd data-name="blog" class="layui-this">
+          <a lay-href="/Admin/Tag">标签管理</a>
+        </dd>
+        <dd data-name="blog">
+          <a lay-href="/Admin/Category">分类管理</a>
+        </dd>
+        <dd data-name="blog">
+          <a lay-href="/Admin/Post">文章管理</a>
+        </dd>
+        <dd data-name="blog">
+          <a lay-href="/Admin/Comment">评论管理</a>
+        </dd>
+      </dl>
+    </li>
+  </ul>
 </div>

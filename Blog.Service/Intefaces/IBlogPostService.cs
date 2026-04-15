@@ -16,7 +16,8 @@ namespace Blog.Service.Intefaces
         Task<EditReponse<int>> Add(PostAddOrEditVo postAddOrEditVo);
         Task<EditReponse<PostAddOrEditVo>> GetById(long id);
         Task<EditReponse<int>> DeleteById(PostAddOrEditVo vo);
-
         Task<EditReponse<int>> Edit(PostAddOrEditVo postAddOrEditVo);
+        Task<EditReponse<int>> Top(List<PostAddOrEditVo> list);
+        Task<EditReponse<int>> Featured(List<PostAddOrEditVo> list);
     }
 }

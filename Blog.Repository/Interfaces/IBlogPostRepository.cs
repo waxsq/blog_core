@@ -14,8 +14,6 @@ namespace Blog.Repository.Interfaces
     {
         Task<PageReponse<PostTablePageVo>> QueryPageAsync(PostTableQueryVo query);
         Task<EditReponse<PostAddOrEditVo>> GetById(long id);
-
-
     }
 
 }

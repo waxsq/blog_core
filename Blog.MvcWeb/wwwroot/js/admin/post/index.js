@@ -135,18 +135,14 @@
                     sendAjax("/Post/DeleteById", { blogPostId: data.blogPostId }, function (res) {
                         if (res.success && res.code == 200) {
                             layer.msg('操作成功', { icon: 1, time: 2000 });
-                            currentTable.reload({
-                                page: {
-                                    curr: 1
-                                },
-                                where: form.val('search-form')
-                            })
+                            layer.close(index)
+                            refresh();
                         } else {
                             layer.msg(`操作失败:${res.message}`, { icon: 2, time: 4000 });
                         }
                     }, function (error) {
                         layer.msg(`操作失败:${error.statusText}`, { icon: 2, time: 4000 });
-                    }, function () { layer.close(index) })
+                    })
                 });
                 break;
             case 'View':
@@ -158,14 +154,57 @@
     table.on('toolbar(ID-table-demo-data)', function (obj) {
         var options = obj.config;
         var checkStatus = table.checkStatus(options.id);
+        var checkData = checkStatus.data;
+        var content = `是否将【${checkData.map(item => item.title)}】设为`;
         switch (obj.event) {
             case 'Add':
                 openDialog(0, obj.event)
                 break;
+            case "Top":
+                debugger
+                if (checkData.length == 0) {
+                    layer.msg("请选择数据", { icon: 2, time: 4000 });
+                    return;
+                }
+                openSureDialog("置顶", content + "置顶", function () {
+                    sendAjax("/Post/Top", checkData, function (res) {
+                        if (res.success && res.code == 200) {
+                            layer.msg('操作成功', { icon: 1, time: 2000 });
+                            layer.close(index)
+                            refresh();
+                        } else {
+                            layer.msg(`操作失败:${res.message}`, { icon: 2, time: 4000 });
+                        }
+                    }, function (error) {
+                        layer.msg(`操作失败:${error.statusText}`, { icon: 2, time: 4000 });
+                    })
+                });
+                break;
+            case "Featured":
+                if (checkData.length == 0) {
+                    layer.msg("请选择数据", { icon: 2, time: 4000 });
+                    return;
+                }
+                openSureDialog("推荐", content + "推荐", function () {
+                    sendAjax("/Post/Featured", checkData, function (res) {
+                        if (res.success && res.code == 200) {
+                            layer.msg('操作成功', { icon: 1, time: 2000 });
+                            layer.close(index)
+                            refresh();
+                        } else {
+                            layer.msg(`操作失败:${res.message}`, { icon: 2, time: 4000 });
+                        }
+                    }, function (error) {
+                        layer.msg(`操作失败:${error.statusText}`, { icon: 2, time: 4000 });
+                    })
+                });
+                break;
         }
     })
 
-
+    let openSureDialog = function (title,content, yes) {
+        layer.confirm(content, { icon: 3, title }, yes);
+    }
 
     let openDialog = function (id, action = 'View') {
 
@@ -215,4 +254,12 @@
         layer.full(fullIndex);
     }
 
+    let refresh = function () {
+        currentTable.reload({
+            page: {
+                curr: 1
+            },
+            where: form.val('search-form')
+        })
+    }
 })

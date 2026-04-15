@@ -81,7 +81,7 @@ namespace Blog.Service.Commons
                 await _sender.Send(recod);
             }
 
-            if(newDto != null && newDto.CategoryId != 0)
+            if (newDto != null && newDto.CategoryId != 0)
             {
                 var list = new List<long>()
                 {
@@ -158,7 +158,7 @@ namespace Blog.Service.Commons
             var ids = list.Select(dto => dto.TagId).ToList();
             await _blogPostTagRepository.DeleteAsync(pt => pt.PostId == postAddOrEditVo.BlogPostId);
             await _blogPostTagRepository.BatchInsertAsync(insertRecord);
-            var list1= ids.Union(insertRecord.Select(dto => dto.TagId).ToList());
+            var list1 = ids.Union(insertRecord.Select(dto => dto.TagId).ToList());
 
             return ResultUtil.Success(result);
 
@@ -185,6 +185,31 @@ namespace Blog.Service.Commons
             {
                 throw new BusinessException("文章标签不存在");
             }
+        }
+
+        public async Task<EditReponse<int>> Top(List<PostAddOrEditVo> list)
+        {
+            if (list.Count == 0)
+            {
+                throw new BusinessException("请选择数据");
+            }
+            var ids = list.Select(item => item.BlogPostId).ToList();
+            var isTop = list.First().isTop;
+            var result = await _blogPostRepository.UpdateAsync((item) => ids.Contains(item.BlogPostId), (item) => new BlogPost { IsTop = isTop });
+            return ResultUtil.Success(result);
+
+        }
+
+        public async Task<EditReponse<int>> Featured(List<PostAddOrEditVo> list)
+        {
+            if (list.Count == 0)
+            {
+                throw new BusinessException("请选择数据");
+            }
+            var ids = list.Select(item => item.BlogPostId).ToList();
+            var isFeatured = list.First().isFeatured;
+            var result = await _blogPostRepository.UpdateAsync((item) => ids.Contains(item.BlogPostId), (item) => new BlogPost { IsFeatured = isFeatured });
+            return ResultUtil.Success(result);
         }
     }
 }

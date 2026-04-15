@@ -20,8 +20,8 @@ namespace Blog.Core.RequestHandlers
         public Task Handle(CategoryCountRecord request, CancellationToken cancellationToken)
         {
             var count = request.Count;
-            var id = request.Id;
-            _db.Updateable<BlogCategory>().SetColumns(c => c.RefCount == c.RefCount + count).Where(c => c.BlogCategoryId == id && (c.RefCount + count) >= 0).ExecuteCommand();
+            var Ids = request.Ids;
+            _db.Updateable<BlogCategory>().SetColumns(c => c.RefCount == c.RefCount + count).Where(c => Ids.Contains(c.BlogCategoryId) && (c.RefCount + count) >= 0).ExecuteCommand();
             return Task.CompletedTask;
         }
     }

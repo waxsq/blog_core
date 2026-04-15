@@ -20,7 +20,7 @@ namespace Blog.Repository.Commons
             _mapper = mapper;
         }
 
-        public new async Task<EditReponse<PostAddOrEditVo>> GetByIdAsync(long id)
+        public async Task<EditReponse<PostAddOrEditVo>> GetById(long id)
         {
             BlogPost postDto = _db.Queryable<BlogPost>()
                 .LeftJoin<BlogCategory>((p, c) => p.CategoryId == c.BlogCategoryId)

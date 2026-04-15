@@ -39,14 +39,10 @@ namespace Blog.Core.Entities
         /// 评论内容
         /// </summary>
         [Required]
+        [MaxLength(200)]
         [SugarColumn(ColumnName = "content")]
         public string Content { get; set; }
 
-        /// <summary>
-        /// 是否审核通过：1=通过，0=待审/拒绝
-        /// </summary>
-        [SugarColumn(ColumnName = "is_approved")]
-        public int IsApproved { get; set; }
 
         /// <summary>
         /// 评论点赞数
@@ -81,6 +77,18 @@ namespace Blog.Core.Entities
         /// </summary>
         [SugarColumn(ColumnName = "update_by")]
         public long? UpdateBy { get; set; }
+
+        [SugarColumn(ColumnName = "reply_id")]
+        public long? ReplyId { get; set; }
+
+        [SugarColumn(ColumnName = "reply_user_id")]
+        public long? ReplyUserId { get; set; }
+
+        [SugarColumn(ColumnName = "status")]
+        public int? Status { get; set; }
+
+        [SugarColumn(ColumnName = "address")]
+        public string? Address { get; set; }
 
     }
 }
